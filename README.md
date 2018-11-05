@@ -11,7 +11,7 @@ Not many hospitals have computers, stable power supply and internet access. Howe
 In sum, there are two types of users in this case: 1) doctors that enter a daily diary/report, and 2) district health officers, that can see all reports within his or her district, and approve or comment on them. Doctors should be able to submit a daily report, see previous reports, and edit and resubmit the ones that have been declined. The district health officers should see the reports from all doctors within their district, and approve/decline and comment on them.
 
 ## Comments/updates added
-You will work with a pre-configured tracker-program on the course.dhis2.org -server. You can find this by opening the "Tracker Capture" app, and selecting the Kambia --> Bramaia in the org-unit selector. All facilities within Bramaia will have the "Anaesthetist - PBR monitoring"-program assigned. You can see it here.
+You will work with a pre-configured tracker-program on the course.dhis2.org -server. You can find this by opening the "Tracker Capture" app, and selecting the Kambia --> Bramaia in the org-unit selector. All facilities within Bramaia will have the "Anaesthetist - PBR monitoring"-program assigned. You can see it [here](https://course.dhis2.org/dhis/dhis-web-commons/security/login.action#/dashboard?tei=vjVNrMa4zvc&program=r6qGL4AmFV4&ou=eLLMnNjuluX).
 
 The program is configured in the following manner:
 * Each doctor is registered in the system as a "Tracked Entity"
