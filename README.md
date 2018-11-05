@@ -9,3 +9,21 @@ Moreover, a district health officer responsible for a variety of health clinics 
 Not many hospitals have computers, stable power supply and internet access. However, all doctors have smartphones which they are already familiar with. Mobile 3G or 4G network coverage is good, but connectivity can be slow and unstable throughout the day.
  
 In sum, there are two types of users in this case: 1) doctors that enter a daily diary/report, and 2) district health officers, that can see all reports within his or her district, and approve or comment on them. Doctors should be able to submit a daily report, see previous reports, and edit and resubmit the ones that have been declined. The district health officers should see the reports from all doctors within their district, and approve/decline and comment on them.
+
+## Comments/updates added
+You will work with a pre-configured tracker-program on the course.dhis2.org -server. You can find this by opening the "Tracker Capture" app, and selecting the Kambia --> Bramaia in the org-unit selector. All facilities within Bramaia will have the "Anaesthetist - PBR monitoring"-program assigned. You can see it here.
+
+The program is configured in the following manner:
+* Each doctor is registered in the system as a "Tracked Entity"
+* For each tracked entity a new event is added every day. This represents the daily report/diary. 
+* You can access all of the elements in the program (both tracked entity, events and more) through the API. See the documentation. 
+
+We have created some users for testing. Six users represent doctors and are each assigned to their own health facility (all facilities in the Bramaia district). One represents the district health officer at Bramaia district. The users are configured with the appropriate access rights for approval etc. See the table below for username and password. 
+* District Health Officer / Bramaia - BjarneB - District1-
+* Doctor / Barakuya MCHP - AkselJ - District1-
+* Doctor / Gbolon MCHP - CasperL - District1-
+* Doctor / Kanku Bramaia MCHP - PatrikM - District1-
+* Doctor / Konta CHP - MatsW - District1-
+* Doctor / Kukuna CHP - YahyaJ - District1-
+* Doctor / Shekaia MCHP - EllingS - District1-
+
