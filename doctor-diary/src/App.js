@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Test from './Views/Test.js'
+import Home from './Views/Home.js'
+import {BrowserRouter, Route} from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      //<Browse Router> brukes for å linke til andre sider til applikasjonen, må importeres over
+      <BrowserRouter>
+        <div>
+          <Route exact={true} path='/' render={() => (<div className="App"> <Home /> </div>)} />
+          <Route exact={true} path='/test' render={() => (<div className="App"> <Test /></div>)} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
