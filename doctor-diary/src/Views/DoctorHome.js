@@ -9,11 +9,9 @@ export default class DoctorHome extends Component {
             <div>
                 <header>
                 <h1>Doctor Diary</h1>
-                <form id='form'>
-                    <button id='submit'>
+                    <button>
                         <a className='Home-link' href='/'>Go back</a>
                     </button>
-                </form>
             </header>
             </div>
         )
