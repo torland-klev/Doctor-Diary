@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Test from './Views/Test.js'
 import Home from './Views/Home.js'
+import DoctorHome from './Views/DoctorHome.js'
 import {BrowserRouter, Route} from 'react-router-dom';
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
         <div>
           <Route exact={true} path='/' render={() => (<div className="App"> <Home /> </div>)} />
           <Route exact={true} path='/test' render={() => (<div className="App"> <Test /></div>)} />
+          <Route exact={true} path='/doctor' render={() => (<div className="App"> <DoctorHome /> </div>)} />
         </div>
       </BrowserRouter>
     );
