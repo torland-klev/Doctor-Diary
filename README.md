@@ -1,3 +1,5 @@
+## Note: egwene & linneak is the same user
+
 # Case 1: Doctors diary
 
 In a state in India, the Ministry of Health wants to get more insight into the workload and challenges that doctors at public hospitals and clinics face. To do so, they want to implement DHIS2 to support collection, flow, and presentation of this information. However, many of the doctors have limited prior experience with digital artifacts, and due to a hectic workday with many patients, their capacity to learn and operate advanced digital interfaces is limited.
