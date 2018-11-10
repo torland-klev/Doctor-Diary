@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Components/Header.js';
 
 export default class HealthOfficerHome extends Component {
     state = {
@@ -6,7 +7,8 @@ export default class HealthOfficerHome extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="Home">
+                <Header />
                 <header>
                 <h1>Health Officer Home</h1>
                     <button>

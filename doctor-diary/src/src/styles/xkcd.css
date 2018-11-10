@@ -1,0 +1,12 @@
+
+#xkcd {
+  float: right;
+  max-width: 38%;
+  min-width: 300px;
+  height: 90vh;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
