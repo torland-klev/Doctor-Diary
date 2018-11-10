@@ -12,9 +12,6 @@ export default class DoctorHome extends Component {
             <header>
               <h1>Doctor Diary</h1>
                 <button>
-                  <a className='Home-link' href='/'>Go back</a>
-                </button>
-                <button>
                     <a className="Home-link" href='doctor/pending'>
                     <h1>Pending</h1>
                     </a>
@@ -29,16 +26,17 @@ export default class DoctorHome extends Component {
                     <h1>Declined</h1>
                     </a>
                 </button>
-            <div className="Home">
-                <Header />
-                <header>
-                <h1>Doctor Diary</h1>
-                    <button>
-                        <a href='/'>Go back</a>
-                    </button>
-            </header>
-
-          </div>
-        )
+                <div className="Home">
+                    <Header />
+                    <header>
+                    <h1>Doctor Diary</h1>
+                        <button>
+                            <a href='/'>Go back</a>
+                        </button>
+                    </header>
+                </div>
+              </header>
+            </div>
+          )
     }
 }
