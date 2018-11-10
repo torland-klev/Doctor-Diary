@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 
+
 export default class DoctorHome extends Component {
     state = {
 
     }
     render () {
-        return (
-            <div>
-                <header>
-                <h1>Doctor Diary</h1>
-                <form id='form'>
-                    <button id='submit'>
-                        <a className='Home-link' href='/'>Go back</a>
+        return(
+            <div className="Home">
+                <header className="Home-header">
+                    <button>
+                        <a className="Home-link" href='/'>
+                        <h1>Go back</h1>
+                        </a>
                     </button>
-                </form>
+                    <button>
+                        <a className="NewEntry" href='newEntry'>
+                        <h1>New entry</h1>
+                        </a>
+                    </button>
             </header>
             </div>
         )
