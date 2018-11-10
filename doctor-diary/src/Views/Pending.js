@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Components/Header.js';
 
 class Pending extends Component {
     state = {
@@ -6,13 +7,12 @@ class Pending extends Component {
     }
     render() {
         return (
-            <div>
-                <header>
-                <h1>Pending reports</h1>
-                    <button>
-                        <a className='Home-link' href='/doctor'>Go back</a>
-                    </button>
-                </header>
+            <div className='Home'>
+                <Header />
+                <main className='Home-main'>
+                    <h1>Pending reports</h1>
+                    <a href='/doctor' className='Home-button'>Go back</a>
+                </main>
             </div>
         )
     }

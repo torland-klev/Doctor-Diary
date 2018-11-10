@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Header from '../Components/Header.js';
 
 export default class NewEntry extends Component {
     state = {
@@ -8,13 +8,13 @@ export default class NewEntry extends Component {
     render () {
         return(
             <div className="Home">
-                <header className="Home-header">
-                <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
-                <input type="text" name="nyttelement" id="nyttelement"
+                <Header />
+                <main className="Home-main">
+                    <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
+                    <input type="text" name="nyttelement" id="nyttelement"
                        placeholder="New element" />
-
-
-            </header>
+                    <a href='/doctor' className="Home-button">Go back</a>
+                </main>
             </div>
         )
     }
