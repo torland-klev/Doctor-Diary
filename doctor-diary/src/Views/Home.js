@@ -12,13 +12,13 @@ export default class Home extends Component {
         return(
             <div className="Home">
                 <Header />
-                <header className="Home-header">
+                <main className="Home-header">
                     <h1> CHOOSE ROLE </h1>
 
                     <a href='doctor' className="Home-button">DOCTOR</a>
 
                     <a href='healthofficer' className="Home-button">HEALTH OFFICER</a>
-            </header>
+            </main>
             </div>
         )
     }

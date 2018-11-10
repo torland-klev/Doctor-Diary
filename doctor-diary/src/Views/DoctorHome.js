@@ -9,12 +9,12 @@ export default class DoctorHome extends Component {
         return (
             <div className="Home">
                 <Header />
-                <header>
+                <main>
                 <h1>Doctor Diary</h1>
                     <button>
                         <a href='/'>Go back</a>
                     </button>
-            </header>
+                </main>
             </div>
         )
     }
