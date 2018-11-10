@@ -12,7 +12,7 @@ export default class Home extends Component {
         return(
             <div className="Home">
                 <Header />
-                <main className="Home-header">
+                <main className="Home-main">
                     <h1> CHOOSE ROLE </h1>
 
                     <a href='doctor' className="Home-button">DOCTOR</a>

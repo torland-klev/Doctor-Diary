@@ -10,13 +10,10 @@ export default class DoctorHome extends Component {
         return(
             <div className="Home">
                 <Header />
-                <main>
-                <h1>Doctor Diary</h1>
-                    <button>
-                        <a className="NewEntry" href='newEntry'>
-                        <h1>New entry</h1>
-                        </a>
-                    </button>
+                <main className="Home-main">
+                    <h1>Doctor Diary</h1>
+                    <a href='newEntry' className="Home-button">New entry</a>
+                    <a href='/' className="Home-button">Go back</a>
                 </main>
             </div>
         )
