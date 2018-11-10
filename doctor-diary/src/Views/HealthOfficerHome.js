@@ -9,12 +9,12 @@ export default class HealthOfficerHome extends Component {
         return (
             <div className="Home">
                 <Header />
-                <header>
+                <main>
                 <h1>Health Officer Home</h1>
                     <button>
                         <a className='Home-link' href='/'>Go back</a>
                     </button>
-                </header>
+                </main>
             </div>
         )
     }
