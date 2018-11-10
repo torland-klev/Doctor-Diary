@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Components/Header.js';
 
 export default class DoctorHome extends Component {
     state = {
@@ -6,11 +7,12 @@ export default class DoctorHome extends Component {
     }
     render () {
         return (
-            <div>
+            <div className="Home">
+                <Header />
                 <header>
                 <h1>Doctor Diary</h1>
                     <button>
-                        <a className='Home-link' href='/'>Go back</a>
+                        <a href='/'>Go back</a>
                     </button>
             </header>
             </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './Home.css';
+import Header from '../Components/Header.js';
 //import header from './Components/Header' kan så legge <Header /> øverst i HTML
 //import footer from './Components/Footer' kan så legge til <Footer /> nederst i HTML
 
@@ -10,19 +11,13 @@ export default class Home extends Component {
     render () {
         return(
             <div className="Home">
+                <Header />
                 <header className="Home-header">
-                    <button>
-                        <a className="Home-link" href='doctor'>
-                        <h1>Doctor</h1>
-                        </a>
-                    </button>
+                    <h1> CHOOSE ROLE </h1>
 
-                    <button>
-                        <a className="Home-link" href='healthofficer'>
-                        <h1>Health Officer</h1>
-                        </a>
-                    </button>
+                    <a href='doctor' className="Home-button">DOCTOR</a>
 
+                    <a href='healthofficer' className="Home-button">HEALTH OFFICER</a>
             </header>
             </div>
         )
