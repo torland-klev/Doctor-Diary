@@ -1,19 +1,35 @@
+header{
+  padding-top: 10%;
+}
+
 .Home {
-    text-align: center;
-  }
+  text-align: center;
+  background-color: white;
+}
   
-  .Home-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .Home-link {
-    color: #61dafb;
-  }
-  
+.Home-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.Home-button {
+  width: 50%;
+  border-radius: 5px;
+  background-color: #bad5f4;
+  margin: 1%;
+  padding: 1.5%;
+  border: 1px solid black;
+  font-size: calc(10px +2vmin);
+  color: black;
+}
+
+a:link{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}

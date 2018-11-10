@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Test from './Views/Test.js'
 import Home from './Views/Home.js'
 import DoctorHome from './Views/DoctorHome.js'
 import HealthOfficerHome from './Views/HealthOfficerHome.js'

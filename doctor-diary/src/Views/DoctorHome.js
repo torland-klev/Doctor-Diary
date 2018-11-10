@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Components/Header.js';
 
 
 export default class DoctorHome extends Component {
