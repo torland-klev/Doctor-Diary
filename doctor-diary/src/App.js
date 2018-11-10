@@ -5,6 +5,7 @@ import New from './Views/New.js';
 import Pending from './Views/Pending.js';
 import Declined from './Views/Declined.js';
 import HealthOfficerHome from './Views/HealthOfficerHome.js'
+import NewEntry from './Views/NewEntry.js'
 import {BrowserRouter, Route} from 'react-router-dom';
 
 class App extends Component {
@@ -18,11 +19,14 @@ class App extends Component {
           <Route exact={true} path='/' render={() => (<div className="App"> <Home /> </div>)} />
           <Route exact={true} path='/healthofficer' render={() => (<div className="App"> <HealthOfficerHome /></div>)} />
           <Route exact={true} path='/doctor' render={() => (<div className="App"> <DoctorHome /> </div>)} />
+<<<<<<< HEAD
 
           {/* Routing from the doctor side to the doctors reports */}
           <Route exact={true} path='/doctor/pending' render={() => (<div className="App"> <Pending /> </div>)} />
-          <Route exact={true} path='/doctor/new' render={() => (<div className="App"> <New /></div>)} />
           <Route exact={true} path='/doctor/declined' render={() => (<div className="App"> <Declined /> </div>)} />
+=======
+          <Route exact={true} path='/newEntry' render={() => (<div className="App"> <NewEntry /> </div>)} />
+>>>>>>> 1fa0fc89404f9d1b02d7622a1725aae96e87fe77
         </div>
       </BrowserRouter>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Header from '../Components/Header.js';
 
+
 export default class DoctorHome extends Component {
     state = {
 
@@ -17,8 +18,8 @@ export default class DoctorHome extends Component {
                     </a>
                 </button>
                 <button>
-                    <a className="Home-link" href='doctor/new'>
-                    <h1>New</h1>
+                    <a className="Home-link" href='doctor/newEntry'>
+                    <h1>New Entry</h1>
                     </a>
                 </button>
                 <button>
