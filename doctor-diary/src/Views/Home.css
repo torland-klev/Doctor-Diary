@@ -1,5 +1,18 @@
 main{
+  min-height: 80vh;
+  width: 100%;
   padding-top: 12%;
+}
+
+footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1%;
+  width: 100%;
+  height: 20vh;
+  position: relative;
 }
 
 .Home {
@@ -8,22 +21,15 @@ main{
 }
   
 .Home-main {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
+}
+@media screen and (max-width:910px){
+ /* Add restrictions to width etc*/
 }
 
-.Home-button {
-  width: 50%;
-  border-radius: 5px;
-  background-color: #bad5f4;
-  margin: 1%;
-  padding: 1.5%;
-  border: 1px solid black;
-  font-size: calc(10px +2vmin);
+a{
   color: black;
 }
 

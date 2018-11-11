@@ -4,7 +4,7 @@ a "send"-button that will send the data to the API.
 NB: It uses date as key for local storage, so it assumes that only one doctor will be using the browser. */
 
 import React, { Component } from 'react';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
 
 export default class NewEntry extends Component {
 
@@ -45,13 +45,13 @@ export default class NewEntry extends Component {
         this.setState({hei: report});
         console.log("report.fullDate: " + report.fullDate, "report.one: "+report.one, "report.two: "+report.two, "report.three: "+ report.three,
         "report.four: " + report.four, "report.five: " + report.five, "report.six: " + report.six);
-    }
+
 
 
     render () {
         return(
             <div className="Home">
-                <Header />
+                <Header title={this.state.title} />
                 <main className="Home-main">
 
                     <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>

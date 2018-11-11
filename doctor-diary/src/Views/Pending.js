@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
+import BackButton from '../Components/Button/BackButton';
 
 class Pending extends Component {
-    state = {
-
+    constructor() {
+        super();
+        this.state = {
+            title: "Pending reports",
+            backbutton: "Back to doctor",
+            backbuttonlink: "/doctor",
+        }
     }
     render() {
         return (
             <div className='Home'>
-                <Header />
+                <Header title={this.state.title} />
                 <main className='Home-main'>
-                    <h1>Pending reports</h1>
-                    <a href='/doctor' className='Home-button'>Go back</a>
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                 </main>
             </div>
         )

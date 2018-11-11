@@ -1,23 +1,29 @@
 import React, { Component } from "react";
 import './Home.css';
-import Header from '../Components/Header.js';
-//import header from './Components/Header' kan så legge <Header /> øverst i HTML
-//import footer from './Components/Footer' kan så legge til <Footer /> nederst i HTML
+import Button from '../Components/Button/Button.js'
+import Header from '../Components/Header/Header.js';
 
 export default class Home extends Component {
-    state = {
-
+    constructor() {
+        super();
+        this.state = {
+            title: "DOCTOR DIARY",
+            role: "CHOOSE ROLE",
+            doctorButton: "DOCTOR",
+            doctorButtonLink: "/doctor",
+            healthOfficerButton: "HEALTH OFFICER",
+            healthOfficerButtonLink: "/healthofficer"
+        }
     }
     render () {
         return(
             <div className="Home">
-                <Header />
+                <Header title={this.state.title}/>
                 <main className="Home-main">
-                    <h1> CHOOSE ROLE </h1>
+                    <h1> {this.state.role} </h1>
 
-                    <a href='doctor' className="Home-button">DOCTOR</a>
-
-                    <a href='healthofficer' className="Home-button">HEALTH OFFICER</a>
+                    <Button title={this.state.doctorButton} link={this.state.doctorButtonLink} />
+                    <Button title={this.state.healthOfficerButton} link={this.state.healthOfficerButtonLink} />
             </main>
             </div>
         )

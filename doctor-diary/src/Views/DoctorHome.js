@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
+import BackButton from '../Components/Button/BackButton.js';
+import Button from '../Components/Button/Button.js'
+import NewButton from '../Components/Button/NewButton.js';
 
 
 export default class DoctorHome extends Component {
-    state = {
-
+    constructor (){
+        super();
+        this.state = {
+            title: "DOCTOR",
+            backbutton: "Homepage",
+            backbuttonlink: "/",
+            pendingButton: "Pending",
+            pendingButtonLink: "doctor/pending",
+            declinedButton: "Declined",
+            declinedButtonLink: "doctor/declined",
+            newButton: "New entry",
+            newButtonLink: "doctor/newEntry"
+        }
     }
     render () {
         return (
             <div className="Home">
-                <Header />
+                <Header title={this.state.title}/>
                 <main className="Home-main">
-                <h1>Doctor Diary</h1>
-                    <a href='doctor/pending' className="Home-button">Pending</a>
-                    <a href='doctor/declined' className="Home-button">Declined</a>
-                    <a href='doctor/newEntry' className="Home-button">New entry</a>
-                    <a href='/' className="Home-button">Go back</a>
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+                    <Button title={this.state.pendingButton} link={this.state.pendingButtonLink} />
+                    <Button title={this.state.declinedButton} link={this.state.declinedButtonLink} />
+                    
                 </main>
+                <footer>
+                    <NewButton title={this.state.newButton} link={this.state.newButtonLink} />
+                </footer>
             </div>
           )
     }
