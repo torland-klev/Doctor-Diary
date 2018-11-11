@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
+import BackButton from '../Components/Button/BackButton.js'
 
 export default class HealthOfficerHome extends Component {
     state = {
 
     }
     render() {
+        const title = "HEALTH OFFICER";
+        const backbutton = "Previous";
+        const backbuttonlink = "/"
         return (
             <div className="Home">
-                <Header />
-                <main>
-                <h1>Health Officer Home</h1>
-                    <button>
-                        <a className='Home-link' href='/'>Go back</a>
-                    </button>
+                <Header title={title} />
+                <main className="Home-main">
+                    <BackButton title={backbutton} link={backbuttonlink} />
                 </main>
             </div>
         )
