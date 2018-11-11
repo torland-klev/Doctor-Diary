@@ -6,30 +6,32 @@ import NewButton from '../Components/Button/NewButton.js';
 
 
 export default class DoctorHome extends Component {
-    state = {
-
+    constructor (){
+        super();
+        this.state = {
+            title: "DOCTOR",
+            backbutton: "Homepage",
+            backbuttonlink: "/",
+            pendingButton: "Pending",
+            pendingButtonLink: "doctor/pending",
+            declinedButton: "Declined",
+            declinedButtonLink: "doctor/declined",
+            newButton: "New entry",
+            newButtonLink: "doctor/newEntry"
+        }
     }
     render () {
-        const title = "DOCTOR";
-        const backbutton = "Previous";
-        const backbuttonlink = "/";
-        const pendingButton = "Pending";
-        const pendingButtonLink = "doctor/pending";
-        const declinedButton = "Declined";
-        const declinedButtonLink = "doctor/declined";
-        const newButton = "New Entry";
-        const newButtonLink = "doctor/newEntry";
         return (
             <div className="Home">
-                <Header title={title}/>
+                <Header title={this.state.title}/>
                 <main className="Home-main">
-                    <BackButton title={backbutton} link={backbuttonlink} />
-                    <Button title={pendingButton} link={pendingButtonLink} />
-                    <Button title={declinedButton} link={declinedButtonLink} />
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+                    <Button title={this.state.pendingButton} link={this.state.pendingButtonLink} />
+                    <Button title={this.state.declinedButton} link={this.state.declinedButtonLink} />
                     
                 </main>
                 <footer>
-                    <NewButton title={newButton} link={newButtonLink} />
+                    <NewButton title={this.state.newButton} link={this.state.newButtonLink} />
                 </footer>
             </div>
           )

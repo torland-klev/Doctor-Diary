@@ -3,18 +3,20 @@ import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js'
 
 export default class HealthOfficerHome extends Component {
-    state = {
-
+    constructor() {
+        super();
+        this.state = {
+            title: "HEALTH OFFICER",
+            backbutton: "Homepage",
+            backbuttonlink: "/",
+        }
     }
     render() {
-        const title = "HEALTH OFFICER";
-        const backbutton = "Previous";
-        const backbuttonlink = "/"
         return (
             <div className="Home">
-                <Header title={title} />
+                <Header title={this.state.title} />
                 <main className="Home-main">
-                    <BackButton title={backbutton} link={backbuttonlink} />
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                 </main>
             </div>
         )

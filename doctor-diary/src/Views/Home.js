@@ -3,23 +3,25 @@ import './Home.css';
 import Header from '../Components/Header/Header.js';
 
 export default class Home extends Component {
-    state = {
-
+    constructor() {
+        super();
+        this.state = {
+            title: "DOCTOR DIARY",
+            role: "CHOOSE ROLE",
+            button1: "DOCTOR",
+            button2: "HEALTH OFFICER",
+        }
     }
     render () {
-        const title = "DOCTOR DIARY"
-        const role = "CHOOSE ROLE"
-        const button1 = "DOCTOR"
-        const button2 = "HEALTH OFFICER"
         return(
             <div className="Home">
-                <Header title={title}/>
+                <Header title={this.state.title}/>
                 <main className="Home-main">
-                    <h1> {role} </h1>
+                    <h1> {this.state.role} </h1>
 
-                    <a href='doctor' className="Home-button">{button1}</a>
+                    <a href='doctor' className="Home-button">{this.state.button1}</a>
 
-                    <a href='healthofficer' className="Home-button">{button2}</a>
+                    <a href='healthofficer' className="Home-button">{this.state.button2}</a>
             </main>
             </div>
         )

@@ -3,12 +3,14 @@ import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js';
 
 export default class NewEntry extends Component {
-    state = {
-
+    constructor() {
+        super();
+        this.state = {
+            backbutton: "Back to doctor",
+            backbuttonlink: "/doctor",
+        }
     }
     render () {
-        const backbutton = "Previous";
-        const backbuttonlink = "/doctor"
         return(
             <div className="Home">
                 <Header />
@@ -32,7 +34,7 @@ export default class NewEntry extends Component {
                     <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                     <input type="text" name="elementSix" id="elementSix" placeholder="..." />
 
-                    <BackButton title={backbutton} link={backbuttonlink} />
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                 </main>
             </div>
         )
