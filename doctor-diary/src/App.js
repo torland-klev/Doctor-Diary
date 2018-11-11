@@ -5,6 +5,7 @@ import Pending from './Views/Pending.js';
 import Declined from './Views/Declined.js';
 import HealthOfficerHome from './Views/HealthOfficerHome.js'
 import NewEntry from './Views/NewEntry.js'
+import ConfirmSendReport from './Views/ConfirmSendReport.js'
 import {BrowserRouter, Route} from 'react-router-dom';
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact={true} path='/doctor/pending' render={() => (<div className="App"> <Pending /> </div>)} />
           <Route exact={true} path='/doctor/declined' render={() => (<div className="App"> <Declined /> </div>)} />
           <Route exact={true} path='/doctor/newEntry' render={() => (<div className="App"> <NewEntry /> </div>)} />
+          <Route exact={true} path='/doctor/newEntry/confirmSendReport' render={() => (<div className="App"> <ConfirmSendReport /> </div>)} />
         </div>
       </BrowserRouter>
     );
