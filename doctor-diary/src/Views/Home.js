@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './Home.css';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
 
 export default class Home extends Component {
     state = {

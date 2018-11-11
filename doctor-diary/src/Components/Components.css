@@ -7,7 +7,7 @@
 }
 
 .Title{
-    font-size: calc(25px + 2vmin);
+    font-size: calc(30px + 2vmin);
     color: white; 
 }
 
@@ -22,7 +22,7 @@
 }
 
 .BackButton{
-    width: 25%;
+    width: 20%;
     border-radius: 5px;
     background-color: #bad5f4;
     margin: 1%;
@@ -30,3 +30,13 @@
     border: 1px solid black;
     font-size: calc(10px +2vmin);
 }
+
+.NewButton{
+    width: 70%;
+    height: 70%;
+    border-radius: 5px;
+    background-color: #9ab67b;
+    margin: 1%;
+    border: 1px solid black;
+    font-size: 30px;
+  }

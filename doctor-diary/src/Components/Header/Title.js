@@ -5,7 +5,7 @@ export default class Title extends Component{
 		return (
 			<div className="Title">
                 {this.props.title}
-            </div>
+			</div>
 		);
 	}
 }

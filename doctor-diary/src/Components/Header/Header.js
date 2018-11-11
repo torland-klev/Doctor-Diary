@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./Header.css";
-import Title from "./Header/Title"
+import "../Components.css";
+import Title from "./Title"
 
 /*
  * Header burde ta en "prop" verdi, som tittelen for siden 

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
+import BackButton from '../Components/Button/BackButton.js';
 
 export default class NewEntry extends Component {
     state = {
 
     }
     render () {
+        const backbutton = "Previous";
+        const backbuttonlink = "/doctor"
         return(
             <div className="Home">
                 <Header />
@@ -29,7 +32,7 @@ export default class NewEntry extends Component {
                     <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                     <input type="text" name="elementSix" id="elementSix" placeholder="..." />
 
-                    <a href='/doctor' className="Home-button">Go back</a>
+                    <BackButton title={backbutton} link={backbuttonlink} />
                 </main>
             </div>
         )

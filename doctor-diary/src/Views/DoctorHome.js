@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header.js';
+import Header from '../Components/Header/Header.js';
+import BackButton from '../Components/Button/BackButton.js';
+import Button from '../Components/Button/Button.js'
+import NewButton from '../Components/Button/NewButton.js';
 
 
 export default class DoctorHome extends Component {
@@ -8,19 +11,25 @@ export default class DoctorHome extends Component {
     }
     render () {
         const title = "DOCTOR";
+        const backbutton = "Previous";
+        const backbuttonlink = "/";
+        const pendingButton = "Pending";
+        const pendingButtonLink = "doctor/pending";
+        const declinedButton = "Declined";
+        const declinedButtonLink = "doctor/declined";
+        const newButton = "New Entry";
+        const newButtonLink = "doctor/newEntry";
         return (
             <div className="Home">
                 <Header title={title}/>
                 <main className="Home-main">
-                    <a href='doctor/pending' className="Home-button">Pending</a>
-                    <a href='doctor/declined' className="Home-button">Declined</a>
-                    <a href='/' className="Home-button">Go back</a>
-                   
+                    <BackButton title={backbutton} link={backbuttonlink} />
+                    <Button title={pendingButton} link={pendingButtonLink} />
+                    <Button title={declinedButton} link={declinedButtonLink} />
+                    
                 </main>
                 <footer>
-                    <button  className="New-button">
-                    <a href='doctor/newEntry' >New entry</a>
-                    </button>
+                    <NewButton title={newButton} link={newButtonLink} />
                 </footer>
             </div>
           )

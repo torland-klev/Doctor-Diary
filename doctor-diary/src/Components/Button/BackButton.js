@@ -3,9 +3,7 @@ import React, { Component } from "react";
 export default class BackButton extends Component{
 	render() {
 		return (
-			<div className="BackButton">
-                <a href={this.props.link}>{this.props.title}</a>
-            </div>
+            <a href={this.props.link} className="BackButton">{this.props.title}</a>
 		);
 	}
 }
