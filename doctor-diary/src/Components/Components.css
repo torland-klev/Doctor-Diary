@@ -32,11 +32,15 @@
 }
 
 .NewButton{
-    width: 70%;
-    height: 70%;
+    width: 40vh;
+    height: 10vh;
     border-radius: 5px;
     background-color: #9ab67b;
     margin: 1%;
     border: 1px solid black;
     font-size: 30px;
-  }
+}
+
+@media screen and (max-width:910px){
+    /* Add restrictions to width etc*/
+}

@@ -6,6 +6,7 @@ export default class NewEntry extends Component {
     constructor() {
         super();
         this.state = {
+            title: "NEW ENTRY",
             backbutton: "Back to doctor",
             backbuttonlink: "/doctor",
         }
@@ -13,7 +14,7 @@ export default class NewEntry extends Component {
     render () {
         return(
             <div className="Home">
-                <Header />
+                <Header title={this.state.title} />
                 <main className="Home-main">
 
                     <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>

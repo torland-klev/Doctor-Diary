@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './Home.css';
+import Button from '../Components/Button/Button.js'
 import Header from '../Components/Header/Header.js';
 
 export default class Home extends Component {
@@ -8,8 +9,10 @@ export default class Home extends Component {
         this.state = {
             title: "DOCTOR DIARY",
             role: "CHOOSE ROLE",
-            button1: "DOCTOR",
-            button2: "HEALTH OFFICER",
+            doctorButton: "DOCTOR",
+            doctorButtonLink: "/doctor",
+            healthOfficerButton: "HEALTH OFFICER",
+            healthOfficerButtonLink: "/healthofficer"
         }
     }
     render () {
@@ -19,9 +22,8 @@ export default class Home extends Component {
                 <main className="Home-main">
                     <h1> {this.state.role} </h1>
 
-                    <a href='doctor' className="Home-button">{this.state.button1}</a>
-
-                    <a href='healthofficer' className="Home-button">{this.state.button2}</a>
+                    <Button title={this.state.doctorButton} link={this.state.doctorButtonLink} />
+                    <Button title={this.state.healthOfficerButton} link={this.state.healthOfficerButtonLink} />
             </main>
             </div>
         )
