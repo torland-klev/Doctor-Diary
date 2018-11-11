@@ -7,16 +7,21 @@ export default class DoctorHome extends Component {
 
     }
     render () {
+        const title = "DOCTOR";
         return (
             <div className="Home">
-                <Header />
+                <Header title={title}/>
                 <main className="Home-main">
-                <h1>Doctor Diary</h1>
                     <a href='doctor/pending' className="Home-button">Pending</a>
                     <a href='doctor/declined' className="Home-button">Declined</a>
-                    <a href='doctor/newEntry' className="Home-button">New entry</a>
                     <a href='/' className="Home-button">Go back</a>
+                   
                 </main>
+                <footer>
+                    <button  className="New-button">
+                    <a href='doctor/newEntry' >New entry</a>
+                    </button>
+                </footer>
             </div>
           )
     }

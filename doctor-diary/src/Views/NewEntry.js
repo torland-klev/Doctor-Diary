@@ -10,7 +10,7 @@ export default class NewEntry extends Component {
             <div className="Home">
                 <Header />
                 <main className="Home-main">
-                    <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
+                    <label name="entrydesctription"><p>No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</p></label>
                     <input type="text" name="nyttelement" id="nyttelement"
                        placeholder="New element" />
                     <a href='/doctor' className="Home-button">Go back</a>

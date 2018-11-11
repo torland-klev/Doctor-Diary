@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Header.css";
+import Title from "./Header/Title"
 
 /*
  * Header burde ta en "prop" verdi, som tittelen for siden 
@@ -9,7 +10,9 @@ import "./Header.css";
 export default class Header extends Component {
    render () {
         return (
-            <div className="Header">DOCTOR DIARY</div>
-        )
+            <div className="Header">
+                <Title title={this.props.title} />
+            </div>
+        );
     }
 }
