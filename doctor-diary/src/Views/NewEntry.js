@@ -5,14 +5,20 @@ NB: It uses date as key, so it assumes that only one doctor will be using the br
 
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-
+import BackButton from '../Components/Button/BackButton.js';
+import NextButton from '../Components/Button/NextButton.js';
 
 export default class NewEntry extends Component {
 
   constructor(props) {
       super(props);
       this.state = {
-          hei: {}
+            hei: {},
+            title: "NEW ENTRY",
+            backbutton: "Back to doctor",
+            backbuttonlink: "/doctor",
+            nextButton: "New",
+            nextButtonLink: '/doctor/newEntry/confirmSendReport',
       };
       this.updateData = this.updateData.bind(this)
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
@@ -52,7 +58,7 @@ export default class NewEntry extends Component {
     render () {
         return(
             <div className="Home">
-                <Header />
+                <Header title={this.state.title} />
                 <main className="Home-main">
 
                     <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
@@ -73,9 +79,8 @@ export default class NewEntry extends Component {
                     <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                     <input type="text" name="elementSix" onKeyUp={this.updateData} id="elementSix" placeholder="..." />
 
-                    <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
-
-                    <a href='/doctor' className="Home-button">Go back</a>
+                    <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} onClick={this.saveToLocalStorage} />
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
                 </main>
 

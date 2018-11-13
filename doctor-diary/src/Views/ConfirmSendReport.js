@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
+import BackButton from '../Components/Button/BackButton.js';
 
 
 export default class ConfirmSendReport extends Component {
-    state = {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "Confirm Report",
+            backbutton: "Back to new Entry",
+            backbuttonlink: '/doctor/newEntry',
+        };
     }
     render () {
         return (
             <div className="Home">
-                <Header />
+                <Header title={this.state.title} />
                 <main className="Home-main">
-                <h1>ConfirmSendReport</h1>
-                <a href='/doctor/newEntry' className="Home-button">Go back</a>
+
+                <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                 </main>
             </div>
           )

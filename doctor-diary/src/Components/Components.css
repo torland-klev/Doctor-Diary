@@ -21,7 +21,7 @@
     font-size: calc(10px +2vmin);
 }
 
-.BackButton{
+.BackButton, .NextButton{
     width: 30%;
     border-radius: 5px;
     background-color: #bad5f4;
