@@ -26,7 +26,8 @@ export default class NewEntry extends Component {
 
 
     saveToLocalStorage() {
-        localStorage.setItem(this.state.hei.fullDate, this.state.hei);
+        console.log("saveToLocalStorage");
+        localStorage.setItem(this.state.hei.fullDate, JSON.stringify(this.state.hei));
     }
 
 
@@ -79,7 +80,7 @@ export default class NewEntry extends Component {
                     <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                     <input type="text" name="elementSix" onKeyUp={this.updateData} id="elementSix" placeholder="..." />
 
-                    <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} onClick={this.saveToLocalStorage} />
+                    <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
                     <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
                 </main>

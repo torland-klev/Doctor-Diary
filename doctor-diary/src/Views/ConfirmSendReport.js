@@ -4,44 +4,55 @@ import BackButton from '../Components/Button/BackButton.js';
 
 
 export default class ConfirmSendReport extends Component {
-<<<<<<< HEAD
-
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-        this.loadLocalStorage = this.loadLocalStorage.bind(this)
-    }
 
 
-    loadLocalStorage() {
-      var d = new Date();
-      var year = String(d.getFullYear());
-      var month = String(d.getMonth());
-      var day = String(d.getDate());
-      var fullDate = day + month + year;
-      this.setState({report: localStorage.getItem(fullDate)})
-      //Maa sette innerHTML paa alle p-"objektene" til aa vaere data fra localStorage.
-=======
     constructor(props) {
         super(props);
         this.state = {
             title: "Confirm Report",
             backbutton: "Back to new Entry",
             backbuttonlink: '/doctor/newEntry',
+            report: {},
         };
->>>>>>> de0cc8e1383cfd72cef693f9013569df54a3008c
+        this.componentWillMount = this.componentWillMount.bind(this)
+        this.testMetode = this.testMetode.bind(this)
+    }
+
+
+    componentWillMount() {
+        console.log("componentWillMount");
+        var d = new Date();
+        var year = String(d.getFullYear());
+        var month = String(d.getMonth());
+        var day = String(d.getDate());
+        var fullDate = day + month + year;
+        var obj = localStorage.getItem(fullDate);
+        var parsedReport = JSON.parse(obj);
+        var one = parsedReport.one;
+        var two = parsedReport.two;
+        var three = parsedReport.three;
+        var four = parsedReport.four;
+        var five = parsedReport.five;
+        var six = parsedReport.six;
+        var tmpReport = {fullDate:+fullDate, one:+one, two:+two, three:+three, four:+four, five:+five, six:+six};
+        this.setState({report: tmpReport});
+        console.log("tmpReport.one: " + tmpReport.one);
+        var reportHeadline = document.getElementById("reportHeadline");
+    }
+
+    testMetode() {
+      return this.state.report.one;
     }
 
 
     render () {
         return (
+
             <div className="Home">
                 <Header title={this.state.title} />
                 <main className="Home-main">
-<<<<<<< HEAD
-                <h1>Report created on (date)</h1>
+
+                <div dangerouslySetInnerHTML={testMetode} />
 
                 <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
                 <p id="one"></p>
@@ -61,12 +72,8 @@ export default class ConfirmSendReport extends Component {
                 <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                 <p id="six"></p>
 
-
-                <a href='/doctor/newEntry' className="Home-button">Go back</a>
-=======
-
                 <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
->>>>>>> de0cc8e1383cfd72cef693f9013569df54a3008c
+
                 </main>
             </div>
           )
