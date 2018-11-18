@@ -23,14 +23,14 @@
     width: 5vh;
     height: 5vh;
     padding-left: 1vh;
-    
+
 }
 
 .Title{
     font-family: "Helvetica-CondensedBold", sans-serif;
     font-weight: bold;
     font-size: calc(0.9em +2vmin);
-    color: white; 
+    color: white;
     padding-left: 1.5vh;
 }
 
@@ -72,6 +72,23 @@
     align-items: baseline;
 }
 
+.TableDataElement{
+  float: left;
+  margin-right: 30px;
+}
+
+.TableValue{
+  float: right;
+}
+
+.ReportListItem{
+  border: solid 1px black;
+  margin-bottom: 2px;
+  padding: 2px;
+}
+.ReportListItemName{
+  float: left;
+}
 @media screen and (max-width:910px){
     /* Add restrictions to width etc*/
 }
