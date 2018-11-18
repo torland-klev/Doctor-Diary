@@ -28,20 +28,19 @@ export default class NewEntry extends Component {
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
   }
 
+
     saveToLocalStorage() {
+        localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+    }
+
+
+    componentWillMount() {
         var d = new Date();
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
         console.log(day);
-        this.state.fullDate = day + month + year;
-        console.log("saveToLocalStorage " + this.state.fullDate);
-        //Husk aa endre paa det som settes inn i local storage
-        localStorage.setItem(this.state.fullDate, JSON.stringify(this.dataToBeStored));
-    }
-
-
-    componentWillMount() {
+        this.state.fullDate = day + "." + month + "."+ year;
         var elements = this.state.dataElements;
         elements.forEach((el) => {
               this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
@@ -54,9 +53,20 @@ export default class NewEntry extends Component {
       var theId = id;
       var dataContent = document.getElementById(theId).value;
       console.log(dataContent)
-      var newElement = {id:{id}, name:{name}, data:{dataContent}};
-      this.state.dataToBeStored.push(newElement);
-      console.log(this.state.dataToBeStored)
+
+      //Maa finne ut om tabellen allerede har et element med denne id'en:
+      //Altsaa ikke opprett objekt med samme id flere ganger.
+
+      var newElement = true;
+      if (this.state.dataToBeStored.includes(theId)) {
+        console.log("found the id")
+      }
+
+      if (newElement == true) {
+          var newElement = {id: id, name: name, dataContent: dataContent};
+          this.state.dataToBeStored.push(newElement);
+      }
+
     }
 
 
@@ -67,7 +77,7 @@ export default class NewEntry extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
 
-                    <h1>Create Report for date {this.state.fullDate}</h1>
+                    <h1>Create report for date {this.state.fullDate}</h1>
 
                     <table>
                         <tbody>

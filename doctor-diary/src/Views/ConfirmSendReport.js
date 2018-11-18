@@ -13,35 +13,28 @@ export default class ConfirmSendReport extends Component {
             backbutton: "Back to new Entry",
             backbuttonlink: '/doctor/newEntry',
             report: {},
+            rows: [],
         };
         this.componentWillMount = this.componentWillMount.bind(this)
-        this.testMetode = this.testMetode.bind(this)
     }
 
 
     componentWillMount() {
-        console.log("componentWillMount");
         var d = new Date();
-        var year = String(d.getFullYear());
-        var month = String(d.getMonth());
-        var day = String(d.getDate());
-        var fullDate = day + month + year;
-        var obj = localStorage.getItem(fullDate);
-        var parsedReport = JSON.parse(obj);
-        var one = parsedReport.one;
-        var two = parsedReport.two;
-        var three = parsedReport.three;
-        var four = parsedReport.four;
-        var five = parsedReport.five;
-        var six = parsedReport.six;
-        var tmpReport = {fullDate:+fullDate, one:+one, two:+two, three:+three, four:+four, five:+five, six:+six};
-        this.setState({report: tmpReport});
-        console.log("tmpReport.one: " + tmpReport.one);
-        var reportHeadline = document.getElementById("reportHeadline");
-    }
-
-    testMetode() {
-      return this.state.report.one;
+        var year = String(d.getFullYear())
+        var month = String(d.getMonth())
+        var day = String(d.getDate())
+        var fullDate = day + "." + month + "." + year
+        var obj = localStorage.getItem(fullDate)
+        var parsedReport = JSON.parse(obj)
+        parsedReport.forEach((el) => {
+              console.log(el.id)
+              console.log(el.name)
+              console.log(el.dataContent)
+              var str = JSON.stringify(el.name)
+              this.state.rows.push(<tr><p type="text" id={el.name}>{str.substring(1, str.length - 1)}</p></tr>)
+              this.state.rows.push(<tr><p type="text" id={el.dataContent}>{el.dataContent}</p></tr>);
+        })
     }
 
 
@@ -52,27 +45,15 @@ export default class ConfirmSendReport extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
 
+                <h1>Report for date {this.state.fullDate}</h1>
+
+                <table>
+                    <tbody>
+                        {this.state.rows}
+                    </tbody>
+                 </table>
 
 
-                <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
-                <p id="one"></p>
-
-                <label name="entrydesctription">Anaesthesia provided to other cases</label>
-                <p id="two"></p>
-
-                <label name="entrydesctription">Challenges faced</label>
-                <p id="three"></p>
-
-                <label name="entrydesctription">Challenges faced: Other</label>
-                <p id="four"></p>
-
-                <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced</label>
-                <p id="five"></p>
-
-                <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
-                <p id="six"></p>
-
-                <a href='/doctor/newEntry/confirmSendReport/confirmation' onClick={this.sendDataToApi} className="Home-button">Confirm and send</a>
 
 
                 <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
