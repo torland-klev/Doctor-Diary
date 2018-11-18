@@ -1,22 +1,11 @@
 main{
-  min-height: 80vh;
+  min-height: 80%;
   width: 100%;
-  padding-top: 12%;
-}
-
-footer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1%;
-  width: 100%;
-  height: 20vh;
-  position: relative;
+  padding-top: 10vh;
+  font-family: "Helvetica-CondensedBold", sans-serif;
 }
 
 .Home {
-  text-align: center;
   background-color: white;
 }
   
@@ -25,8 +14,23 @@ footer{
   flex-direction: column;
   align-items: center;
 }
-@media screen and (max-width:910px){
+
+.NewEntry-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  /* @media screen greiene setter flex-direction: column*/
+}
+
+.NewEntry-input{
+  font-size: 18px;
+}
+@media screen and (max-width:480px){
  /* Add restrictions to width etc*/
+  .NewEntry-section{
+    flex-direction: column;
+  }
 }
 
 a{

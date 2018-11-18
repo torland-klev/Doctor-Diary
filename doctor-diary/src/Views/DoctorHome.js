@@ -3,6 +3,7 @@ import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js';
 import Button from '../Components/Button/Button.js'
 import NewButton from '../Components/Button/NewButton.js';
+import NavBar from '../Components/NavBar/NavBar.js';
 
 
 export default class DoctorHome extends Component {
@@ -28,11 +29,12 @@ export default class DoctorHome extends Component {
                     <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                     <Button title={this.state.pendingButton} link={this.state.pendingButtonLink} />
                     <Button title={this.state.declinedButton} link={this.state.declinedButtonLink} />
+                    <NewButton title={this.state.newButton} link={this.state.newButtonLink} />
                     
                 </main>
-                <footer>
-                    <NewButton title={this.state.newButton} link={this.state.newButtonLink} />
-                </footer>
+                <nav>
+                    <NavBar />
+                </nav>
             </div>
           )
     }

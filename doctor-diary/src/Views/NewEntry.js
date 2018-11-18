@@ -17,7 +17,7 @@ export default class NewEntry extends Component {
             title: "NEW ENTRY",
             backbutton: "Back to doctor",
             backbuttonlink: "/doctor",
-            nextButton: "New",
+            nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
       };
       this.updateData = this.updateData.bind(this)
@@ -59,27 +59,35 @@ export default class NewEntry extends Component {
         return(
             <div className="Home">
                 <Header title={this.state.title} />
-                <main className="Home-main">
-
-                    <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
-                    <input type="text" name="elementOne" onKeyUp={this.updateData} id="elementOne" placeholder="..." />
-
-                    <label name="entrydesctription">Anaesthesia provided to other cases</label>
-                    <input type="text" name="elementTwo" onKeyUp={this.updateData} id="elementTwo" placeholder="..." />
-
-                    <label name="entrydesctription">Challenges faced</label>
-                    <input type="text" name="elementThree" onKeyUp={this.updateData} id="elementThree" placeholder="..." />
-
-                    <label name="entrydesctription">Challenges faced: Other</label>
-                    <input type="text" name="elementFour" onKeyUp={this.updateData} id="elementFour" placeholder="..." />
-
-                    <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced</label>
-                    <input type="text" name="elementFive" onKeyUp={this.updateData} id="elementFive" placeholder="..." />
-
-                    <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
-                    <input type="text" name="elementSix" onKeyUp={this.updateData} id="elementSix" placeholder="..." />
-
-                    <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} onClick={this.saveToLocalStorage} />
+                <main>
+                    <div className="NewEntry-section">
+                        <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
+                        <input type="text" name="elementOne" onKeyUp={this.updateData} className="NewEntry-input" id="elementOne" placeholder="..." />
+                    </div>
+                    <div className="NewEntry-section">
+                        <label name="entrydesctription">Anaesthesia provided to other cases</label>
+                        <input type="text" name="elementTwo" onKeyUp={this.updateData} className="NewEntry-input" id="elementTwo" placeholder="..." />
+                    </div>
+                    <div className="NewEntry-section">
+                        <label name="entrydesctription">Challenges faced</label>
+                        <input type="text" name="elementThree" onKeyUp={this.updateData} className="NewEntry-input" id="elementThree" placeholder="..." />
+                    </div>
+                    <div className="NewEntry-section">
+                        <label name="entrydesctription">Challenges faced: Other</label>
+                        <input type="text" name="elementFour" onKeyUp={this.updateData} className="NewEntry-input" id="elementFour" placeholder="..." />
+                    </div>
+                    <div className="NewEntry-section">
+                        <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced</label>
+                        <input type="text" name="elementFive" onKeyUp={this.updateData} className="NewEntry-input" id="elementFive" placeholder="..." />
+                    </div>
+                    <div className="NewEntry-element">
+                        <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
+                        <input type="text" name="elementSix" onKeyUp={this.updateData} className="NewEntry-input" id="elementSix" placeholder="..." />
+                    </div> 
+                    {/* onClick={this.saveToLocalStorage} funker ikke med NextButton denne setupen, må se på det*/}
+                    <div onClick={this.saveToLocalStorage}>
+                        <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} />
+                    </div>
                     <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
                 </main>

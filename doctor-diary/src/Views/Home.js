@@ -20,7 +20,7 @@ export default class Home extends Component {
             <div className="Home">
                 <Header title={this.state.title}/>
                 <main className="Home-main">
-                    <h1> {this.state.role} </h1>
+                    <h2>{this.state.role}</h2>
 
                     <Button title={this.state.doctorButton} link={this.state.doctorButtonLink} />
                     <Button title={this.state.healthOfficerButton} link={this.state.healthOfficerButtonLink} />
