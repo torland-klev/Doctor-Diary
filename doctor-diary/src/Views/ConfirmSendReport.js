@@ -52,7 +52,7 @@ export default class ConfirmSendReport extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
 
-                <div dangerouslySetInnerHTML={testMetode} />
+            
 
                 <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
                 <p id="one"></p>
