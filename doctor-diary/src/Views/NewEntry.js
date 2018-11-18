@@ -14,8 +14,9 @@ export default class NewEntry extends Component {
   constructor(props) {
       super(props);
       this.state = {
-            dataElements: [{name: "hei", valueType: "paa", id: "deg"}, {name: "hei", valueType: "paa", id: "deg"}],
-            dataToBeStored: {},
+            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
+            dataToBeStored: [],
+            fullDate: "",
             rows: [],
             title: "NEW ENTRY",
             backbutton: "Back to doctor",
@@ -27,29 +28,35 @@ export default class NewEntry extends Component {
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
   }
 
-
     saveToLocalStorage() {
         var d = new Date();
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
-        var fullDate = day + month + year;
-        console.log("saveToLocalStorage " + fullDate);
-        localStorage.setItem(this.state.dataToBeStored.fullDate, JSON.stringify(this.state.dataToBeStored));
+        console.log(day);
+        this.state.fullDate = day + month + year;
+        console.log("saveToLocalStorage " + this.state.fullDate);
+        //Husk aa endre paa det som settes inn i local storage
+        localStorage.setItem(this.state.fullDate, JSON.stringify(this.dataToBeStored));
     }
 
 
     componentWillMount() {
         var elements = this.state.dataElements;
         elements.forEach((el) => {
-              //Husk aa lage dynamiske navn paa ting:
-              this.state.rows.push(<tr><input type="text" name="el.name" onKeyUp={this.updateData} id="elementTwo" placeholder="..." /></tr>);
+              this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+              this.state.rows.push(<tr><input type={el.valueType} name={el.name} onKeyUp={this.updateData.bind(this, el.id, el.name)} id={el.id} placeholder="..." /></tr>);
             })
     }
 
 
-    updateData() {
-      console.log("updateData")
+    updateData(id, name) {
+      var theId = id;
+      var dataContent = document.getElementById(theId).value;
+      console.log(dataContent)
+      var newElement = {id:{id}, name:{name}, data:{dataContent}};
+      this.state.dataToBeStored.push(newElement);
+      console.log(this.state.dataToBeStored)
     }
 
 
@@ -60,7 +67,7 @@ export default class NewEntry extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
 
-                    <h1>Create Report</h1>
+                    <h1>Create Report for date {this.state.fullDate}</h1>
 
                     <table>
                         <tbody>
