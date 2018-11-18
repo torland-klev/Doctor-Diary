@@ -3,6 +3,8 @@ main{
   width: 100%;
   padding-top: 10vh;
   font-family: "Helvetica-CondensedBold", sans-serif;
+  overflow-x: hidden; 
+  overflow-y: auto;
 }
 
 .Home {
@@ -13,6 +15,14 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.Home-iconcontainer{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content: flex-start;
+  text-align: center;
 }
 
 .NewEntry-section{

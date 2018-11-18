@@ -7,6 +7,10 @@ export default class Header extends Component {
    render () {
         return (
             <div className="Header">
+                <meta
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+                />
                 <HeaderImage />
                 <Title title={this.props.title} />
             </div>

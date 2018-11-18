@@ -84,12 +84,14 @@ export default class NewEntry extends Component {
                         <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                         <input type="text" name="elementSix" onKeyUp={this.updateData} className="NewEntry-input" id="elementSix" placeholder="..." />
                     </div> 
-                    {/* onClick={this.saveToLocalStorage} funker ikke med NextButton denne setupen, må se på det*/}
-                    <div onClick={this.saveToLocalStorage}>
-                        <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} />
+                   
+                   <div className="TemporaryContainer">
+                        {/* onClick={this.saveToLocalStorage} funker ikke med NextButton denne setupen, må se på det*/}
+                        <div onClick={this.saveToLocalStorage}>
+                            <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} />
+                        </div>
+                        <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                     </div>
-                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
-
                 </main>
 
             </div>

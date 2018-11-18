@@ -8,7 +8,7 @@ class Declined extends Component {
         this.state = {
             title: "Declined reports",
             backbutton: "Back to doctor",
-            backbuttonlink: "/doctor",
+            backLink: "/doctor",
         }
     }
     render() {
