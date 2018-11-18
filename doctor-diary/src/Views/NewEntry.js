@@ -10,10 +10,13 @@ import NextButton from '../Components/Button/NextButton.js';
 
 export default class NewEntry extends Component {
 
+
   constructor(props) {
       super(props);
       this.state = {
-            hei: {},
+            dataElements: [{name: "hei", valueType: "paa", id: "deg"}, {name: "hei", valueType: "paa", id: "deg"}],
+            dataToBeStored: {},
+            rows: [],
             title: "NEW ENTRY",
             backbutton: "Back to doctor",
             backbuttonlink: "/doctor",
@@ -26,59 +29,44 @@ export default class NewEntry extends Component {
 
 
     saveToLocalStorage() {
-        console.log("saveToLocalStorage");
-        localStorage.setItem(this.state.hei.fullDate, JSON.stringify(this.state.hei));
-    }
-
-
-    updateData() {
-        var one = document.getElementById("elementOne").value;
-        console.log("one: " + one);
-        var two = document.getElementById("elementTwo").value;
-        console.log("two: " + two);
-        var three = document.getElementById("elementThree").value;
-        console.log("three: " + three);
-        var four = document.getElementById("elementFour").value;
-        console.log("four: " + four);
-        var five = document.getElementById("elementFive").value;
-        console.log("five: " + five);
-        var six = document.getElementById("elementSix").value;
-        console.log("six: " + six);
         var d = new Date();
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
         var fullDate = day + month + year;
-        var report = {fullDate:+fullDate, one:+one, two:+two, three:+three, four:+four, five:+five, six:+six};
-        this.setState({hei: report});
-        console.log("report.fullDate: " + report.fullDate, "report.one: "+report.one, "report.two: "+report.two, "report.three: "+ report.three,
-        "report.four: " + report.four, "report.five: " + report.five, "report.six: " + report.six);
+        console.log("saveToLocalStorage " + fullDate);
+        localStorage.setItem(this.state.dataToBeStored.fullDate, JSON.stringify(this.state.dataToBeStored));
+    }
+
+
+    componentWillMount() {
+        var elements = this.state.dataElements;
+        elements.forEach((el) => {
+              //Husk aa lage dynamiske navn paa ting:
+              this.state.rows.push(<tr><input type="text" name="el.name" onKeyUp={this.updateData} id="elementTwo" placeholder="..." /></tr>);
+            })
+    }
+
+
+    updateData() {
+      console.log("updateData")
     }
 
 
     render () {
         return(
+
             <div className="Home">
                 <Header title={this.state.title} />
                 <main className="Home-main">
 
-                    <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
-                    <input type="text" name="elementOne" onKeyUp={this.updateData} id="elementOne" placeholder="..." />
+                    <h1>Create Report</h1>
 
-                    <label name="entrydesctription">Anaesthesia provided to other cases</label>
-                    <input type="text" name="elementTwo" onKeyUp={this.updateData} id="elementTwo" placeholder="..." />
-
-                    <label name="entrydesctription">Challenges faced</label>
-                    <input type="text" name="elementThree" onKeyUp={this.updateData} id="elementThree" placeholder="..." />
-
-                    <label name="entrydesctription">Challenges faced: Other</label>
-                    <input type="text" name="elementFour" onKeyUp={this.updateData} id="elementFour" placeholder="..." />
-
-                    <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced</label>
-                    <input type="text" name="elementFive" onKeyUp={this.updateData} id="elementFive" placeholder="..." />
-
-                    <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
-                    <input type="text" name="elementSix" onKeyUp={this.updateData} id="elementSix" placeholder="..." />
+                    <table>
+                        <tbody>
+                            {this.state.rows}
+                        </tbody>
+                     </table>
 
                     <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
                     <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />

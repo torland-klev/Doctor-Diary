@@ -52,7 +52,7 @@ export default class ConfirmSendReport extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
 
-            
+
 
                 <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
                 <p id="one"></p>
@@ -71,6 +71,9 @@ export default class ConfirmSendReport extends Component {
 
                 <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
                 <p id="six"></p>
+
+                <a href='/doctor/newEntry/confirmSendReport/confirmation' onClick={this.sendDataToApi} className="Home-button">Confirm and send</a>
+
 
                 <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
