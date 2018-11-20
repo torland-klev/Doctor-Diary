@@ -3,7 +3,7 @@ import ReportListItem from '../Report/ReportListItem.jsx';
 
 /* Input: Array of reports/events
  * Displays: Creator and creation date of every report
- * Function: Can click on any given report to access it 
+ * Function: Can click on any given report to access it
  */
 
 export default class ReportList extends Component{
