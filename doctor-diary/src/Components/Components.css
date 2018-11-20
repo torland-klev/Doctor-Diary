@@ -88,6 +88,7 @@
 }
 .ReportListItemName{
   float: left;
+  margin-right: 10px;
 }
 
 .ReportPageButtonBack{

@@ -24,6 +24,7 @@ export default class ReportListHolder extends Component{
   }
 
   newPage(i){
+    //Check for first page
     if (i < 1){
       this.setState({activePage: 1});
     }
@@ -41,7 +42,7 @@ export default class ReportListHolder extends Component{
     const reports = this.getReports(REPORTS_PER_PAGE*activePage-8,REPORTS_PER_PAGE*activePage);
 		return (
       <div>
-        <ReportList reports={reports}/>
+        <ReportList reports={reports} perPage={REPORTS_PER_PAGE}/>
         <button className="ReportPageButtonBack" onClick={() => {this.newPage(activePage - 1)}}>{"<"}</button>
         {activePage}
         <button className="ReportPageButtonNext" onClick={() => {this.newPage(activePage + 1)}}>{">"}</button>
