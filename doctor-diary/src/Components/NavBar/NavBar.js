@@ -8,7 +8,6 @@ import ViewList from '@material-ui/icons/ViewList';
 import AddCircle from '@material-ui/icons/AddCircle';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom';
-import "../Components.css";
 
 const styles = {
   root: {

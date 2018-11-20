@@ -28,3 +28,8 @@ We have created some users for testing. Six users represent doctors and are each
 * Doctor / Konta CHP - MatsW - District1-
 * Doctor / Kukuna CHP - YahyaJ - District1-
 * Doctor / Shekaia MCHP - EllingS - District1-
+
+
+# Licensing
+## Material UI
+We have made these icons available for you to incorporate them into your products under the Apache License Version 2.0. Feel free to remix and re-share these icons and documentation in your products. We'd love attribution in your app's about screen, but it's not required. The only thing we ask is that you not re-sell the icons themselves.

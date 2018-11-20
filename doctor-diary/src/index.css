@@ -1,3 +1,4 @@
+/* main for pages*/
 body {
   margin: 0;
   padding: 0;
@@ -6,9 +7,174 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; 
+  overflow-y: auto;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+main{
+  min-height: 80%;
+  max-width: 100%;
+  padding-top: 10vh;
+  font-family: "Helvetica-CondensedBold", sans-serif;
+  background-color: white;
+}
+
+a{
+  color: black;
+}
+
+a:link{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+/* laptop screens*/ 
+@media screen and (min-width: 700px) and (-webkit-min-device-pixel-ratio: 1) { 
+    .NavBar{
+      position: relative;
+      top: 0px;
+      height: 7vh;
+      padding: 0.5vh;
+      padding-left: 40vh;
+      /* TODO: endre ikonfargene, endre bakgrunnsfargen HOOOW??*/
+    }
+}
+
+/* phone screens*/
+@media screen and (min-width:320px) and (max-width:480px){
+   .NewEntry-section{
+     flex-direction: row;
+     flex-wrap: wrap;
+     flex-basis: 0;
+     flex-grow: 1;
+   }
+   .NewEntry-input{
+    border: 1px solid #276696;
+    border-radius: 5px;
+   }
+ }
+
+/* Views */
+  
+.Home-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Home-iconcontainer{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content: flex-start;
+  text-align: center;
+}
+
+.NewEntry-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+.NewEntry-input{
+  font-size: 18px;
+}
+
+/* Components */
+.NavBar{
+  bottom: 0px;
+  position: absolute;
+  min-width: 90%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+}
+.Header{
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+  height: 7vh;
+  background-color: #276696;
+  padding: 0.5vh;
+}
+
+.HeaderImg{
+  width: 5vh;
+  height: 5vh;
+  padding-left: 1vh;
+
+}
+
+.Title{
+  font-family: "Helvetica-CondensedBold", sans-serif;
+  font-weight: bold;
+  font-size: calc(0.9em +2vmin);
+  color: white;
+  padding-left: 1.5vh;
+}
+
+.Button{
+  width: 40vh;
+  background-color: #bad5f4;
+  margin: 5px;;
+  padding: 1.5%;
+  border: 1px solid black;
+  font-size: calc(10px +2vmin);
+}
+
+.BackButton, .NextButton{
+  width: 20vh;
+  background-color: #bad5f4;
+  margin: 5px;
+  padding: 1.5%;
+  border: 1px solid black;
+  font-size: calc(10px +2vmin);
+}
+
+.NewButton{
+  text-align: center;
+  width: 40vh;
+  height: 5vh;
+  margin: 1%;
+  padding: 1.5%;
+  padding-top: 1.3vh;
+  padding-bottom: 1.5vh;
+  background-color: #9ab67b;
+  border: 1px solid black;
+  font-size: 30px;
+}
+
+.TemporaryContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.TableDataElement{
+  float: left;
+  margin-right: 30px;
+}
+
+.TableValue{
+  float: right;
+}
+
+.ReportListItem{
+  border: solid 1px black;
+  margin-bottom: 2px;
+  padding: 2px;
+}
+.ReportListItemName{
+  float: left;
 }

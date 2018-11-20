@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
-import Button from '../Components/Button/Button.js'
-import NewButton from '../Components/Button/NewButton.js';
 import ViewList from '@material-ui/icons/ViewList';
 import AssignmentLate from '@material-ui/icons/AssignmentLate'
 import AddCircle from '@material-ui/icons/AddCircle';

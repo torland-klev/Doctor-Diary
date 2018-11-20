@@ -5,8 +5,6 @@ NB: It uses date as key, so it assumes that only one doctor will be using the br
 
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
-import NextButton from '../Components/Button/NextButton.js';
 
 export default class NewEntry extends Component {
 
@@ -15,8 +13,8 @@ export default class NewEntry extends Component {
       this.state = {
             hei: {},
             title: "NEW ENTRY",
-            backbutton: "Back to doctor",
-            backbuttonlink: "/doctor",
+            backButton: "Back",
+            backButtonLink: "/doctor",
             nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
       };
@@ -61,36 +59,37 @@ export default class NewEntry extends Component {
                 <Header title={this.state.title} />
                 <main>
                     <div className="NewEntry-section">
-                        <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning)</label>
+                        <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning):</label>
                         <input type="text" name="elementOne" onKeyUp={this.updateData} className="NewEntry-input" id="elementOne" placeholder="..." />
                     </div>
                     <div className="NewEntry-section">
-                        <label name="entrydesctription">Anaesthesia provided to other cases</label>
+                        <label name="entrydesctription">Anaesthesia provided to other cases:</label>
                         <input type="text" name="elementTwo" onKeyUp={this.updateData} className="NewEntry-input" id="elementTwo" placeholder="..." />
                     </div>
                     <div className="NewEntry-section">
-                        <label name="entrydesctription">Challenges faced</label>
+                        <label name="entrydesctription">Challenges faced:</label>
                         <input type="text" name="elementThree" onKeyUp={this.updateData} className="NewEntry-input" id="elementThree" placeholder="..." />
                     </div>
                     <div className="NewEntry-section">
-                        <label name="entrydesctription">Challenges faced: Other</label>
+                        <label name="entrydesctription">Challenges faced: Other:</label>
                         <input type="text" name="elementFour" onKeyUp={this.updateData} className="NewEntry-input" id="elementFour" placeholder="..." />
                     </div>
                     <div className="NewEntry-section">
-                        <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced</label>
+                        <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced:</label>
                         <input type="text" name="elementFive" onKeyUp={this.updateData} className="NewEntry-input" id="elementFive" placeholder="..." />
                     </div>
                     <div className="NewEntry-element">
-                        <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM</label>
+                        <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM:</label>
                         <input type="text" name="elementSix" onKeyUp={this.updateData} className="NewEntry-input" id="elementSix" placeholder="..." />
                     </div> 
                    
                    <div className="TemporaryContainer">
-                        {/* onClick={this.saveToLocalStorage} funker ikke med NextButton denne setupen, må se på det*/}
-                        <div onClick={this.saveToLocalStorage}>
-                            <NextButton title={this.state.nextButton} link={this.state.nextButtonLink} />
-                        </div>
-                        <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+                        <form>
+                            <button formaction={this.state.backButtonLink}> {this.state.backButton} </button>
+                        </form>
+                        <form>
+                            <button formaction={this.state.nextButtonLink} onClick={this.saveToLocalStorage}> {this.state.nextButton} </button>
+                        </form>
                     </div>
                 </main>
 
