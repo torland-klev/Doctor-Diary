@@ -53,3 +53,38 @@ a:link{
 a:hover{
   text-decoration: underline;
 }
+
+/* CSS stuff for converting home to a login page  */
+
+
+.login-input{
+
+  font-size: 18px;
+  padding: 10px
+}
+
+.login-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+
+}
+
+.login-text{
+  font-size: 20px;
+  color: red;
+  padding: 10px;
+}
+
+.login-button{
+
+  padding: 10px;
+
+}
+
+
+
+
+
