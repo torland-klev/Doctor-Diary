@@ -14,17 +14,48 @@ export default class ReportList extends Component{
 		super(props);
 		this.state = {
 			rows: [],
-			reports: []
+			prevProps: []
 		}
 	}
 
+	componentWillMount(){
+		this.setState({prevProps: this.props.reports});
+	}
 	componentDidMount(){
 		this.updateReports();
 	}
 	componentDidUpdate(){
-		if (this.state.reports === this.props.reports{
-			console.log("Reports equal");
+		if (this.arrayComparator(this.state.prevProps, this.props.reports)){
 		}
+		else {
+			this.setState({prevProps: this.props.reports, rows: []});
+			this.updateReports();
+		}
+	}
+
+	arrayComparator(array1, array2){
+		var boolArray = [];
+		for (var i = 0; i < array1.length; i++){
+			if (this.arrayHas(array2, array1[i])){
+				boolArray.push(1);
+			}else {
+				boolArray.push(0);
+			}
+		}
+		if (this.arrayHas(boolArray, 0)){
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	arrayHas(array, element){
+		for (var i = 0; i < array.length; i++){
+			if (array[i] === element){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	updateReports(){
@@ -32,8 +63,8 @@ export default class ReportList extends Component{
 		reports.forEach((el) => {
 			this.getTeiName(el.trackedEntityInstance).then((result) => {
 				this.setState({rows: this.state.rows.concat([
-					<ReportListItem report={el} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>]
-					), reports: this.state.reports.concat([el])});
+					<ReportListItem report={el} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>])
+				});
 			})
 		})
 	}

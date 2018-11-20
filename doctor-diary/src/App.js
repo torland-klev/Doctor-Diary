@@ -3,6 +3,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Home from './Views/Home.js';
 import HealthOfficerHome from './Views/HealthOfficerHome.js';
 import HealthOfficerViewReport from './Views/HealthOfficerViewReport.js'
+import HealthOfficerReportList from './Views/HealthOfficerReportList.js'
 import DoctorHome from './Views/DoctorHome.js';
 
 import Pending from './Views/Pending.js';
@@ -22,7 +23,8 @@ class App extends Component {
           {/* Routing from main menu */}
           <Route exact={true} path='/' render={() => (<div className="App"> <Home /> </div>)} />
           <Route exact={true} path='/healthofficer' render={() => (<div className="App"> <HealthOfficerHome /></div>)} />
-          <Route exact={true} path='/healthofficer/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
+          <Route exact={true} path='/healthofficer/reportlist' render={(props) => (<div className="App"> <HealthOfficerReportList {...props}/></div>)} />
+          <Route exact={true} path='/healthofficer/reportlist/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
           <Route exact={true} path='/doctor' render={() => (<div className="App"> <DoctorHome /> </div>)} />
 
           {/* Routing from the doctor side to the doctors reports */}

@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js';
-import ReportHolder from '../Components/Report/ReportHolder.jsx';
+import ReportListHolder from '../Components/Report/ReportListHolder.jsx';
+import testEvent from '../Views/testEvent.js';
 
-export default class HealthOfficerViewReport extends Component {
+export default class HealthOfficerHome extends Component {
     constructor() {
         super();
         this.state = {
-            title: "HEALTH OFFICER VIEW REPORTS",
+            title: "HEALTH OFFICER REPORT LIST",
             backbutton: "Back",
-            backbuttonlink: "/healthofficer/reportlist",
+            backbuttonlink: "/HealthOfficerHome",
         }
     }
     render() {
-      const {report} = this.props.location.state;
-      console.log(report);
         return (
             <div className="Home">
                 <Header title={this.state.title} />
                 <main className="Home-main">
-                    <ReportHolder report={report}/>
+                    <ReportListHolder reports={testEvent}/>
                     <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
                 </main>
             </div>
