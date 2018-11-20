@@ -6,6 +6,7 @@ import BackButton from '../Components/Button/BackButton.js';
 export default class ConfirmSendReport extends Component {
 
 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -14,9 +15,11 @@ export default class ConfirmSendReport extends Component {
             backbuttonlink: '/doctor/newEntry',
             report: {},
             rows: [],
+            fullDate: "",
         };
         this.componentWillMount = this.componentWillMount.bind(this)
     }
+
 
 
     componentWillMount() {
@@ -24,8 +27,8 @@ export default class ConfirmSendReport extends Component {
         var year = String(d.getFullYear())
         var month = String(d.getMonth())
         var day = String(d.getDate())
-        var fullDate = day + "." + month + "." + year
-        var obj = localStorage.getItem(fullDate)
+        this.state.fullDate = day + "." + month + "." + year
+        var obj = localStorage.getItem(this.state.fullDate)
         var parsedReport = JSON.parse(obj)
         parsedReport.forEach((el) => {
               console.log(el.id)
@@ -36,6 +39,7 @@ export default class ConfirmSendReport extends Component {
               this.state.rows.push(<tr><p type="text" id={el.dataContent}>{el.dataContent}</p></tr>);
         })
     }
+
 
 
     render () {
@@ -53,13 +57,13 @@ export default class ConfirmSendReport extends Component {
                     </tbody>
                  </table>
 
-
-
-
                 <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
                 </main>
             </div>
           )
     }
+
+
+    
 }

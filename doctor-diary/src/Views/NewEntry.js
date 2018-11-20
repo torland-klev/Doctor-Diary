@@ -11,6 +11,7 @@ import NextButton from '../Components/Button/NextButton.js';
 export default class NewEntry extends Component {
 
 
+
   constructor(props) {
       super(props);
       this.state = {
@@ -26,11 +27,53 @@ export default class NewEntry extends Component {
       };
       this.updateData = this.updateData.bind(this)
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
+      this.fillInDataToBeStored = this.fillInDataToBeStored.bind(this)
+      this.getFieldValue = this.getFieldValue.bind(this)
+      this.getDataToBeStoredElement = this.getDataToBeStoredElement.bind(this)
   }
+
 
 
     saveToLocalStorage() {
         localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+    }
+
+
+    fillInDataToBeStored() {
+        var lista = localStorage.getItem(this.state.fullDate);
+        var listFromLS = JSON.parse(lista)
+        if (listFromLS != null) {
+            listFromLS.forEach((el) => {
+                var id = el.id
+                var name = el.name
+                var dataContent = el.dataContent
+                var newElement = {id: id, name: name, dataContent: dataContent};
+                this.state.dataToBeStored.push(newElement);
+            })
+        }
+    }
+
+
+    getFieldValue(id) {
+      var fieldValue = null
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == id) {
+                fieldValue = this.state.dataToBeStored[i].dataContent;
+                break;
+            }
+        }
+        return fieldValue;
+    }
+
+    getDataToBeStoredElement(id) {
+        var dtbsElement = ""
+          for (var i=0; i<this.state.dataToBeStored.length; i++) {
+              if (this.state.dataToBeStored[i].id == id) {
+                  dtbsElement = this.state.dataToBeStored[i]
+                  break;
+              }
+          }
+          return dtbsElement;
     }
 
 
@@ -39,35 +82,40 @@ export default class NewEntry extends Component {
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
-        console.log(day);
         this.state.fullDate = day + "." + month + "."+ year;
+        this.fillInDataToBeStored();
         var elements = this.state.dataElements;
         elements.forEach((el) => {
+              var fieldValue = this.getFieldValue(el.id);
+              var dtbsElement = this.getDataToBeStoredElement(el.id)
               this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
-              this.state.rows.push(<tr><input type={el.valueType} name={el.name} onKeyUp={this.updateData.bind(this, el.id, el.name)} id={el.id} placeholder="..." /></tr>);
-            })
+              //NB: fieldValue viser bare det som evt sto der foer sida ble aapna
+              this.state.rows.push(<tr><input type={el.valueType} value={dtbsElement.dataContent} name={el.name} onKeyUp={this.updateData.bind(this, el.id, el.name)} id={el.id} placeholder="..." /></tr>);
+        })
     }
 
 
     updateData(id, name) {
+      console.log("updateData with id: " + id)
       var theId = id;
-      var dataContent = document.getElementById(theId).value;
-      console.log(dataContent)
+      var newDataContent = document.getElementById(id).value;
 
-      //Maa finne ut om tabellen allerede har et element med denne id'en:
-      //Altsaa ikke opprett objekt med samme id flere ganger.
-
-      var newElement = true;
-      if (this.state.dataToBeStored.includes(theId)) {
-        console.log("found the id")
+      newElement = true;
+      for (var i=0; i<this.state.dataToBeStored.length; i++) {
+        if (this.state.dataToBeStored[i].id == theId) {
+          this.state.dataToBeStored[i].dataContent = newDataContent;
+          newElement = false;
+          break;
+        }
       }
-
       if (newElement == true) {
-          var newElement = {id: id, name: name, dataContent: dataContent};
-          this.state.dataToBeStored.push(newElement);
-      }
-
+            var newElement = {id: id, name: name, dataContent: newDataContent};
+            this.state.dataToBeStored.push(newElement);
+            console.log("added new element to dataToBeStored: id = " + id)
+        }
+        console.log(this.state.dataToBeStored)
     }
+
 
 
     render () {
@@ -94,4 +142,7 @@ export default class NewEntry extends Component {
 
         );
     }
+
+
+
 }
