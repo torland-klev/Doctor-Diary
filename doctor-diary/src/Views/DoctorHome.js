@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-import ViewList from '@material-ui/icons/ViewList';
-import AssignmentLate from '@material-ui/icons/AssignmentLate'
-import AddCircle from '@material-ui/icons/AddCircle';
 
 export default class DoctorHome extends Component {
     constructor (){
@@ -26,22 +23,15 @@ export default class DoctorHome extends Component {
             <div className="Home">
                 <Header title={this.state.title}/>
                 <main className="Home-main">
-                    <div className="Home-iconcontainer">
                         <a href={this.state.pendingLink}>
-                            <ViewList style={{ fontSize:100 }} />
-                            <p>{this.state.pendingButton}</p>
+                            <button>{this.state.pendingButton}</button>
                         </a>
                         <a href={this.state.declinedLink}>
-                            <AssignmentLate color="error" style={{ fontSize:100 }} />
-                            <p>{this.state.declinedButton}</p>
+                            <button>{this.state.declinedButton}</button>
                         </a>
-                    </div>
-                    <div className="Home-iconcontainer">
                         <a href={this.state.newLink}>
-                            <AddCircle style={{ fontSize:100 }} />
-                            <p>{this.state.newButton}</p>
+                            <button>{this.state.newButton}</button>
                         </a>
-                    </div>
                 </main>
             </div>
           )

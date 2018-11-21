@@ -68,7 +68,7 @@ class NavBar extends React.Component {
             <BottomNavigationAction
                 component={Link}
                 to={this.state.newLink}
-                Key="addEntry"
+                key="addEntry"
                 label="Add entry" 
                 icon={<AddCircle />} 
                 onPress={() => this.setState({ active: 'addEntry' })}

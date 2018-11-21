@@ -1,3 +1,5 @@
+// TODO: SLETTE DENNE SIDEN?
+
 const testEvent = [
 {
 storedBy: "admin",

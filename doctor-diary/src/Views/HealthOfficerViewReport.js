@@ -9,7 +9,7 @@ export default class HealthOfficerViewReport extends Component {
         this.state = {
             title: "HEALTH OFFICER VIEW REPORTS",
             backbutton: "Back",
-            backbuttonlink: "/healthofficer",
+            backbuttonlink: "/dho",
         }
     }
     render() {
