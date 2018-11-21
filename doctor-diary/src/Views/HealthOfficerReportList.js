@@ -35,6 +35,7 @@ export default class HealthOfficerHome extends Component {
 		})
 			.then((response) => response.json())
 	    .then((responseJson) => {
+        console.log("ok"); //WHY DOES THIS NO LONGER PRINT
         var reports = [];
 	      responseJson.events.forEach((el) => {
           reports.push(el);

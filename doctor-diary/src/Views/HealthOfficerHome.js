@@ -3,6 +3,29 @@ import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js';
 import OrganizationListHolder from '../Components/Report/OrganizationListHolder.jsx';
 
+/*
+ * This is the start of the District Health Officer wild ride.
+ * The entire DHO adventure is like a recurisve waterfall. One component
+ * will call a new component, which will call a new component. I will
+ * here try to explain the program flow. I will elaborate on the specific
+ * element when we come to them in the code.
+ *
+ * In essence, the flow goes like this:
+ *
+ * HealthOfficerHome -> 1 OrganizationListHolder -> 1 OrganizationList -> Many OrganizationListItems
+ *
+ * Each OrganizationListItem can call on HealthOfficerReportList with their own orgUnit ID.
+ *
+ * HealthOfficerReportList -> 1 ReportListHolder -> 1 ReportList -> Many (up to 8) ReportListItems
+ *
+ * Each ReportListItem can call on HealthOfficerViewReport with their own Event, which will be displayed.
+ *
+ * HealthOfficerViewReport -> 1 ReportHolder -> Many DataElements
+ *
+ * You can at any point in the process take a step back.
+ *
+ */
+
 export default class HealthOfficerHome extends Component {
   constructor() {
       super();
@@ -10,15 +33,23 @@ export default class HealthOfficerHome extends Component {
           title: "HEALTH OFFICER",
           backbutton: "Homepage",
           backbuttonlink: "/",
-          names: [],
           ids: [],
           i: [],
-          n: []
+          n: [],
+          sort: 0,
+          sortSymbol: '-'
       }
   }
 
+  /* When the component mounts, every teiSearchOrganisationUnit ID from /api/me
+   * will be fetched. Then, the name will be fetched from /api/organisationUnits/[ID].
+   * The ID will be placed into the state.i, while the name will be placed into state.n
+   * at the same time. The ID will then have the same array index as the corresponding
+   * name.
+   * The reason for the state.ids is that its a hacky way to know when the list
+   * is still loading.
+   */
   componentDidMount(){
-    var names = [];
     this.fetchReports().then( (ou) => {
       this.setState({ids: ou});
       ou.forEach( (el) => {
@@ -68,13 +99,29 @@ export default class HealthOfficerHome extends Component {
 		);
   }
 
+  sortNumber(){
+    var number = this.state.sort;
+    if (number === 2){
+      number = 0;
+      this.setState({sort: 0, sortSymbol: '-'});
+    } else if (number === 1){
+      number = 2;
+      this.setState({sort: 2, sortSymbol: '^'});
+    } else {
+      number = 1;
+      this.setState({sort: 1, sortSymbol: 'v'})
+    }
+    return number;
+  }
+
   render() {
     return (this.state.ids.length === this.state.i.length) ? (
       <div className="Home">
           <Header title={this.state.title} />
           <main className="Home-main">
             <h2>Choose the organisation unit</h2>
-            <OrganizationListHolder elements={this.state.i} names={this.state.n}/>
+            <OrganizationListHolder elements={this.state.i} names={this.state.n} sort={this.state.sort}/>
+            <button className="ReportPageButtonNext" onClick={() => {this.sortNumber()}}>{this.state.sortSymbol}</button>
             <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
           </main>
       </div>
@@ -82,6 +129,7 @@ export default class HealthOfficerHome extends Component {
       <div className="Home">
           <Header title={this.state.title} />
           <main className="Home-main">
+            <h2>Choose the organisation unit</h2>
             Loading...
             <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
           </main>
