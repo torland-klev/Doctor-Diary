@@ -40,11 +40,12 @@ export default class ReportListHolder extends Component{
   render() {
     const activePage = this.state.activePage;
     const reports = this.getReports(REPORTS_PER_PAGE*activePage-8,REPORTS_PER_PAGE*activePage);
+    const max = (Math.ceil(this.props.reports.length/REPORTS_PER_PAGE));
 		return (
       <div>
-        <ReportList reports={reports} perPage={REPORTS_PER_PAGE}/>
+        <ReportList reports={reports} total={(REPORTS_PER_PAGE<this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
         <button className="ReportPageButtonBack" onClick={() => {this.newPage(activePage - 1)}}>{"<"}</button>
-        {activePage}
+        {activePage} / {max}
         <button className="ReportPageButtonNext" onClick={() => {this.newPage(activePage + 1)}}>{">"}</button>
       </div>
 		);

@@ -4,7 +4,7 @@ import OrganizationList from '../Report/OrganizationList.jsx';
 export default class OrganizationListHolder extends Component{
 	render() {
 		return (
-      <OrganizationList />
+      <OrganizationList elements={this.props.elements}/>
 		);
 	}
 }

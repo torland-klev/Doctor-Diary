@@ -25,7 +25,10 @@ export default class ReportList extends Component{
 		this.updateReports();
 	}
 	componentDidUpdate(){
-		if (this.arrayComparator(this.state.prevProps, this.props.reports)){
+		if (!this.state.prevProps){
+			this.setState({prevProps: this.props.reports});
+		}
+		else if (this.arrayComparator(this.state.prevProps, this.props.reports)){
 		}
 		else {
 			this.setState({prevProps: this.props.reports, rows: []});
@@ -34,6 +37,9 @@ export default class ReportList extends Component{
 	}
 
 	arrayComparator(array1, array2){
+		if(array1.length !== array2.length){
+			return false;
+		}
 		var boolArray = [];
 		for (var i = 0; i < array1.length; i++){
 			if (this.arrayHas(array2, array1[i])){
@@ -93,13 +99,12 @@ export default class ReportList extends Component{
 				return (firstname + " " + lastname);
 	    })
 	    .catch((error) => {
-	      console.error(error);
 	    }
 		);
 	}
 
 	render() {
-		return (this.state.rows.length === this.props.perPage) ? (
+		return (this.state.rows.length === this.props.total) ? (
       <div>
         {this.state.rows}
       </div>
