@@ -8,93 +8,139 @@ import Header from '../Components/Header/Header.js';
 
 export default class NewEntry extends Component {
 
+
   constructor(props) {
       super(props);
       this.state = {
-            hei: {},
+            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
+            dataToBeStored: [],
+            fullDate: "",
+            rows: [],
             title: "NEW ENTRY",
             backButton: "Back",
             backButtonLink: "/doctor",
             nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
+            tmpId: null,
+            tmpDataFromChild: null,
       };
-      this.updateData = this.updateData.bind(this)
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
+      this.updateData = this.updateData.bind(this)
+      this.myCallback = this.myCallback.bind(this)
+      this.getDataContent = this.getDataContent.bind(this)
+      this.loadFromLocalStorage = this.loadFromLocalStorage.bind(this)
   }
 
 
-    saveToLocalStorage() {
-        localStorage.setItem(this.state.hei.fullDate, this.state.hei);
+  saveToLocalStorage() {
+      localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+  }
+
+
+    updateData(id, dataFromChild) {
+        console.log("dataToBeStored.length: " + this.state.dataToBeStored.length)
+        if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
+            for (var i=0; i<this.state.dataToBeStored.length; i++) {
+                if (this.state.dataToBeStored[i].id == id) {
+                    console.log(this.state.dataToBeStored[i])
+                    this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
+                    break;
+                }
+            }
+        }
+        this.state.tmpDataFromChild = null
+        this.state.tmpId = null
     }
 
 
-    updateData() {
-        var one = document.getElementById("elementOne").value;
-        console.log("one: " + one);
-        var two = document.getElementById("elementTwo").value;
-        console.log("two: " + two);
-        var three = document.getElementById("elementThree").value;
-        console.log("three: " + three);
-        var four = document.getElementById("elementFour").value;
-        console.log("four: " + four);
-        var five = document.getElementById("elementFive").value;
-        console.log("five: " + five);
-        var six = document.getElementById("elementSix").value;
-        console.log("six: " + six);
+
+    myCallback(id, dataFromChild) {
+          this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
+    }
+
+
+    loadFromLocalStorage() {
+        this.state.dataToBeStored = [];
+        console.log("this.state.dataToBeStored.length : " + this.state.dataToBeStored.length)
+        var l = localStorage.getItem(this.state.fullDate)
+        var lista = JSON.parse(l)
+        if (lista != null) {
+          lista.forEach((el) => {
+              var id = el.id
+              var name = el.name
+              var dataContent = el.dataContent
+              var nextElement = {id: id, name: name, dataContent: dataContent}
+              this.state.dataToBeStored.push(nextElement);
+              console.log("Added element to dataToBeStored")
+          })
+          localStorage.removeItem(this.state.fullDate)
+        }
+    }
+
+
+    getDataContent(id) {
+        var fieldValue = null
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == id) {
+                fieldValue = this.state.dataToBeStored[i].dataContent;
+                break;
+            }
+        }
+        return fieldValue;
+    }
+
+
+    addToList(element) {
+        var isNew = true;
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == element.id) {
+                this.state.dataToBeStored[i].dataContent = element.dataContent
+                isNew = false
+            }
+        }
+        if (isNew) {
+            this.state.dataToBeStored.push(element)
+        }
+    }
+
+
+    componentWillMount() {
         var d = new Date();
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
-        var fullDate = day + month + year;
-        var report = {fullDate:+fullDate, one:+one, two:+two, three:+three, four:+four, five:+five, six:+six};
-        this.setState({hei: report});
-        console.log("report.fullDate: " + report.fullDate, "report.one: "+report.one, "report.two: "+report.two, "report.three: "+ report.three,
-        "report.four: " + report.four, "report.five: " + report.five, "report.six: " + report.six);
+        this.state.fullDate = day + "." + month + "."+ year;
+        this.loadFromLocalStorage()
+        var elements = this.state.dataElements;
+        elements.forEach((el) => {
+            //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+            var nextId = el.id
+            var nextName = el.name
+            var nextDataContent = this.getDataContent(nextId)
+            console.log("nextDataContent " + nextDataContent)
+            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
+            var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: this.myCallback}, null)
+            var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+            this.state.rows.push(htmlDataElementContainer)
+            var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
+            this.addToList(newToBeStored)
+        })
     }
 
 
     render () {
+        this.updateData(this.state.tmpId, this.state.tmpDataFromChild);
         return(
-            <div className="Home">
-                <Header title={this.state.title} />
-                <main>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning):</label>
-                        <input type="text" name="elementOne" onKeyUp={this.updateData} className="NewEntry-input" id="elementOne" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Anaesthesia provided to other cases:</label>
-                        <input type="text" name="elementTwo" onKeyUp={this.updateData} className="NewEntry-input" id="elementTwo" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Challenges faced:</label>
-                        <input type="text" name="elementThree" onKeyUp={this.updateData} className="NewEntry-input" id="elementThree" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Challenges faced: Other:</label>
-                        <input type="text" name="elementFour" onKeyUp={this.updateData} className="NewEntry-input" id="elementFour" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced:</label>
-                        <input type="text" name="elementFive" onKeyUp={this.updateData} className="NewEntry-input" id="elementFive" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-element">
-                        <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM:</label>
-                        <input type="text" name="elementSix" onKeyUp={this.updateData} className="NewEntry-input" id="elementSix" placeholder="..." />
-                    </div> 
-                   
-                   <div className="TemporaryContainer">
-                        <form>
-                            <button formaction={this.state.backButtonLink}> {this.state.backButton} </button>
-                        </form>
-                        <form>
-                            <button formaction={this.state.nextButtonLink} onClick={this.saveToLocalStorage}> {this.state.nextButton} </button>
-                        </form>
-                    </div>
-                </main>
-
-            </div>
-
+            <table>
+                <tbody>
+                    {this.state.rows}
+                </tbody>
+                <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
+                <a href='/doctor' className='Home-button'>Back</a>
+            </table>
         );
     }
+
+
+
 }
