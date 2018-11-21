@@ -69,7 +69,7 @@ export default class ReportList extends Component{
 		reports.forEach((el) => {
 			this.getTeiName(el.trackedEntityInstance).then((result) => {
 				this.setState({rows: this.state.rows.concat([
-					<ReportListItem report={el} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>])
+					<ReportListItem report={el} id={this.props.id} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>])
 				});
 			})
 		})

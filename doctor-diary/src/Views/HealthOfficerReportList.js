@@ -52,7 +52,7 @@ export default class HealthOfficerHome extends Component {
       <div className="Home">
           <Header title={this.state.title} />
           <main className="Home-main">
-              <ReportListHolder reports={this.state.reports} total={this.state.reports.length}/>
+              <ReportListHolder reports={this.state.reports} id={this.props.location.state.id} total={this.state.reports.length}/>
               <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
           </main>
       </div>

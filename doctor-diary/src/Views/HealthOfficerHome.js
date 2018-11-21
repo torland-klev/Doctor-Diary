@@ -10,12 +10,21 @@ export default class HealthOfficerHome extends Component {
           title: "HEALTH OFFICER",
           backbutton: "Homepage",
           backbuttonlink: "/",
-          ou: []
+          names: [],
+          ids: [],
+          i: [],
+          n: []
       }
   }
 
   componentDidMount(){
-    this.fetchReports();
+    var names = [];
+    this.fetchReports().then( (ou) => {
+      this.setState({ids: ou});
+      ou.forEach( (el) => {
+        this.fetchOuName(el.id);
+      })
+    });
   }
 
   fetchReports(){
@@ -28,9 +37,30 @@ export default class HealthOfficerHome extends Component {
 		})
 			.then((response) => response.json())
 	    .then((responseJson) => {
+        var ou = [];
 	      responseJson.teiSearchOrganisationUnits.forEach((el) => {
-          this.setState({ou: this.state.ou.concat([el])});
+          ou.push(el);
 				})
+        return ou;
+	    })
+	    .catch((error) => {
+	      console.error(error);
+	    }
+		);
+  }
+
+  fetchOuName(id){
+    const url = 'https://course.dhis2.org/dhis/api/organisationUnits/' + id;
+    return fetch(url, {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Basic YWRtaW46ZGlzdHJpY3Q='
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+        this.setState({i: this.state.i.concat([id]), n: this.state.n.concat([responseJson.name])});
+	      return responseJson.name;
 	    })
 	    .catch((error) => {
 	      console.error(error);
@@ -39,11 +69,20 @@ export default class HealthOfficerHome extends Component {
   }
 
   render() {
-    return (
+    return (this.state.ids.length === this.state.i.length) ? (
       <div className="Home">
           <Header title={this.state.title} />
           <main className="Home-main">
-            <OrganizationListHolder elements={this.state.ou}/>
+            <h2>Choose the organisation unit</h2>
+            <OrganizationListHolder elements={this.state.i} names={this.state.n}/>
+            <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+          </main>
+      </div>
+    ) : (
+      <div className="Home">
+          <Header title={this.state.title} />
+          <main className="Home-main">
+            Loading...
             <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
           </main>
       </div>
