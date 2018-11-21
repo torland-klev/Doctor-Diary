@@ -5,12 +5,8 @@ NB: It uses date as key, so it assumes that only one doctor will be using the br
 
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
-import NextButton from '../Components/Button/NextButton.js';
-import DataElementForm from '../Components/DataElementForm.js';
 
 export default class NewEntry extends Component {
-
 
 
   constructor(props) {
@@ -21,9 +17,9 @@ export default class NewEntry extends Component {
             fullDate: "",
             rows: [],
             title: "NEW ENTRY",
-            backbutton: "Back to doctor",
-            backbuttonlink: "/doctor",
-            nextButton: "New",
+            backButton: "Back",
+            backButtonLink: "/doctor",
+            nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
             tmpId: null,
             tmpDataFromChild: null,
@@ -34,7 +30,6 @@ export default class NewEntry extends Component {
       this.getDataContent = this.getDataContent.bind(this)
       this.loadFromLocalStorage = this.loadFromLocalStorage.bind(this)
   }
-
 
 
   saveToLocalStorage() {
@@ -56,6 +51,7 @@ export default class NewEntry extends Component {
         this.state.tmpDataFromChild = null
         this.state.tmpId = null
     }
+
 
 
     myCallback(id, dataFromChild) {

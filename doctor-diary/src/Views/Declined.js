@@ -8,7 +8,7 @@ class Declined extends Component {
         this.state = {
             title: "Declined reports",
             backbutton: "Back to doctor",
-            backbuttonlink: "/doctor",
+            backLink: "/doctor",
         }
     }
     render() {
@@ -16,7 +16,7 @@ class Declined extends Component {
             <div className="Home">
                 <Header title={this.state.title} />
                 <main className="Home-main">
-                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+                    <BackButton title={this.state.backbutton} link={this.state.backLink} />
                 </main>
             </div>
         )

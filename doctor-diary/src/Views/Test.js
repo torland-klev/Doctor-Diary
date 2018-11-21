@@ -1,3 +1,4 @@
+// TODO: SLETTE DENNE SIDEN?
 import React, { Component } from 'react';
 
 

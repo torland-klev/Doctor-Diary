@@ -1,31 +1,19 @@
 import React, { Component } from "react";
-import './Home.css';
-import Button from '../Components/Button/Button.js'
 import Header from '../Components/Header/Header.js';
+
+
 
 export default class Home extends Component {
     constructor() {
         super();
         this.state = {
             title: "DOCTOR DIARY",
-            role: "CHOOSE ROLE",
-            doctorButton: "DOCTOR",
-            doctorButtonLink: "/doctor",
-            healthOfficerButton: "HEALTH OFFICER",
-            healthOfficerButtonLink: "/healthofficer"
+            text: "You do not have a valid role"
         }
     }
     render () {
         return(
-            <div className="Home">
-                <Header title={this.state.title}/>
-                <main className="Home-main">
-                    <h1> {this.state.role} </h1>
-
-                    <Button title={this.state.doctorButton} link={this.state.doctorButtonLink} />
-                    <Button title={this.state.healthOfficerButton} link={this.state.healthOfficerButtonLink} />
-            </main>
-            </div>
-        )
+            <Header title={this.state.title} />
+        );
     }
 }
