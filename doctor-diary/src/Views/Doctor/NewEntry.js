@@ -53,13 +53,19 @@ export default class NewEntry extends Component {
     updateData(id, dataFromChild) {
         console.log("dataToBeStored.length: " + this.state.dataToBeStored.length)
         if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
-            for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            /*for (var i=0; i<this.state.dataToBeStored.length; i++) {
                 if (this.state.dataToBeStored[i].id === id) {
                     console.log(this.state.dataToBeStored[i])
                     this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
                     break;
                 }
-            }
+            }*/
+            this.state.dataToBeStored.forEach((element) => {
+                if(element.id === id) {
+                    console.log(element + "Heiiiii");
+                    element.setState({dataContent: this.state.tmpDataFromChild});
+                }
+            });
         }
         this.setState({tmpDataFromChild: null}, {tmpID: null});
     }
@@ -104,12 +110,18 @@ export default class NewEntry extends Component {
 
     addToList(element) {
         var isNew = true;
-        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+        /*for (var i=0; i<this.state.dataToBeStored.length; i++) {
             if (this.state.dataToBeStored[i].id === element.id) {
                 this.state.dataToBeStored[i].dataContent = element.dataContent
                 isNew = false
             }
-        }
+        }*/
+        this.state.dataToBeStored.forEach((e) => {
+            if(e.id === element.id) {
+                e.setState({dataContent: element.dataContent});
+                isNew= false;
+            }
+        });
         if (isNew) {
             this.state.dataToBeStored.push(element)
         }
