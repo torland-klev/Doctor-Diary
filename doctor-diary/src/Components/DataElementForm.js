@@ -6,6 +6,7 @@ export default class DataElementForm extends React.Component {
 
 
   constructor(props) {
+    console.log("Hei")
       super(props);
       console.log(this.props)
       this.id = props.id;

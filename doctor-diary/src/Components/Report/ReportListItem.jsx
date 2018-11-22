@@ -8,10 +8,10 @@ export default class ReportList extends Component{
     const date = report.created;
 		return (
       <Link to={{pathname: '/dho/report', state: {report: this.props.report}}}>
-        <div className="ReportListItem">
-          <div className="ReportListItemName"><b>Doctor name:</b> {creator}</div>
-          <div className="ReportListItemDate"><b>Date:</b> {date}</div>
-        </div>
+        	<div className="ReportListItem">
+        	<div className="ReportListItemName"><b>Doctor name:</b> {creator}</div>
+        	<div className="ReportListItemDate"><b>Date:</b> {date}</div>
+        	</div>
       </Link>
 		);
 	}

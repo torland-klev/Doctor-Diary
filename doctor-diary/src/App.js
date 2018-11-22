@@ -9,6 +9,7 @@ import NavBar from './Components/NavBar/NavBar.js';
 /* Pages for Health Officer */
 import HealthOfficerHome from './Views/HealthOfficerHome.js';
 import HealthOfficerViewReport from './Views/HealthOfficerViewReport.js'
+import ApproveReject from './Views/ApproveReject.js'
 
 /* Pages for Doctor */
 import DoctorHome from './Views/DoctorHome.js';
@@ -25,12 +26,12 @@ function checkRole(){
   var authKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
   return fetch(meAPI, {
-    method: 'GET', 
+    method: 'GET',
     headers: {
     'Accept': 'application/json',
     'Authorization': authKey,
   }
-  }).then(function(response){ 
+  }).then(function(response){
     return response.json().then(data => {
       var doctorRoleID = "kNIhGGdyWFp";
       //var doctorRoleID = "noe"; //for testing at man kommer til hjemsiden hvis ingen gyldig rolle
@@ -40,11 +41,11 @@ function checkRole(){
       data.userCredentials.userRoles.forEach(element => {
           roles.push(element.id);
       })
-      
+
       if(roles.includes(doctorRoleID)){
         role="doctor";
         return Promise.resolve(role);
-        
+
 
       }else if(roles.includes(dhoRoleID)){
         role="dho"
@@ -53,7 +54,7 @@ function checkRole(){
       }
     }).catch(function (error){
       return null;
-    }) 
+    })
   }) ;
 }
 
@@ -77,6 +78,7 @@ class App extends Component {
           <div>
             <Header />
             <Route exact={true} path='/doctor' render={() => (<div className="App"> <DoctorHome /> </div>)} />
+            <Route exact={true} path='/approveReject' render={() => (<div className="App"> <ApproveReject /> </div>)} />
             <Route exact={true} path='/doctor/pending' render={() => (<div className="App"> <Pending />  </div>)} />
             <Route exact={true} path='/doctor/declined' render={() => (<div className="App"> <Declined /> </div>)} />
             <Route exact={true} path='/doctor/newEntry' render={() => (<div className="App"> <NewEntry /> </div>)} />

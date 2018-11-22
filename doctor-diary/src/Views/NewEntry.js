@@ -118,28 +118,28 @@ export default class NewEntry extends Component {
 
     fetchDataElements(_callback){
 
-        var ref_findDataElementContent = this.findDataElementContent;      
+        var ref_findDataElementContent = this.findDataElementContent;
         var self = this;
 
         this.findDataElementIDs().then(function (result){
 
             var dataElementIDs = result;
             var dataElementContent = [];
-      
+
             for(var i = 0; i < dataElementIDs.length; i++){
               dataElementContent.push(ref_findDataElementContent(dataElementIDs[i]));
               //console.log(dataElementIDs[i]);
             }
-      
+
             Promise.all(dataElementContent).then(function (dataObjects){
-              
+
                 self.setState({dataElements: dataObjects})
 
                 //console.log("STATE ARRAY: ", self.state.dataElements);
                 _callback();
             })
           })
-          
+
     }
 
 
@@ -148,7 +148,7 @@ export default class NewEntry extends Component {
         var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
         var programStageID = "";
         var dataElementIDs = [];
-    
+
         return fetch(baseURL + "/programs/" + programID, {
           method: 'GET',
           headers: {
@@ -157,32 +157,32 @@ export default class NewEntry extends Component {
         }).then(function (response){
           return response.json();
         }).then(function (data){
-            
+
             programStageID = data.programStages[0].id;
-            
+
             return fetch(baseURL + "/programStages/" + programStageID,{
               method: 'GET',
               headers: {
               'Authorization': authKey
               }
             }).then(function (response){
-    
+
                 return response.json();
-    
+
             }).then(function (data){
-                
+
                 data.programStageDataElements.forEach((element) => {
-    
+
                   dataElementIDs.push(element.dataElement.id);
                 })
-    
+
                 return dataElementIDs;
             })
-          
+
         })
       }
-    
-    
+
+
       findDataElementContent(id){
         return fetch(baseURL + "/dataElements/" + id, {
           method: 'GET',
@@ -191,16 +191,16 @@ export default class NewEntry extends Component {
           }
         }).then(function (response){
           return response.json().then(function (data){
-    
+
             var newElement = {
               "name": data.name,
               "id": data.id,
               "valueType": data.valueType,
             };
-    
+
             return newElement;
           }).catch(function (error){
-    
+
             //console.log(error);
           })
         })
@@ -234,7 +234,7 @@ export default class NewEntry extends Component {
             self.addToList(newToBeStored)
             })
         });
-    
+
         */
         var d = new Date();
         var year = String(d.getFullYear());
@@ -252,11 +252,12 @@ export default class NewEntry extends Component {
             //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
             var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: this.myCallback}, null)
             var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+            console.log(newDataElementForm)
             this.state.rows.push(htmlDataElementContainer)
             var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
             this.addToList(newToBeStored)
         })
-        
+
     }
 
 
