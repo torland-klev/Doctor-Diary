@@ -4,11 +4,12 @@ a "send"-button that will send the data to the API.
 NB: It uses date as key, so it assumes that only one doctor will be using the browser. */
 
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
+import Header from '../../Components/Header/Header.js';
+import NavBar from '../../Components/NavBar/NavBar.js';
 
-import BackButton from '../Components/Button/BackButton.js';
-import NextButton from '../Components/Button/NextButton.js';
-import DataElementForm from '../Components/DataElementForm.js';
+import BackButton from '../../Components/Button/BackButton.js';
+import NextButton from '../../Components/Button/NextButton.js';
+import DataElementForm from '../../Components/DataElementForm.js';
 
 const baseURL = "https://course.dhis2.org/dhis/api";
 var authKey = 'Basic ' + btoa("AkselJ" + ':' + "District1-");
@@ -29,6 +30,7 @@ export default class NewEntry extends Component {
             backButtonLink: "/doctor",
             nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
+            active: '#43CBCB',
             tmpId: null,
             tmpDataFromChild: null,
       };
@@ -263,13 +265,19 @@ export default class NewEntry extends Component {
     render () {
         this.updateData(this.state.tmpId, this.state.tmpDataFromChild);
         return(
-            <table>
-                <tbody>
-                    {this.state.rows}
-                </tbody>
-                <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
-                <a href='/doctor' className='Home-button'>Back</a>
-            </table>
+            <div className="Home">
+            <Header title={this.state.title} />
+            <main className="Home-main">
+                <table>
+                    <tbody>
+                        {this.state.rows}
+                    </tbody>
+                    <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
+                    <a href='/doctor' className='Home-button'>Back</a>
+                </table>
+            <NavBar addFill={this.state.active}/>
+            </main>
+            </div>
         );
     }
 

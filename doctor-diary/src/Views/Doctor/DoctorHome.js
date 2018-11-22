@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import IconHome from '../Components/NavBar/IconHome.js';
-import IconAdd from '../Components/NavBar/IconAdd.js';
+import Header from '../../Components/Header/Header.js';
+import NavBar from '../../Components/NavBar/NavBar.js';
+import IconHome from '../../Components/NavBar/IconHome.js';
+import IconAdd from '../../Components/NavBar/IconAdd.js';
 
 export default class DoctorHome extends Component {
     constructor (){
@@ -16,7 +17,8 @@ export default class DoctorHome extends Component {
             declinedLink: "doctor/declined",
             newButton: "New entry",
             newLink: "doctor/newEntry",
-            homeLink: '/doctor'
+            homeLink: '/doctor',
+            active: '#43CBCB'
 
         }
     }
@@ -35,6 +37,7 @@ export default class DoctorHome extends Component {
                             <button>{this.state.newButton}</button>
                         </a>
                 </main>
+                <NavBar homeFill={this.state.active}/>
             </div>
           )
     }

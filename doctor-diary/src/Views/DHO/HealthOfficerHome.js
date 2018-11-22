@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
-import OrganizationListHolder from '../Components/Report/OrganizationListHolder.jsx';
+import Header from '../../Components/Header/Header.js';
+import BackButton from '../../Components/Button/BackButton.js';
+import OrganizationListHolder from '../../Components/Report/OrganizationListHolder.jsx';
 
 /*
  * This is the start of the District Health Officer wild ride.

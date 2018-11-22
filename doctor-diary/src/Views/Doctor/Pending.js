@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton';
+import Header from '../../Components/Header/Header.js';
+import BackButton from '../../Components/Button/BackButton';
+import NavBar from '../../Components/NavBar/NavBar.js';
+
 class Pending extends Component {
     constructor() {
         super();
@@ -11,6 +13,7 @@ class Pending extends Component {
             homeLink: "/doctor",
             declinedLink: "/doctor/declined",
             newLink: "/doctor/newEntry",
+            active: '#43CBCB'
         }
     }
     render() {
@@ -20,6 +23,7 @@ class Pending extends Component {
                 <main className='Home-main'>
                     <BackButton title={this.state.backbutton} link={this.state.backLink} />
                 </main>
+                <NavBar listFill={this.state.active}/>
             </div>
         )
     }

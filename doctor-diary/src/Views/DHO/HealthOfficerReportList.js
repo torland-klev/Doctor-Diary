@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
-import ReportListHolder from '../Components/Report/ReportListHolder.jsx';
+import Header from '../../Components/Header/Header.js';
+import BackButton from '../../Components/Button/BackButton.js';
+import ReportListHolder from '../../Components/Report/ReportListHolder.jsx';
 
 export default class HealthOfficerHome extends Component {
   constructor() {

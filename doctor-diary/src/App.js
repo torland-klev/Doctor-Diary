@@ -7,21 +7,21 @@ import Header from './Components/Header/Header.js';
 import NavBar from './Components/NavBar/NavBar.js';
 
 /* Pages for Health Officer */
-import HealthOfficerHome from './Views/HealthOfficerHome.js';
-import HealthOfficerViewReport from './Views/HealthOfficerViewReport.js'
-import HealthOfficerReportList from './Views/HealthOfficerReportList.js'
+import HealthOfficerHome from './Views/DHO/HealthOfficerHome.js';
+import HealthOfficerViewReport from './Views/DHO/HealthOfficerViewReport.js'
+import HealthOfficerReportList from './Views/DHO/HealthOfficerReportList.js'
 
 /* Pages for Doctor */
-import DoctorHome from './Views/DoctorHome.js';
-import Pending from './Views/Pending.js';
-import Declined from './Views/Declined.js';
-import NewEntry from './Views/NewEntry.js';
-import ConfirmSendReport from './Views/ConfirmSendReport.js';
+import DoctorHome from './Views/Doctor/DoctorHome.js';
+import Pending from './Views/Doctor/Pending.js';
+import Declined from './Views/Doctor/Declined.js';
+import NewEntry from './Views/Doctor/NewEntry.js';
+import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
-  var user = "BjarneB" // dho
-  //var user = "AkselJ" //doctor
+  //var user = "BjarneB" // dho
+  var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
@@ -71,19 +71,18 @@ class App extends Component {
       this.setState({checkRoleResult: response});
     })
   }
+
   render() {
     if(this.state.checkRoleResult === "doctor"){
       return(
         <Router>
           <div>
-            <Header />
             <Route exact={true} path='/doctor' render={() => (<div className="App"> <DoctorHome /> </div>)} />
             <Route exact={true} path='/doctor/pending' render={() => (<div className="App"> <Pending />  </div>)} />
             <Route exact={true} path='/doctor/declined' render={() => (<div className="App"> <Declined /> </div>)} />
             <Route exact={true} path='/doctor/newEntry' render={() => (<div className="App"> <NewEntry /> </div>)} />
             <Route exact={true} path='/doctor/newEntry/confirmSendReport' render={() => (<div className="App"> <ConfirmSendReport /> </div>)} />
             <Route exact path='/' component={ () => <Redirect to='/doctor' component={DoctorHome} /> } />
-            <NavBar />
           </div>
         </Router>
       );

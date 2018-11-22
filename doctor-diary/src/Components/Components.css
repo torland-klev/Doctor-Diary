@@ -1,11 +1,4 @@
-.NavBar{
-    bottom: 0px;
-    position: absolute;
-    min-width: 90%;
-    max-width: 100%;
-    display: flex;
-    align-items: center;
-}
+
 .Header{
     position: fixed;
     display: flex;

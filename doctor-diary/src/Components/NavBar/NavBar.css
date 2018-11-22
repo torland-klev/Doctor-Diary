@@ -1,17 +1,15 @@
-@media screen and (min-width: 700px) and (-webkit-min-device-pixel-ratio: 1) { 
-    .NavBar{
-      position: relative;
-      top: 0px;
-      height: 7vh;
-      width: 10%;
-      padding: 0.5vh;
-      margin-left: 30vh;
-      justify-content: flex-end;
-      background-color: none;
-      z-index: 3;
+@media screen and (min-width: 600px) { 
+    nav{
+        top: 2.75vh;
+        position: absolute;
+        background-color: transparent !important;
+        z-index: 3;
+        overflow: hidden;
+        float: right;
+        justify-content: flex-end;
     }
 }
-.NavBar{
+nav{
     bottom: 0px;
     position: absolute;
     width: 100%;

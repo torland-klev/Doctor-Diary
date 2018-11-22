@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton';
+import Header from '../../Components/Header/Header.js';
+import BackButton from '../../Components/Button/BackButton';
+import NavBar from '../../Components/NavBar/NavBar.js';
 
 class Declined extends Component {
     constructor (){
@@ -9,6 +10,7 @@ class Declined extends Component {
             title: "Declined reports",
             backbutton: "Back to doctor",
             backLink: "/doctor",
+            active: '#43CBCB'
         }
     }
     render() {
@@ -18,6 +20,7 @@ class Declined extends Component {
                 <main className="Home-main">
                     <BackButton title={this.state.backbutton} link={this.state.backLink} />
                 </main>
+                <NavBar notificationFill={this.state.active}/>
             </div>
         )
     }

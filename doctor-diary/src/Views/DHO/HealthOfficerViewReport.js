@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import ReportHolder from '../Components/Report/ReportHolder.jsx';
+import Header from '../../Components/Header/Header.js';
+import ReportHolder from '../../Components/Report/ReportHolder.jsx';
 import {Link} from 'react-router-dom';
 
 export default class HealthOfficerViewReport extends Component {

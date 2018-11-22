@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
+import Header from '../../Components/Header/Header.js';
+import BackButton from '../../Components/Button/BackButton.js';
 
 
 export default class ConfirmSendReport extends Component {
