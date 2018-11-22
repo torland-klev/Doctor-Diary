@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import OrganizationListHolder from '../../Components/Report/OrganizationListHolder.jsx';
-import NavBar from '../../Components/NavBar/NavBar.js';
 
 /*
  * This is the start of the District Health Officer wild ride.
@@ -122,7 +121,6 @@ export default class HealthOfficerHome extends Component {
             <h2>Choose the organisation unit</h2>
             <OrganizationListHolder elements={this.state.i} names={this.state.n} sort={this.state.sort}/>
             <button className="ReportPageButtonSort" onClick={() => {this.sortNumber()}}>{this.state.sortSymbol}</button>
-            <NavBar homeFill={this.state.active} homeLink={this.state.homeLink}/>
           </main>
       </div>
     ) : (
@@ -132,7 +130,6 @@ export default class HealthOfficerHome extends Component {
             <h2>Choose the organisation unit</h2>
             Loading...
           </main>
-          <NavBar homeFill={this.state.active} homeLink={this.state.homeLink}/>
       </div>
     )
   }

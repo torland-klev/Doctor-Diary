@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 export default class DataElementForm extends Component {
   constructor(props) {
+    console.log("Hei")
       super(props);
       console.log(this.props)
       this.id = props.id;
