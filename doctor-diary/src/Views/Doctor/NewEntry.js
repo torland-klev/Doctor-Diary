@@ -6,7 +6,6 @@ NB: It uses date as key, so it assumes that only one doctor will be using the br
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
-import {Link} from 'react-router-dom';
 
 import DataElementForm from '../../Components/DataElementForm.js';
 
@@ -274,19 +273,19 @@ export default class NewEntry extends Component {
     render () {
         return(
             <div className="Home">
-            <Header title={this.state.title} />
-            <main className="Home-main">
-                <table>
-                    <tbody>
-                        {this.state.rows}
-                    </tbody>
-                </table>
-                <div className="NewButtonContainer">
-                    <a href='/doctor'><div className='ReportPageButton'>Back</div></a>
-                    <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage}><div className='ReportPageButton'>Next</div></a>
-                </div>
-            </main>
-            <NavBar addFill={this.state.active}/>
+                <Header title={this.state.title} />
+                <main className="Home-main">
+                    <table>
+                        <tbody>
+                            {this.state.rows}
+                        </tbody>
+                    </table>
+                    <div className="NewButtonContainer">
+                        <a href='/doctor'><div className='ReportPageButton'>Back</div></a>
+                        <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage}><div className='ReportPageButton'>Next</div></a>
+                    </div>
+                </main>
+                <NavBar addFill={this.state.active}/>
             </div>
         );
     }
