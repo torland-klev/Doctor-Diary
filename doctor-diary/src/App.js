@@ -9,6 +9,7 @@ import NavBar from './Components/NavBar/NavBar.js';
 /* Pages for Health Officer */
 import HealthOfficerHome from './Views/HealthOfficerHome.js';
 import HealthOfficerViewReport from './Views/HealthOfficerViewReport.js'
+import HealthOfficerReportList from './Views/HealthOfficerReportList.js'
 
 /* Pages for Doctor */
 import DoctorHome from './Views/DoctorHome.js';
@@ -91,7 +92,8 @@ class App extends Component {
         <Router>
           <div>
             <Route exact={true} path='/dho' render={() => (<div className="App"> <HealthOfficerHome /></div>)} />
-            <Route exact={true} path='/dho/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
+			<Route exact={true} path='/dho/reportlist' render={(props) => (<div className="App"> <HealthOfficerReportList {...props}/></div>)} />
+            <Route exact={true} path='/dho/reportlist/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
             <Route exact path='/' component={ () => <Redirect to='/dho' component={HealthOfficerHome} /> } />
           </div>
         </Router>
