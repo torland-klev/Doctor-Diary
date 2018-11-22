@@ -25,7 +25,8 @@ export default class ConfirmSendReport extends Component {
         var year = String(d.getFullYear())
         var month = String(d.getMonth())
         var day = String(d.getDate())
-        this.state.fullDate = day + "." + month + "." + year
+        //this.state.fullDate = day + "." + month + "." + year
+        this.setState({fullDate: day + "." + month + "." + year});
         var obj = localStorage.getItem(this.state.fullDate)
         var parsedReport = JSON.parse(obj)
         console.log("parsedReport: " + parsedReport)

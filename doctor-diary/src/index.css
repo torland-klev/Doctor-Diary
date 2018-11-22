@@ -18,7 +18,6 @@ code {
 main{
   min-height: 80%;
   max-width: 100%;
-  min-width: 600px;
   padding-top: 10vh;
   font-family: "Helvetica-CondensedBold", sans-serif;
   background-color: white;
@@ -27,7 +26,6 @@ main{
 a{
   color: black;
 }
-
 a:link{
   text-decoration: none;
 }
@@ -35,15 +33,18 @@ a:hover{
   text-decoration: underline;
 }
 
+li{
+  list-style-type: none;
+}
+
 /* laptop screens*/ 
-@media screen and (min-width: 600px) and (-webkit-min-device-pixel-ratio: 1) { 
+@media screen and (min-width: 700px) and (-webkit-min-device-pixel-ratio: 1) { 
   .Header {
     min-width: 600px;
     max-width: 1200px;
     min-height: 70px;
     max-height: 87px;
   }
-
 }
 
 /* phone screens*/
@@ -84,91 +85,4 @@ a:hover{
 }
 .NewEntry-input{
   font-size: 18px;
-}
-
-/* Components */
-
-.Header{
-  position: fixed;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  top: 0px;
-  width: 100%;
-  height: 7vh;
-  background-color: #276696;
-  padding: 0.5vh;
-  z-index: 2;
-}
-
-.HeaderImg{
-  width: 5vh;
-  height: 5vh;
-  padding-left: 1vh;
-
-}
-
-.Title{
-  font-family: "Helvetica-CondensedBold", sans-serif;
-  font-weight: bold;
-  font-size: calc(0.9em +2vmin);
-  color: white;
-  padding-left: 1.5vh;
-}
-
-.Button{
-  width: 40vh;
-  background-color: #bad5f4;
-  margin: 5px;;
-  padding: 1.5%;
-  border: 1px solid black;
-  font-size: calc(10px +2vmin);
-}
-
-.BackButton, .NextButton{
-  width: 20vh;
-  background-color: #bad5f4;
-  margin: 5px;
-  padding: 1.5%;
-  border: 1px solid black;
-  font-size: calc(10px +2vmin);
-}
-
-.NewButton{
-  text-align: center;
-  width: 40vh;
-  height: 5vh;
-  margin: 1%;
-  padding: 1.5%;
-  padding-top: 1.3vh;
-  padding-bottom: 1.5vh;
-  background-color: #9ab67b;
-  border: 1px solid black;
-  font-size: 30px;
-}
-
-.TemporaryContainer{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: baseline;
-}
-
-.TableDataElement{
-  float: left;
-  margin-right: 30px;
-}
-
-.TableValue{
-  float: right;
-}
-
-.ReportListItem{
-  border: solid 1px black;
-  margin-bottom: 2px;
-  padding: 2px;
-}
-.ReportListItemName{
-  float: left;
 }

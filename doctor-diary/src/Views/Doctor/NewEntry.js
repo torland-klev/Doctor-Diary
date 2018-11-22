@@ -7,12 +7,12 @@ import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
 
-import BackButton from '../../Components/Button/BackButton.js';
-import NextButton from '../../Components/Button/NextButton.js';
 import DataElementForm from '../../Components/DataElementForm.js';
 
 const baseURL = "https://course.dhis2.org/dhis/api";
-var authKey = 'Basic ' + btoa("AkselJ" + ':' + "District1-");
+var userNew = "AkselJ" //doctor
+var passNew = "District1-" //hardkodet for nå
+var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
 
 export default class NewEntry extends Component {
 
@@ -20,17 +20,17 @@ export default class NewEntry extends Component {
   constructor(props) {
       super(props);
       this.state = {
-            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
-            //dataElements: [],
-            dataToBeStored: [],
-            fullDate: "",
-            rows: [],
             title: "NEW ENTRY",
             backButton: "Back",
             backButtonLink: "/doctor",
             nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
             active: '#43CBCB',
+            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
+            //dataElements: [],
+            dataToBeStored: [],
+            fullDate: "",
+            rows: [],
             tmpId: null,
             tmpDataFromChild: null,
       };
@@ -55,15 +55,17 @@ export default class NewEntry extends Component {
         console.log("dataToBeStored.length: " + this.state.dataToBeStored.length)
         if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
             for (var i=0; i<this.state.dataToBeStored.length; i++) {
-                if (this.state.dataToBeStored[i].id == id) {
+                if (this.state.dataToBeStored[i].id === id) {
                     console.log(this.state.dataToBeStored[i])
                     this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
                     break;
                 }
             }
         }
-        this.state.tmpDataFromChild = null
-        this.state.tmpId = null
+        //this.state.tmpDataFromChild = null
+        this.setState({tmpDataFromChild: null});
+        //this.state.tmpId = null
+        this.setState({tmpId: null});
     }
 
 
@@ -74,7 +76,8 @@ export default class NewEntry extends Component {
 
 
     loadFromLocalStorage() {
-        this.state.dataToBeStored = [];
+        //this.state.dataToBeStored = [];
+        this.setState({dataToBeStore: []})
         console.log("this.state.dataToBeStored.length : " + this.state.dataToBeStored.length)
         var l = localStorage.getItem(this.state.fullDate)
         var lista = JSON.parse(l)
@@ -95,7 +98,7 @@ export default class NewEntry extends Component {
     getDataContent(id) {
         var fieldValue = null
         for (var i=0; i<this.state.dataToBeStored.length; i++) {
-            if (this.state.dataToBeStored[i].id == id) {
+            if (this.state.dataToBeStored[i].id === id) {
                 fieldValue = this.state.dataToBeStored[i].dataContent;
                 break;
             }
@@ -107,7 +110,7 @@ export default class NewEntry extends Component {
     addToList(element) {
         var isNew = true;
         for (var i=0; i<this.state.dataToBeStored.length; i++) {
-            if (this.state.dataToBeStored[i].id == element.id) {
+            if (this.state.dataToBeStored[i].id === element.id) {
                 this.state.dataToBeStored[i].dataContent = element.dataContent
                 isNew = false
             }
@@ -242,7 +245,8 @@ export default class NewEntry extends Component {
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
-        this.state.fullDate = day + "." + month + "."+ year;
+        //this.state.fullDate = day + "." + month + "."+ year;
+        this.setState({fullDate: day + "." + month + "."+ year});
         this.loadFromLocalStorage()
         var elements = this.state.dataElements;
         elements.forEach((el) => {
@@ -275,8 +279,8 @@ export default class NewEntry extends Component {
                     <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
                     <a href='/doctor' className='Home-button'>Back</a>
                 </table>
-            <NavBar addFill={this.state.active}/>
             </main>
+            <NavBar addFill={this.state.active}/>
             </div>
         );
     }

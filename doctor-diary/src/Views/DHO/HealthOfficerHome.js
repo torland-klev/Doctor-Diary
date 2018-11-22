@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
-import BackButton from '../../Components/Button/BackButton.js';
 import OrganizationListHolder from '../../Components/Report/OrganizationListHolder.jsx';
+import NavBar from '../../Components/NavBar/NavBar.js';
 
 /*
  * This is the start of the District Health Officer wild ride.
@@ -31,8 +31,8 @@ export default class HealthOfficerHome extends Component {
       super();
       this.state = {
           title: "HEALTH OFFICER",
-          backbutton: "Homepage",
-          backbuttonlink: "/",
+          active: '#43CBCB',
+          homeLink: "/dho",
           ids: [],
           i: [],
           n: [],
@@ -121,8 +121,8 @@ export default class HealthOfficerHome extends Component {
           <main className="Home-main">
             <h2>Choose the organisation unit</h2>
             <OrganizationListHolder elements={this.state.i} names={this.state.n} sort={this.state.sort}/>
-            <button className="ReportPageButtonNext" onClick={() => {this.sortNumber()}}>{this.state.sortSymbol}</button>
-            <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+            <button className="ReportPageButtonSort" onClick={() => {this.sortNumber()}}>{this.state.sortSymbol}</button>
+            <NavBar homeFill={this.state.active} homeLink={this.state.homeLink}/>
           </main>
       </div>
     ) : (
@@ -131,8 +131,8 @@ export default class HealthOfficerHome extends Component {
           <main className="Home-main">
             <h2>Choose the organisation unit</h2>
             Loading...
-            <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
           </main>
+          <NavBar homeFill={this.state.active} homeLink={this.state.homeLink}/>
       </div>
     )
   }

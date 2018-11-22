@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
 
-export default class DataElementForm extends React.Component {
-
-
-
+export default class DataElementForm extends Component {
   constructor(props) {
       super(props);
       console.log(this.props)
@@ -15,15 +12,11 @@ export default class DataElementForm extends React.Component {
       this.props.callbackFromParent(this.id, this.dataContent);
   }
 
-
-
   updateData() {
     var newDataContent = document.getElementById(this.id).value
     this.dataContent = newDataContent
     this.props.callbackFromParent(this.id, this.dataContent)
   }
-
-
 
   render() {
     return (

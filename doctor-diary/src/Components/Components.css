@@ -74,29 +74,59 @@
   float: right;
 }
 
+/* Styling for list of reports */
 .ReportListItem{
-  border: solid 1px black;
-  margin-bottom: 2px;
-  padding: 2px;
+  border: solid 1px #373737;
+  margin: 5px;
+  padding: 5px;
+  width: 450px;
+  height: 40px;
 }
 .ReportListItemName{
-  float: left;
-  margin-right: 10px;
+    margin-left: 5px;
+}
+
+.ReportListItemDate{
+    margin-left: 5px;
+}
+
+.ReportActivePages{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 5px;
+    width: 450px;
+    height: 20px;
 }
 
 .ReportPageButtonBack{
   float: left;
   font-size: calc(10px +2vmin);
   background-color: #bad5f4;
-  margin-right: 32%;
+  border: 1px solid #373737;
 }
 
 .ReportPageButtonNext{
   float: right;
   font-size: calc(10px +2vmin);
   background-color: #bad5f4;
+  border: 1px solid #373737;
 }
-
-@media screen and (max-width:910px){
-    /* Add restrictions to width etc*/
+.ReportPageButtonSort{
+    float: right;
+    font-size: 15px;
+    background-color: #bad5f4;
+    border: 1px solid #373737;
+  }
+/* Styling for list of units (OrganizationListItem) */
+.OrganizationListItem{
+    font-size: calc(20px +2vmin);
+    border-style: solid;
+    border-color: #373737;
+    border-width: 1px;
+    margin: 5px;
+    height: 20px;
+    width: 30vh;
+    padding: 5px;
 }

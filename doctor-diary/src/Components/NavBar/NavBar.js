@@ -9,10 +9,10 @@ export default class NavBar extends Component {
   render() {
     return (
         <nav>
-          <IconHome homeFill={this.props.homeFill}/>
-          <IconList listFill={this.props.listFill}/>
-          <IconNotification notificationFill={this.props.notificationFill}/>
-          <IconAdd addFill={this.props.addFill} />
+          <IconHome homeFill={this.props.homeFill} homeLink={this.props.homeLink}/>
+          <IconList listFill={this.props.listFill} listLink={this.props.listLink}/>
+          <IconNotification notificationFill={this.props.notificationFill} notificationLink={this.props.notificationLink}/>
+          <IconAdd addFill={this.props.addFill} addLink={this.props.addLink} />
         </nav>
     );
   }

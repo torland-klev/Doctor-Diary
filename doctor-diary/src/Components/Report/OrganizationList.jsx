@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import OrganizationListItem from '../Report/OrganizationListItem.jsx';
+import '../Components.css'
 
 export default class OrganizationList extends Component{
 
@@ -77,7 +78,7 @@ export default class OrganizationList extends Component{
 			}
 		}
 		return (
-			<div>{rows}</div>
+			<div className="OrganizationList">{rows}</div>
 		);
 	}
 }

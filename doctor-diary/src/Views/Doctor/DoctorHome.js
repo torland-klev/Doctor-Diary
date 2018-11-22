@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
-import IconHome from '../../Components/NavBar/IconHome.js';
-import IconAdd from '../../Components/NavBar/IconAdd.js';
 
 export default class DoctorHome extends Component {
     constructor (){
         super();
         this.state = {
             title: "DOCTOR",
-            backbutton: "Go to homepage",
-            backLink: "/",
             pendingButton: "Pending",
             pendingLink: "doctor/pending",
             declinedButton: "Declined",

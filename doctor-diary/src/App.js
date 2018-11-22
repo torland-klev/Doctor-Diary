@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import Home from './Views/Home.js';
 
-/* Componens used */
-import Header from './Components/Header/Header.js';
-import NavBar from './Components/NavBar/NavBar.js';
 
 /* Pages for Health Officer */
 import HealthOfficerHome from './Views/DHO/HealthOfficerHome.js';
@@ -20,8 +17,8 @@ import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
-  //var user = "BjarneB" // dho
-  var user = "AkselJ" //doctor
+  var user = "BjarneB" // dho
+  //var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";

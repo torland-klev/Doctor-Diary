@@ -44,9 +44,11 @@ export default class ReportListHolder extends Component{
 		return (
       <div>
         <ReportList reports={reports} id={this.props.id} total={(REPORTS_PER_PAGE<this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
-        <button className="ReportPageButtonBack" onClick={() => {this.newPage(activePage - 1)}}>{"<"}</button>
-        {activePage} / {max}
-        <button className="ReportPageButtonNext" onClick={() => {this.newPage(activePage + 1)}}>{">"}</button>
+        <div className="ReportActivePages">
+          <button className="ReportPageButtonBack" onClick={() => {this.newPage(activePage - 1)}}>{"<"}</button>
+          <div> {activePage} / {max} </div>
+          <button className="ReportPageButtonNext" onClick={() => {this.newPage(activePage + 1)}}>{">"}</button>
+        </div>
       </div>
 		);
 	}
