@@ -37,7 +37,7 @@ export default class HealthOfficerHome extends Component {
           i: [],
           n: [],
           sort: 0,
-          sortSymbol: '-'
+          sortSymbol: "sort list"
       }
   }
 

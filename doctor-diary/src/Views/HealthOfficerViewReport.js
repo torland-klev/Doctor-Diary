@@ -9,7 +9,7 @@ export default class HealthOfficerViewReport extends Component {
         this.state = {
             title: "HEALTH OFFICER VIEW REPORTS",
             backbutton: "Back",
-            backbuttonlink: "/dhoreportlist",
+            backbuttonlink: "/dho/reportlist",
         }
     }
     render() {
@@ -19,7 +19,7 @@ export default class HealthOfficerViewReport extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
                     <ReportHolder report={report}/>
-                    <Link to={{pathname: '/healthofficer/reportlist', state: {id: this.props.location.state.id}}}>
+                    <Link to={{pathname: '/dho/reportlist', state: {id: this.props.location.state.id}}}>
                       <div className="BackButton">BACK</div>
                     </Link>
                 </main>

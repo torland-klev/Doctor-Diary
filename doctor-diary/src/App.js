@@ -20,8 +20,8 @@ import ConfirmSendReport from './Views/ConfirmSendReport.js';
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
-  //var user = "BjarneB" // dho
-  var user = "AkselJ" //doctor
+  var user = "BjarneB" // dho
+  //var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
@@ -92,7 +92,7 @@ class App extends Component {
         <Router>
           <div>
             <Route exact={true} path='/dho' render={() => (<div className="App"> <HealthOfficerHome /></div>)} />
-			<Route exact={true} path='/dho/reportlist' render={(props) => (<div className="App"> <HealthOfficerReportList {...props}/></div>)} />
+			      <Route exact={true} path='/dho/reportlist' render={(props) => (<div className="App"> <HealthOfficerReportList {...props}/></div>)} />
             <Route exact={true} path='/dho/reportlist/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
             <Route exact path='/' component={ () => <Redirect to='/dho' component={HealthOfficerHome} /> } />
           </div>
