@@ -6,8 +6,8 @@ export default class DataElementForm extends React.Component {
 
 
   constructor(props) {
+      console.log("Hei!")
       super(props);
-      console.log(this.props)
       this.id = props.id;
       this.name = props.name;
       this.dataContent = props.dataContent;
@@ -26,6 +26,7 @@ export default class DataElementForm extends React.Component {
 
 
   render() {
+    console.log("Hei jeg er et dataelement");
     return (
       <form onSubmit={this.handleSubmit}>
         <label>

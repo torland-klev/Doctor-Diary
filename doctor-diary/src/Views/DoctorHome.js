@@ -36,4 +36,8 @@ export default class DoctorHome extends Component {
             </div>
           )
     }
+
+    //<Link to={{pathname: '/doctor/newEntry', state: {importList: this.state.dataElements}}}>
+    //<div>asdasd</div>
+    //</Link>
 }

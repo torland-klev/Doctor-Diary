@@ -133,10 +133,9 @@ export default class NewEntry extends Component {
       
             Promise.all(dataElementContent).then(function (dataObjects){
               
-                self.setState({dataElements: dataObjects})
-
-                //console.log("STATE ARRAY: ", self.state.dataElements);
-                _callback();
+                //self.setState({dataElements: dataObjects})
+                
+                _callback(dataObjects);
             })
           })
           
@@ -207,35 +206,53 @@ export default class NewEntry extends Component {
       }
 
 
-    componentWillMount() {
+    tomfunksjon(_callback){
 
-        /*
+        console.log("tomfunksjon");
+        _callback();
+    }
+
+
+    componentWillMount() {
+        
+        
         var self = this;
-        this.fetchDataElements(function(){
-            console.log(self.state.dataElements);
+        //this.tomfunksjon(function (){
+        this.fetchDataElements(function(li){
+            //console.log("INNE I THEN;" + self.state.dataElements);
             var d = new Date();
             var year = String(d.getFullYear());
             var month = String(d.getMonth());
             var day = String(d.getDate());
             self.state.fullDate = day + "." + month + "."+ year;
             self.loadFromLocalStorage()
-            var elements = self.state.dataElements;
+            //console.log("DATAELEMENTS: " + self.state.dataElements.length);
+            var elements = li//self.state.dataElements;
+            //console.log("legger til")
             elements.forEach((el) => {
-            //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
-            var nextId = el.id
-            var nextName = el.name
-            var nextDataContent = self.getDataContent(nextId)
-            console.log("nextDataContent " + nextDataContent)
-            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
-            var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
-            var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
-            self.state.rows.push(htmlDataElementContainer)
-            var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
-            self.addToList(newToBeStored)
+            
+                console.log(el);
+                //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+                var nextId = el.id
+                var nextName = el.name
+                var nextDataContent = self.getDataContent(nextId)
+                //console.log(el.id, el.name)
+                //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
+                var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
+                var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+                
+                self.state.rows.push(htmlDataElementContainer)
+                var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
+                self.addToList(newToBeStored)
             })
-        });
-    
-        */
+
+            self.setState({ state: self.state });
+            
+        })
+
+        
+        
+        /*
         var d = new Date();
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
@@ -249,13 +266,13 @@ export default class NewEntry extends Component {
             var nextName = el.name
             var nextDataContent = this.getDataContent(nextId)
             console.log("nextDataContent " + nextDataContent)
-            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
             var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: this.myCallback}, null)
             var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
             this.state.rows.push(htmlDataElementContainer)
             var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
             this.addToList(newToBeStored)
-        })
+        })  
+        */  
         
     }
 
