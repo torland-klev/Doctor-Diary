@@ -6,95 +6,273 @@ NB: It uses date as key, so it assumes that only one doctor will be using the br
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
 
+import BackButton from '../Components/Button/BackButton.js';
+import NextButton from '../Components/Button/NextButton.js';
+import DataElementForm from '../Components/DataElementForm.js';
+
+const baseURL = "https://course.dhis2.org/dhis/api";
+var authKey = 'Basic ' + btoa("AkselJ" + ':' + "District1-");
+
 export default class NewEntry extends Component {
+
 
   constructor(props) {
       super(props);
       this.state = {
-            hei: {},
+            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
+            //dataElements: [],
+            dataToBeStored: [],
+            fullDate: "",
+            rows: [],
             title: "NEW ENTRY",
             backButton: "Back",
             backButtonLink: "/doctor",
             nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
+            tmpId: null,
+            tmpDataFromChild: null,
       };
-      this.updateData = this.updateData.bind(this)
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
+      this.updateData = this.updateData.bind(this)
+      this.myCallback = this.myCallback.bind(this)
+      this.getDataContent = this.getDataContent.bind(this)
+      this.loadFromLocalStorage = this.loadFromLocalStorage.bind(this)
+
+      this.fetchDataElements = this.fetchDataElements.bind(this)
+      this.findDataElementIDs = this.findDataElementIDs.bind(this)
+      this.findDataElementContent = this.findDataElementContent.bind(this)
   }
 
 
-    saveToLocalStorage() {
-        localStorage.setItem(this.state.hei.fullDate, this.state.hei);
+  saveToLocalStorage() {
+      localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+  }
+
+
+    updateData(id, dataFromChild) {
+        console.log("dataToBeStored.length: " + this.state.dataToBeStored.length)
+        if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
+            for (var i=0; i<this.state.dataToBeStored.length; i++) {
+                if (this.state.dataToBeStored[i].id == id) {
+                    console.log(this.state.dataToBeStored[i])
+                    this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
+                    break;
+                }
+            }
+        }
+        this.state.tmpDataFromChild = null
+        this.state.tmpId = null
     }
 
 
-    updateData() {
-        var one = document.getElementById("elementOne").value;
-        console.log("one: " + one);
-        var two = document.getElementById("elementTwo").value;
-        console.log("two: " + two);
-        var three = document.getElementById("elementThree").value;
-        console.log("three: " + three);
-        var four = document.getElementById("elementFour").value;
-        console.log("four: " + four);
-        var five = document.getElementById("elementFive").value;
-        console.log("five: " + five);
-        var six = document.getElementById("elementSix").value;
-        console.log("six: " + six);
+
+    myCallback(id, dataFromChild) {
+          this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
+    }
+
+
+    loadFromLocalStorage() {
+        this.state.dataToBeStored = [];
+        console.log("this.state.dataToBeStored.length : " + this.state.dataToBeStored.length)
+        var l = localStorage.getItem(this.state.fullDate)
+        var lista = JSON.parse(l)
+        if (lista != null) {
+          lista.forEach((el) => {
+              var id = el.id
+              var name = el.name
+              var dataContent = el.dataContent
+              var nextElement = {id: id, name: name, dataContent: dataContent}
+              this.state.dataToBeStored.push(nextElement);
+              console.log("Added element to dataToBeStored")
+          })
+          localStorage.removeItem(this.state.fullDate)
+        }
+    }
+
+
+    getDataContent(id) {
+        var fieldValue = null
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == id) {
+                fieldValue = this.state.dataToBeStored[i].dataContent;
+                break;
+            }
+        }
+        return fieldValue;
+    }
+
+
+    addToList(element) {
+        var isNew = true;
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == element.id) {
+                this.state.dataToBeStored[i].dataContent = element.dataContent
+                isNew = false
+            }
+        }
+        if (isNew) {
+            this.state.dataToBeStored.push(element)
+        }
+    }
+
+
+    fetchDataElements(_callback){
+
+        var ref_findDataElementContent = this.findDataElementContent;      
+        var self = this;
+
+        this.findDataElementIDs().then(function (result){
+
+            var dataElementIDs = result;
+            var dataElementContent = [];
+      
+            for(var i = 0; i < dataElementIDs.length; i++){
+              dataElementContent.push(ref_findDataElementContent(dataElementIDs[i]));
+              //console.log(dataElementIDs[i]);
+            }
+      
+            Promise.all(dataElementContent).then(function (dataObjects){
+              
+                self.setState({dataElements: dataObjects})
+
+                //console.log("STATE ARRAY: ", self.state.dataElements);
+                _callback();
+            })
+          })
+          
+    }
+
+
+    findDataElementIDs(){
+
+        var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
+        var programStageID = "";
+        var dataElementIDs = [];
+    
+        return fetch(baseURL + "/programs/" + programID, {
+          method: 'GET',
+          headers: {
+            'Authorization': authKey
+          }
+        }).then(function (response){
+          return response.json();
+        }).then(function (data){
+            
+            programStageID = data.programStages[0].id;
+            
+            return fetch(baseURL + "/programStages/" + programStageID,{
+              method: 'GET',
+              headers: {
+              'Authorization': authKey
+              }
+            }).then(function (response){
+    
+                return response.json();
+    
+            }).then(function (data){
+                
+                data.programStageDataElements.forEach((element) => {
+    
+                  dataElementIDs.push(element.dataElement.id);
+                })
+    
+                return dataElementIDs;
+            })
+          
+        })
+      }
+    
+    
+      findDataElementContent(id){
+        return fetch(baseURL + "/dataElements/" + id, {
+          method: 'GET',
+          headers: {
+            'Authorization': authKey
+          }
+        }).then(function (response){
+          return response.json().then(function (data){
+    
+            var newElement = {
+              "name": data.name,
+              "id": data.id,
+              "valueType": data.valueType,
+            };
+    
+            return newElement;
+          }).catch(function (error){
+    
+            //console.log(error);
+          })
+        })
+      }
+
+
+    componentWillMount() {
+
+        /*
+        var self = this;
+        this.fetchDataElements(function(){
+            console.log(self.state.dataElements);
+            var d = new Date();
+            var year = String(d.getFullYear());
+            var month = String(d.getMonth());
+            var day = String(d.getDate());
+            self.state.fullDate = day + "." + month + "."+ year;
+            self.loadFromLocalStorage()
+            var elements = self.state.dataElements;
+            elements.forEach((el) => {
+            //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+            var nextId = el.id
+            var nextName = el.name
+            var nextDataContent = self.getDataContent(nextId)
+            console.log("nextDataContent " + nextDataContent)
+            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
+            var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
+            var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+            self.state.rows.push(htmlDataElementContainer)
+            var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
+            self.addToList(newToBeStored)
+            })
+        });
+    
+        */
         var d = new Date();
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
-        var fullDate = day + month + year;
-        var report = {fullDate:+fullDate, one:+one, two:+two, three:+three, four:+four, five:+five, six:+six};
-        this.setState({hei: report});
-        console.log("report.fullDate: " + report.fullDate, "report.one: "+report.one, "report.two: "+report.two, "report.three: "+ report.three,
-        "report.four: " + report.four, "report.five: " + report.five, "report.six: " + report.six);
+        this.state.fullDate = day + "." + month + "."+ year;
+        this.loadFromLocalStorage()
+        var elements = this.state.dataElements;
+        elements.forEach((el) => {
+            //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+            var nextId = el.id
+            var nextName = el.name
+            var nextDataContent = this.getDataContent(nextId)
+            console.log("nextDataContent " + nextDataContent)
+            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
+            var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: this.myCallback}, null)
+            var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+            this.state.rows.push(htmlDataElementContainer)
+            var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
+            this.addToList(newToBeStored)
+        })
+        
     }
 
 
     render () {
+        this.updateData(this.state.tmpId, this.state.tmpDataFromChild);
         return(
-            <div className="Home">
-                <Header title={this.state.title} />
-                <main>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">No of Emergency Cesearean Cases provided anaesthesia during night time (5PM - Morning):</label>
-                        <input type="text" name="elementOne" onKeyUp={this.updateData} className="NewEntry-input" id="elementOne" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Anaesthesia provided to other cases:</label>
-                        <input type="text" name="elementTwo" onKeyUp={this.updateData} className="NewEntry-input" id="elementTwo" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Challenges faced:</label>
-                        <input type="text" name="elementThree" onKeyUp={this.updateData} className="NewEntry-input" id="elementThree" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Challenges faced: Other:</label>
-                        <input type="text" name="elementFour" onKeyUp={this.updateData} className="NewEntry-input" id="elementFour" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-section">
-                        <label name="entrydesctription">Remarks/ Feedback/ Details of Challenges faced:</label>
-                        <input type="text" name="elementFive" onKeyUp={this.updateData} className="NewEntry-input" id="elementFive" placeholder="..." />
-                    </div>
-                    <div className="NewEntry-element">
-                        <label name="entrydesctription">No TEST of Emergency Cesearean Cases provided anaesthesia during day till 5PM:</label>
-                        <input type="text" name="elementSix" onKeyUp={this.updateData} className="NewEntry-input" id="elementSix" placeholder="..." />
-                    </div> 
-                   
-                   <div className="TemporaryContainer">
-                        <form>
-                            <button formaction={this.state.backButtonLink}> {this.state.backButton} </button>
-                        </form>
-                        <form>
-                            <button formaction={this.state.nextButtonLink} onClick={this.saveToLocalStorage}> {this.state.nextButton} </button>
-                        </form>
-                    </div>
-                </main>
-
-            </div>
-
+            <table>
+                <tbody>
+                    {this.state.rows}
+                </tbody>
+                <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
+                <a href='/doctor' className='Home-button'>Back</a>
+            </table>
         );
     }
+
+
+
 }
