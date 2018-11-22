@@ -7,7 +7,9 @@ export default class ReportListHolder extends Component{
   constructor(props){
     super(props);
     this.state = {
-      activePage: 1
+      activePage: 1,
+      backArrow: "<",
+      nextArrow: ">"
     };
   }
 
@@ -45,9 +47,9 @@ export default class ReportListHolder extends Component{
       <div>
         <ReportList reports={reports} id={this.props.id} total={(REPORTS_PER_PAGE<this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
         <div className="ReportActivePages">
-          <button className="ReportPageButtonBack" onClick={() => {this.newPage(activePage - 1)}}>{"<"}</button>
+          <button className="ReportPageButtonArrow" onClick={() => {this.newPage(activePage - 1)}}>{this.state.backArrow}</button>
           <div> {activePage} / {max} </div>
-          <button className="ReportPageButtonNext" onClick={() => {this.newPage(activePage + 1)}}>{">"}</button>
+          <button className="ReportPageButtonArrow" onClick={() => {this.newPage(activePage + 1)}}>{this.state.nextArrow}</button>
         </div>
       </div>
 		);

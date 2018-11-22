@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
-import BackButton from '../../Components/Button/BackButton.js';
 import ReportListHolder from '../../Components/Report/ReportListHolder.jsx';
+import {Link} from 'react-router-dom';
 
 export default class HealthOfficerHome extends Component {
   constructor() {
@@ -54,7 +54,9 @@ export default class HealthOfficerHome extends Component {
           <Header title={this.state.title} />
           <main className="Home-main">
               <ReportListHolder reports={this.state.reports} id={this.props.location.state.id} total={this.state.reports.length}/>
-              <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+              <Link to={{pathname: '/dho'}}>
+                      <div className="ReportPageButton">{this.state.backbutton}</div>
+              </Link>
           </main>
       </div>
     )

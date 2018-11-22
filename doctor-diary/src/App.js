@@ -18,16 +18,17 @@ import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
-  var user = "BjarneB" // dho
-  //var user = "AkselJ" //doctor
+  /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
+  //var user = "BjarneB" // dho
+  var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
-  var authKey = 'Basic ' + btoa(user + ':' + pass);
+  var authentKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
   return fetch(meAPI, {
     method: 'GET',
     headers: {
     'Accept': 'application/json',
-    'Authorization': authKey,
+    'Authorization': authentKey,
   }
   }).then(function(response){
     return response.json().then(data => {
@@ -51,7 +52,7 @@ function checkRole(){
 
       }
     }).catch(function (error){
-      return null;
+      return "error";
     })
   }) ;
 }
@@ -60,7 +61,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      checkRoleResult: "",
+      checkRoleResult: " ",
     }
   }
 

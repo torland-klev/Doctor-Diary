@@ -74,6 +74,15 @@
   float: right;
 }
 
+/* Styling for new entry*/
+.NewButtonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px;
+    width: 200px;
+}
+
 /* Styling for list of reports */
 .ReportListItem{
   border: solid 1px #373737;
@@ -100,22 +109,16 @@
     height: 20px;
 }
 
-.ReportPageButtonBack{
-  float: left;
-  font-size: calc(10px +2vmin);
+.ReportPageButtonArrow{
+  font-size: 10px;
   background-color: #bad5f4;
   border: 1px solid #373737;
+  text-align: center;
 }
 
-.ReportPageButtonNext{
-  float: right;
-  font-size: calc(10px +2vmin);
-  background-color: #bad5f4;
-  border: 1px solid #373737;
-}
-.ReportPageButtonSort{
-    float: right;
+.ReportPageButton{
     font-size: 15px;
+    padding: 5px;
     background-color: #bad5f4;
     border: 1px solid #373737;
   }

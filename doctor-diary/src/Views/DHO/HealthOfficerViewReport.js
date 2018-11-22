@@ -20,7 +20,7 @@ export default class HealthOfficerViewReport extends Component {
                 <main className="Home-main">
                     <ReportHolder report={report}/>
                     <Link to={{pathname: '/dho/reportlist', state: {id: this.props.location.state.id}}}>
-                      <div className="BackButton">BACK</div>
+                      <div className="ReportPageButton">{this.state.backbutton}</div>
                     </Link>
                 </main>
             </div>

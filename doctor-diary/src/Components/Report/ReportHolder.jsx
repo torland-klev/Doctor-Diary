@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DataElement from '../Report/DataElement.jsx'
+import '../Components.css'
 
 export default class ReportHolder extends Component{
 	render() {
@@ -18,13 +19,14 @@ export default class ReportHolder extends Component{
           value={el.value}
           key={el.dataElement}/>);
     })
-
+    
+    /** TODO: Style the table */
 		return (
       <table>
         <tbody>
           <tr>
-            <th className="TableDataElement">Data Element</th>
-            <th className="TableValue">Value</th>
+            <th className="TableDataElement">Question</th> {/** Data element */}
+            <th className="TableValue">Answer</th> {/** Value */}
           </tr>
           {rows}
         </tbody>

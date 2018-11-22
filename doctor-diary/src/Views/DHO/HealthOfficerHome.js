@@ -120,7 +120,7 @@ export default class HealthOfficerHome extends Component {
           <main className="Home-main">
             <h2>Choose the organisation unit</h2>
             <OrganizationListHolder elements={this.state.i} names={this.state.n} sort={this.state.sort}/>
-            <button className="ReportPageButtonSort" onClick={() => {this.sortNumber()}}>{this.state.sortSymbol}</button>
+            <button className="ReportPageButton" onClick={() => {this.sortNumber()}}>{this.state.sortSymbol}</button>
           </main>
       </div>
     ) : (

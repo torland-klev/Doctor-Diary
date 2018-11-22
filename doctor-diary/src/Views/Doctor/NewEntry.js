@@ -6,6 +6,7 @@ NB: It uses date as key, so it assumes that only one doctor will be using the br
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
+import {Link} from 'react-router-dom';
 
 import DataElementForm from '../../Components/DataElementForm.js';
 
@@ -15,8 +16,6 @@ var passNew = "District1-" //hardkodet for nå
 var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
 
 export default class NewEntry extends Component {
-
-
   constructor(props) {
       super(props);
       this.state = {
@@ -62,10 +61,7 @@ export default class NewEntry extends Component {
                 }
             }
         }
-        //this.state.tmpDataFromChild = null
-        this.setState({tmpDataFromChild: null});
-        //this.state.tmpId = null
-        this.setState({tmpId: null});
+        this.setState({tmpDataFromChild: null}, {tmpID: null});
     }
 
 
@@ -76,7 +72,6 @@ export default class NewEntry extends Component {
 
 
     loadFromLocalStorage() {
-        //this.state.dataToBeStored = [];
         this.setState({dataToBeStore: []})
         console.log("this.state.dataToBeStored.length : " + this.state.dataToBeStored.length)
         var l = localStorage.getItem(this.state.fullDate)
@@ -188,28 +183,28 @@ export default class NewEntry extends Component {
       }
     
     
-      findDataElementContent(id){
-        return fetch(baseURL + "/dataElements/" + id, {
-          method: 'GET',
-          headers: {
-            'Authorization': authKey
-          }
-        }).then(function (response){
-          return response.json().then(function (data){
-    
-            var newElement = {
-              "name": data.name,
-              "id": data.id,
-              "valueType": data.valueType,
-            };
-    
-            return newElement;
-          }).catch(function (error){
-    
-            //console.log(error);
-          })
+    findDataElementContent(id){
+    return fetch(baseURL + "/dataElements/" + id, {
+        method: 'GET',
+        headers: {
+        'Authorization': authKey
+        }
+    }).then(function (response){
+        return response.json().then(function (data){
+
+        var newElement = {
+            "name": data.name,
+            "id": data.id,
+            "valueType": data.valueType,
+        };
+
+        return newElement;
+        }).catch(function (error){
+
+        //console.log(error);
         })
-      }
+    })
+    }
 
 
     componentWillMount() {
@@ -245,7 +240,6 @@ export default class NewEntry extends Component {
         var year = String(d.getFullYear());
         var month = String(d.getMonth());
         var day = String(d.getDate());
-        //this.state.fullDate = day + "." + month + "."+ year;
         this.setState({fullDate: day + "." + month + "."+ year});
         this.loadFromLocalStorage()
         var elements = this.state.dataElements;
@@ -262,12 +256,10 @@ export default class NewEntry extends Component {
             var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
             this.addToList(newToBeStored)
         })
-        
     }
 
 
     render () {
-        this.updateData(this.state.tmpId, this.state.tmpDataFromChild);
         return(
             <div className="Home">
             <Header title={this.state.title} />
@@ -276,9 +268,11 @@ export default class NewEntry extends Component {
                     <tbody>
                         {this.state.rows}
                     </tbody>
-                    <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
-                    <a href='/doctor' className='Home-button'>Back</a>
                 </table>
+                <div className="NewButtonContainer">
+                    <a href='/doctor'><div className='ReportPageButton'>Back</div></a>
+                    <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage}><div className='ReportPageButton'>Next</div></a>
+                </div>
             </main>
             <NavBar addFill={this.state.active}/>
             </div>

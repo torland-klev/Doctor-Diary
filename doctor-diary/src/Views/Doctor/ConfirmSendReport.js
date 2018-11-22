@@ -25,8 +25,8 @@ export default class ConfirmSendReport extends Component {
         var year = String(d.getFullYear())
         var month = String(d.getMonth())
         var day = String(d.getDate())
-        //this.state.fullDate = day + "." + month + "." + year
-        this.setState({fullDate: day + "." + month + "." + year});
+        this.state.fullDate = day + "." + month + "." + year
+        //this.setState({fullDate: day + "." + month + "." + year});
         var obj = localStorage.getItem(this.state.fullDate)
         var parsedReport = JSON.parse(obj)
         console.log("parsedReport: " + parsedReport)
@@ -52,7 +52,10 @@ export default class ConfirmSendReport extends Component {
                     </tbody>
                  </table>
 
-                <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
+                 <div className="NewButtonContainer">
+                    <a href={this.state.backbuttonlink}><div className='ReportPageButton'>{this.state.backbutton}</div></a>
+                </div>
+
 
                 </main>
             </div>
