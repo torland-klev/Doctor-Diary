@@ -36,14 +36,7 @@ a:hover{
 
 /* laptop screens*/ 
 @media screen and (min-width: 700px) and (-webkit-min-device-pixel-ratio: 1) { 
-    .NavBar{
-      position: relative;
-      top: 0px;
-      height: 7vh;
-      padding: 0.5vh;
-      padding-left: 40vh;
-      /* TODO: endre ikonfargene, endre bakgrunnsfargen HOOOW??*/
-    }
+
 }
 
 /* phone screens*/
@@ -87,14 +80,7 @@ a:hover{
 }
 
 /* Components */
-.NavBar{
-  bottom: 0px;
-  position: absolute;
-  min-width: 90%;
-  max-width: 100%;
-  display: flex;
-  align-items: center;
-}
+
 .Header{
   position: fixed;
   display: flex;
@@ -106,6 +92,7 @@ a:hover{
   height: 7vh;
   background-color: #276696;
   padding: 0.5vh;
+  z-index: 2;
 }
 
 .HeaderImg{

@@ -1,4 +1,11 @@
 import React from 'react';
+import IconHome from './IconHome.js';
+import IconAdd from './IconAdd';
+import IconList from './IconList';
+import IconNotification from './IconNotification';
+import './NavBar.css'
+
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -24,57 +31,14 @@ class NavBar extends React.Component {
     loginpage: "/",
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
     return (
-        <div className="NavBar">
-        <BottomNavigation
-            value={value}
-            active={this.state.active}
-            onChange={this.handleChange}
-            showLabels
-            className={classes.root}
-        >
-            <BottomNavigationAction 
-                component={Link}
-                to={this.state.homeLink}
-                key="home"
-                label="Home" 
-                icon={<Home />} 
-                onPress={() => this.setState({ active: 'home' })}
-            />
-            <BottomNavigationAction
-                component={Link}
-                to={this.state.loginpage}
-                key="logout"
-                label="Log out" 
-                icon={<ExitToApp />} 
-                onPress={() => this.setState({ active: 'logout' })}
-            />
-            <BottomNavigationAction 
-                component={Link}
-                to={this.state.declinedLink}
-                key="declined"
-                label="Declined" 
-                icon={<ViewList />}
-                onPress={() => this.setState({ active: 'declined' })}
-            />
-            <BottomNavigationAction
-                component={Link}
-                to={this.state.newLink}
-                key="addEntry"
-                label="Add entry" 
-                icon={<AddCircle />} 
-                onPress={() => this.setState({ active: 'addEntry' })}
-            />
-        </BottomNavigation>
-        </div>
+        <nav className="NavBar">
+          <IconHome />
+          <IconList />
+          <IconNotification />
+          <IconAdd />
+        </nav>
     );
   }
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
+import IconHome from '../Components/NavBar/IconHome.js';
+import IconAdd from '../Components/NavBar/IconAdd.js';
 
 export default class DoctorHome extends Component {
     constructor (){
