@@ -5,7 +5,7 @@ import HeaderImage from "./HeaderImg.js";
 export default class Header extends Component {
    render () {
         return (
-            <header className="Header">
+            <header>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"

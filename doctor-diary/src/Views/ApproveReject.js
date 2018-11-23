@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-import BackButton from '../Components/Button/BackButton.js';
 import ReportHolder from '../Components/Report/ReportHolder.jsx'
 import DropdownMenu from '../Components/DropdownMenu.js'
 
@@ -57,25 +56,26 @@ export default class ApproveReject extends Component {
 
 render() {
     const report = this.props.location.state.report;
-      return (
+    return (
+        <div>
+            <Header title={this.state.title} />
+            <main>
+                <h1>Report for {report.dueDate.substring(0, 10)}</h1>
+                <h2>Created by {report.storedBy}</h2>
 
-          <div className="Home">
-              <Header title={this.state.title} />
-              <main className="Home-main">
-              <h1>Report for {report.dueDate.substring(0, 10)}</h1>
-              <h1>Created by {report.storedBy}</h1>
+                <ReportHolder report={report} id="reportHolder"/>
 
-              <ReportHolder report={report} id="reportHolder"/>
+                <input className="commentInput" type="text" onKeyUp={this.updateComment} id="newComment" placeholder="ADD COMMENT" />
 
-               <input type="text" onKeyUp={this.updateComment} id="newComment" placeholder="...Your comment here..." />
+                {/** TODO Istedenfor dropdown kan vi bruke radiokapper? */}
+                <DropdownMenu id="dropdownMenu" setStatus={this.setStatus}/>
 
-               <DropdownMenu id="dropdownMenu" setStatus={this.setStatus}/>
-
-               <a href='/confirmFeedback' onClick={this.sendToAPi} className="Home-button">Sumbit answer</a>
-               <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
-
-              </main>
-          </div>
-        )
+                <div className="TemporaryContainer">
+                    {/** <a href='/dho/reportlist/report'><button className="ReportPageButton">Back</button></a>*/} {/** TODO: Back knapp funker ikke, sikkert pga indeksering */}
+                    <a href='/confirmFeedback' onClick={this.sendToAPi}> <button className="ReportPageButton">Submit</button></a>
+                </div>
+            </main>
+        </div>
+    );
   }
 }

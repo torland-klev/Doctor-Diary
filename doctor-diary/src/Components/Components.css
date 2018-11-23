@@ -1,17 +1,3 @@
-
-.Header{
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    top: 0px;
-    width: 100%;
-    height: 7vh;
-    background-color: #276696;
-    padding: 0.5vh;
-}
-
 .HeaderImg{
     width: 5vh;
     height: 5vh;
@@ -25,15 +11,6 @@
     font-size: calc(0.9em +2vmin);
     color: white;
     padding-left: 1.5vh;
-}
-
-.Button{
-    width: 40vh;
-    background-color: #bad5f4;
-    margin: 5px;;
-    padding: 1.5%;
-    border: 1px solid black;
-    font-size: calc(10px +2vmin);
 }
 
 .BackButton, .NextButton{
@@ -62,16 +39,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
-}
-
-.TableDataElement{
-  float: left;
-  margin-right: 30px;
-}
-
-.TableValue{
-  float: right;
+    width: 200px;
 }
 
 /* Styling for new entry*/
@@ -100,6 +68,19 @@
     margin-left: 5px;
 }
 
+.ReportListHolder{
+    width:100%;
+    align-items: center;
+}
+.ReportListHolderFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%
+}
+
 .ReportActivePages{
     display: flex;
     flex-direction: row;
@@ -108,6 +89,13 @@
     margin: 5px;
     width: 450px;
     height: 20px;
+}
+.ReportView{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    width: 200px;
 }
 
 .ReportPageButtonArrow{
@@ -133,4 +121,21 @@
     height: 20px;
     width: 30vh;
     padding: 5px;
+}
+
+.CenterText{
+    text-align: center;
+    padding: 3px;
+}
+
+/* Styling for input on ApproveReject */
+.commentInput{
+    border: 1px solid #373737;
+    background: #D0E4F5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 50%;
+    height: 30px;
+    margin: 10px;
+    font-size: 13px;
 }

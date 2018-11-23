@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DataElement from '../Report/DataElement.jsx'
 import '../Components.css'
+import '../../index.css'
 
 export default class ReportHolder extends Component{
 	constructor(props){
@@ -71,8 +72,8 @@ export default class ReportHolder extends Component{
       <table>
         <tbody>
           <tr>
-            <th className="TableDataElement">Question</th> {/** Data element */}
-            <th className="TableValue">Answer</th> {/** Value */}
+            <th>Question</th> {/** Data element */}
+            <th>Answer</th> {/** Value */}
           </tr>
           {this.state.rows}
         </tbody>

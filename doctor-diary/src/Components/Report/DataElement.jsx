@@ -6,8 +6,8 @@ export default class DataElement extends Component{
     const value = this.props.value;
 		return (
       <tr>
-        <td className="TableDataElement">{dataElement}</td>
-        <td className="TableValue">{value}</td>
+        <td>{dataElement}</td>
+        <td>{value}</td>
       </tr>
 		);
 	}

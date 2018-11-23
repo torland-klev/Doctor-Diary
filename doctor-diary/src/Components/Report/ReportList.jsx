@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import ReportListItem from '../Report/ReportListItem.jsx';
+import '../Components.css'
+import '../../index.css'
 
 /* Input: Array of reports/events
  * Displays: Creator and creation date of every report
@@ -107,16 +109,22 @@ export default class ReportList extends Component{
 	render() {
 		if (this.props.reports.length){
 			return ((this.state.rows.length === this.props.max) || !(this.state.total)) ? (
-	      <div>
-	        {this.state.rows}
-	      </div>
+	      <table class="reportList"> {/** TODO fix the styling of this table -it borked */}
+			  <tbody>
+				  <tr>
+					  <th> Doctor: </th>
+					  <th> Date : </th>
+				  </tr>
+				  {this.state.rows}
+			  </tbody>
+		  </table>
 			) : (
-				<div>Loading... {this.state.rows}</div>
+				<div className="CenterText">Loading... {this.state.rows}</div>
 			)
 		}
 		else {
 			return (
-				<div> No reports in category, or failed to load </div>
+				<div className="CenterText"> No reports in category, or failed to load </div>
 			)
 		}
 	}
