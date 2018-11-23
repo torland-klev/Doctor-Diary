@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js';
 
+const authKey = 'Basic ' + btoa("CasperL" + ':' + "District1-");
+const baseURL = "https://course.dhis2.org/dhis/api";
 
 export default class ConfirmSendReport extends Component {
 
@@ -42,33 +44,55 @@ export default class ConfirmSendReport extends Component {
 
     sendData(){
 
-        //console.log(this.state.report);
         var objects = this.state.report;
 
         var values = [];
 
         objects.forEach((obj) => {
-            
             var valueElement = {
                 dataElement: obj.id,
                 value: obj.dataContent
             };
-
             values.push(valueElement);
         })
 
-        
+        var programID = "r6qGL4AmFV4";
+        var orgUnitID = "";
+        var teiID = "";
+        var programStageID = "";
 
-        values = [
-            { dataElement: "CXL5mg5l0cv", value: 10 },
-            { dataElement: "EZstOIjb7wN", value: "0"}, 
-            { dataElement: "romAEndBlt4", value: "0"},
-            { dataElement: "p5D5Y9x7yMc", value: "0"},
-            { dataElement: "LoY92GDoDC6", value: "0"},
-            { dataElement: "BIB2zYDYIJp", value: 10 },
-            { dataElement: "zrZADVnTtMa", value: "Approved/Rejected Current Status"}
-          ]
-          console.log(values);
+        var self = this;
+
+        this.findProgramStage(programID).then(function (pStage){
+
+            console.log("programStage: " + pStage);
+            programStageID = pStage;
+
+            self.findTeiOrgUnit().then(function (orgUnit){
+
+                console.log("orgUnitID: " + orgUnit);
+                orgUnitID = orgUnit;
+
+                self.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
+
+                    console.log("teiID: " + tei);
+                    teiID = tei;
+
+                    const newEvent = {
+                        program: programID,
+                        trackedEntityInstance: teiID,
+                        programStage: programStageID,
+                        orgUnit: orgUnitID,
+                        dataValues: values
+                    };
+
+                    self.sendDataToApi(newEvent);
+
+                })
+            })
+        })
+
+        /*
         const newEvent = {
             program: "r6qGL4AmFV4",
             trackedEntityInstance: "vjVNrMa4zvc",
@@ -76,7 +100,7 @@ export default class ConfirmSendReport extends Component {
             orgUnit: "eLLMnNjuluX",
             dataValues: values
         };
-
+        */
         //this.sendDataToApi(newEvent);
 
         /*
@@ -96,13 +120,75 @@ export default class ConfirmSendReport extends Component {
             ]
         };
         */
+    }
 
+    findTeiOrgUnit(){
+
+        var TeiOrgUnitID = "";
+
+        return fetch(baseURL + "/me", {
+            method: 'GET',
+            headers: {
+              'Authorization': authKey
+            }
+          }).then(function (response){
+            return response.json();
+          }).then(function (data){
+              
+            TeiOrgUnitID = data.teiSearchOrganisationUnits[0].id;
+              
+            return TeiOrgUnitID;
+          })
+
+    }
+
+
+
+    findTrackedEntityInstance(teiOrgID, programID){
+
+        var trackedEntityID = "";
+
+        var filters = "/trackedEntityInstances.json?ou=" + teiOrgID + "&program=" + programID;
+
+        console.log(filters);
+        return fetch(baseURL + filters, {
+            method: 'GET',
+            headers: {
+              'Authorization': authKey
+            }
+          }).then(function (response){
+            return response.json();
+          }).then(function (data){
+            
+            //console.log(data);
+            trackedEntityID = data.trackedEntityInstances[0].trackedEntityInstance;
+            //console.log(data.trackedEntityInstances[0]);
+            return trackedEntityID;
+          })
+    }
+
+    findProgramStage(){
+
+        var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
+        var programStageID = "";
+    
+        return fetch(baseURL + "/programs/" + programID, {
+          method: 'GET',
+          headers: {
+            'Authorization': authKey
+          }
+        }).then(function (response){
+          return response.json();
+        }).then(function (data){
+            
+            programStageID = data.programStages[0].id;
+            
+            return programStageID;
+        })
     }
 
     sendDataToApi(eventElement){
         
-        var authKey = 'Basic ' + btoa("AkselJ" + ':' + "District1-");
-
         fetch("https://course.dhis2.org/dhis/api/events", {
           method: 'POST',
           //credentials: 'include', //skal være med på deploy

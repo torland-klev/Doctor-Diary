@@ -19,7 +19,7 @@ export default class NewEntry extends Component {
   constructor(props) {
       super(props);
       this.state = {
-            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
+            //dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
             //dataElements: [],
             dataToBeStored: [],
             fullDate: "",
@@ -246,7 +246,7 @@ export default class NewEntry extends Component {
                 self.addToList(newToBeStored)
             })
 
-            self.setState({ state: self.state });
+            self.setState({ state: self.state }); //Force re-render
             
         })
 
