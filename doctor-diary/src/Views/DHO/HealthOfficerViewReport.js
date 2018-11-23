@@ -7,11 +7,22 @@ export default class HealthOfficerViewReport extends Component {
     constructor() {
         super();
         this.state = {
-            title: "HEALTH OFFICER VIEW REPORTS",
+            title: "",
             backbutton: "Back",
-            backbuttonlink: "/dho/reportlist",
+            backbuttonlink: "",
         }
     }
+
+    componentDidMount(){
+      const user = this.props.location.state.user;
+      console.log(user);
+      if (user === "DOCTOR"){
+        this.setState({backbuttonlink: '/doctor', title: 'DOCTOR VIEW REPORTS'});
+      } else {
+        this.setState({backbuttonlink: '/dho/reportlist', title: 'HEALTH OFFICER VIEW REPORTS'});
+      }
+    }
+
     render() {
       const {report} = this.props.location.state;
         return (
@@ -19,7 +30,7 @@ export default class HealthOfficerViewReport extends Component {
                 <Header title={this.state.title} />
                 <main className="Home-main">
                     <ReportHolder report={report}/>
-                    <Link to={{pathname: '/dho/reportlist', state: {id: this.props.location.state.id}}}>
+                    <Link to={{pathname: this.state.backbuttonlink, state: {id: this.props.location.state.id}}}>
                       <div className="ReportPageButton">{this.state.backbutton}</div>
                     </Link>
                 </main>

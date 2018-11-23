@@ -19,7 +19,7 @@ export default class ReportList extends Component{
 	}
 	render() {
 		return (
-      <Link to={{pathname: this.state.pathname, state: {report: this.props.report, id: this.props.id}}}>
+      <Link to={{pathname: this.state.pathname, state: {report: this.props.report, id: this.props.id, user: this.props.user}}}>
         <ul className="ReportListItem">
           <li className="ReportListItemName"><b>Doctor name: </b>{this.props.creator}</li> {/* only use creator? */}
           <li className="ReportListItemDate"><b>Date: </b>{this.props.date}</li>  {/** only use date? */}
