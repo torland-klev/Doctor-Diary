@@ -85,11 +85,12 @@
 
 /* Styling for list of reports */
 .ReportListItem{
-  border: solid 1px #373737;
-  margin: 5px;
-  padding: 5px;
-  width: 450px;
-  height: 40px;
+    align-items: center;
+    border: solid 1px #373737;
+    margin: 5px;
+    padding: 5px;
+    width: 450px;
+    height: 40px;
 }
 .ReportListItemName{
     margin-left: 5px;
