@@ -49,7 +49,7 @@ export default class ReportListHolder extends Component{
     const max = (Math.ceil(this.props.reports.length/REPORTS_PER_PAGE));
 		return (
       <div>
-        <ReportList reports={reports} id={this.props.id} total={this.props.reports.length - ((REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total)*(activePage-1)} max={(REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
+        <ReportList user={this.props.user} reports={reports} id={this.props.id} total={this.props.reports.length - ((REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total)*(activePage-1)} max={(REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
         <div className="ReportActivePages">
           <button className="ReportPageButtonArrow" onClick={() => {this.newPage(activePage - 1)}}>{this.state.backArrow}</button>
           <div> {(max) ? activePage : 0} / {max} </div>
