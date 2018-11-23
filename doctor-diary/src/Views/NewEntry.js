@@ -29,6 +29,8 @@ export default class NewEntry extends Component {
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
             tmpId: null,
             tmpDataFromChild: null,
+            
+
       };
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
       this.updateData = this.updateData.bind(this)
@@ -43,7 +45,7 @@ export default class NewEntry extends Component {
 
 
   saveToLocalStorage() {
-      localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+    localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));   
   }
 
 
@@ -117,8 +119,7 @@ export default class NewEntry extends Component {
     fetchDataElements(_callback){
 
         var ref_findDataElementContent = this.findDataElementContent;      
-        var self = this;
-
+        
         this.findDataElementIDs().then(function (result){
 
             var dataElementIDs = result;
@@ -222,12 +223,13 @@ export default class NewEntry extends Component {
             
                 var nextId = el.id
                 var nextName = el.name
+                var nextValueType = el.valueType
                 var nextDataContent = self.getDataContent(nextId)
-                var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
+                var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, valueType: nextValueType, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
                 var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
                 
                 self.state.rows.push(htmlDataElementContainer)
-                var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
+                var newToBeStored = {id: nextId, name: nextName, dataContent: "", valueType: nextValueType};
                 self.addToList(newToBeStored)
             })
 
@@ -245,10 +247,12 @@ export default class NewEntry extends Component {
                 <tbody>
                     {this.state.rows}
                 </tbody>
-                <a a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
-                <a href='/doctor' className='Home-button'>Back</a>
+                    <div id="errorMessage" type="text"></div>
+                    <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
+                    <a href='/doctor' className='Home-button'>Back</a>
             </table>
         );
+
     }
 
 

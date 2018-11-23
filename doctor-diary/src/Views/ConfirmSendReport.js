@@ -14,7 +14,7 @@ export default class ConfirmSendReport extends Component {
             title: "Confirm Report",
             backbutton: "Back to new Entry",
             backbuttonlink: '/doctor/newEntry',
-            report: "meow",
+            report: "",
             rows: [],
             fullDate: "",
         };
@@ -51,8 +51,10 @@ export default class ConfirmSendReport extends Component {
         objects.forEach((obj) => {
             var valueElement = {
                 dataElement: obj.id,
-                value: obj.dataContent
+                value: obj.dataContent,
             };
+
+            console.log(valueElement);
             values.push(valueElement);
         })
 
