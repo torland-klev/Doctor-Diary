@@ -7,23 +7,46 @@ export default class HealthOfficerViewReport extends Component {
     constructor() {
         super();
         this.state = {
-            title: "HEALTH OFFICER VIEW REPORTS",
+            title: "",
             backbutton: "Back",
-            backbuttonlink: "/dho/reportlist",
+            backbuttonlink: "",
         }
     }
+
+    componentDidMount(){
+      const user = this.props.location.state.user;
+      console.log(user);
+      if (user === "DOCTOR"){
+        this.setState({backbuttonlink: '/doctor', title: 'DOCTOR VIEW REPORTS'});
+      } else {
+        this.setState({backbuttonlink: '/dho/reportlist', title: 'HEALTH OFFICER VIEW REPORTS'});
+      }
+    }
+
     render() {
       const {report} = this.props.location.state;
-        return (
-            <div className="Home">
-                <Header title={this.state.title} />
-                <main className="Home-main">
-                    <ReportHolder report={report}/>
-                    <Link to={{pathname: '/dho/reportlist', state: {id: this.props.location.state.id}}}>
-                      <div className="ReportPageButton">{this.state.backbutton}</div>
-                    </Link>
-                </main>
-            </div>
-        )
+      return (this.props.location.state.user === "DOCTOR") ? (
+          <div className="Home">
+              <Header title={this.state.title} />
+              <main className="Home-main">
+                  <ReportHolder report={report}/>
+                  <Link to={{pathname: this.state.backbuttonlink, state: {id: this.props.location.state.id}}}>
+                    <div className="ReportPageButton">{this.state.backbutton}</div>
+                  </Link>
+              </main>
+          </div>
+      ) :
+        (<div className="Home">
+          <Header title={this.state.title} />
+          <main className="Home-main">
+              <ReportHolder report={report}/>
+              <Link to={{pathname: this.state.backbuttonlink, state: {id: this.props.location.state.id}}}>
+                <div className="ReportPageButton">{this.state.backbutton}</div>
+              </Link>
+              <Link to={{pathname: '/dho/reportlist/report/comment', state: {report: report}}}>
+                <div>Comment</div>
+              </Link>
+          </main>
+        </div>)
     }
 }

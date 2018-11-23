@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
+import MainReportList from '../../Components/Report/MainReportList.js';
+import {Link} from 'react-router-dom';
+
+const TEI_ID = "vjVNrMa4zvc";
 
 export default class DoctorHome extends Component {
     constructor (){
@@ -23,15 +27,10 @@ export default class DoctorHome extends Component {
             <div className="Home">
                 <Header title={this.state.title}/>
                 <main className="Home-main">
-                        <a href={this.state.pendingLink}>
-                            <button>{this.state.pendingButton}</button>
-                        </a>
-                        <a href={this.state.declinedLink}>
-                            <button>{this.state.declinedButton}</button>
-                        </a>
-                        <a href={this.state.newLink}>
-                            <button>{this.state.newButton}</button>
-                        </a>
+                    <MainReportList id={TEI_ID} user="DOCTOR" />
+                    <Link to={{pathname: this.state.newLink}}>
+                      <div className="ReportPageButton">{this.state.newButton}</div>
+                    </Link>
                 </main>
                 <NavBar homeFill={this.state.active}/>
             </div>

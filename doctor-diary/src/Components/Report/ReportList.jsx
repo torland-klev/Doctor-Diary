@@ -14,7 +14,8 @@ export default class ReportList extends Component{
 		super(props);
 		this.state = {
 			rows: [],
-			prevProps: []
+			prevProps: [],
+			total: 0
 		}
 	}
 
@@ -31,7 +32,7 @@ export default class ReportList extends Component{
 		else if (this.arrayComparator(this.state.prevProps, this.props.reports)){
 		}
 		else {
-			this.setState({prevProps: this.props.reports, rows: []});
+			this.setState({prevProps: this.props.reports, rows: [], total: this.props.total});
 			this.updateReports();
 		}
 	}
@@ -68,8 +69,8 @@ export default class ReportList extends Component{
 		const reports = this.props.reports;
 		reports.forEach((el) => {
 			this.getTeiName(el.trackedEntityInstance).then((result) => {
-				this.setState({rows: this.state.rows.concat([
-					<ReportListItem report={el} id={this.props.id} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>])
+				this.setState({total: this.state.total-1, rows: this.state.rows.concat([
+					<ReportListItem user={this.props.user} report={el} id={this.props.id} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>])
 				});
 			})
 		})
@@ -104,12 +105,19 @@ export default class ReportList extends Component{
 	}
 
 	render() {
-		return (this.state.rows.length === this.props.total) ? (
-      <div>
-        {this.state.rows}
-      </div>
-		) : (
-			<div>Loading... {this.state.rows}</div>
-		)
+		if (this.props.reports.length){
+			return ((this.state.rows.length === this.props.max) || !(this.state.total)) ? (
+	      <div>
+	        {this.state.rows}
+	      </div>
+			) : (
+				<div>Loading... {this.state.rows}</div>
+			)
+		}
+		else {
+			return (
+				<div> No reports in category, or failed to load </div>
+			)
+		}
 	}
 }
