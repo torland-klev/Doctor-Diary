@@ -220,16 +220,22 @@ export default class NewEntry extends Component {
             var elements = objList;
             
             elements.forEach((el) => {
-            
+                
                 var nextId = el.id
                 var nextName = el.name
                 var nextValueType = el.valueType
                 var nextDataContent = self.getDataContent(nextId)
-                var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, valueType: nextValueType, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
-                var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
-                
-                self.state.rows.push(htmlDataElementContainer)
-                var newToBeStored = {id: nextId, name: nextName, dataContent: "", valueType: nextValueType};
+
+                //Approved/Rejected Current Status is not shown to doctor
+                if(nextName === "Approved/Rejected Current Status"){
+                    nextDataContent = "Pending";
+                }else{
+                    var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, valueType: nextValueType, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
+                    var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+                    self.state.rows.push(htmlDataElementContainer)
+                }
+
+                var newToBeStored = {id: nextId, name: nextName, dataContent: nextDataContent, valueType: nextValueType};
                 self.addToList(newToBeStored)
             })
 

@@ -33,9 +33,13 @@ export default class ConfirmSendReport extends Component {
         var parsedReport = JSON.parse(obj)
         console.log("parsedReport: " + parsedReport)
         parsedReport.forEach((el) => {
-              this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
-              this.state.rows.push(<tr><p type="text" id={el.dataContent}>{el.dataContent}</p></tr>);
+
+            if(!(el.name === "Approved/Rejected Current Status")){
                 
+                this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+                this.state.rows.push(<tr><p type="text" id={el.dataContent}>{el.dataContent}</p></tr>);
+            }
+              
         })
 
         this.setState({report: parsedReport})
