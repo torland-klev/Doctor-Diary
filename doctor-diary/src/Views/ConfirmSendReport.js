@@ -90,36 +90,7 @@ export default class ConfirmSendReport extends Component {
 
                 })
             })
-        })
-
-        /*
-        const newEvent = {
-            program: "r6qGL4AmFV4",
-            trackedEntityInstance: "vjVNrMa4zvc",
-            programStage: "ZJ9TrNgrtfb",
-            orgUnit: "eLLMnNjuluX",
-            dataValues: values
-        };
-        */
-        //this.sendDataToApi(newEvent);
-
-        /*
-        const newEvent = {
-            program: "r6qGL4AmFV4",
-            trackedEntityInstance: "vjVNrMa4zvc",
-            programStage: "ZJ9TrNgrtfb",
-            orgUnit: "eLLMnNjuluX",
-            dataValues: [
-              { dataElement: "CXL5mg5l0cv", value: 10 },
-              { dataElement: "EZstOIjb7wN", value: "10"}, 
-              { dataElement: "romAEndBlt4", value: "10"},
-              { dataElement: "p5D5Y9x7yMc", value: "10"},
-              { dataElement: "LoY92GDoDC6", value: "10"},
-              { dataElement: "BIB2zYDYIJp", value: 10 },
-              { dataElement: "zrZADVnTtMa", value: "Approved/Rejected Current Status"}
-            ]
-        };
-        */
+        })   
     }
 
     findTeiOrgUnit(){
