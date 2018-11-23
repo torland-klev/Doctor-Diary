@@ -13,6 +13,10 @@ export default class ReportListHolder extends Component{
     };
   }
 
+  componentDidMount(){
+    this.setState({total: this.props.total});
+  }
+
   getReports(start, end){
     if(end > this.props.reports.length){
       end = this.props.reports.length;
@@ -38,17 +42,17 @@ export default class ReportListHolder extends Component{
       this.setState({activePage: i});
     }
   }
-
+  //The total in reportList is to ensure that the loading... gets removed if there is less than max elements on a page but all are loaded
   render() {
     const activePage = this.state.activePage;
     const reports = this.getReports(REPORTS_PER_PAGE*activePage-8,REPORTS_PER_PAGE*activePage);
     const max = (Math.ceil(this.props.reports.length/REPORTS_PER_PAGE));
 		return (
       <div>
-        <ReportList reports={reports} id={this.props.id} total={(REPORTS_PER_PAGE<this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
+        <ReportList reports={reports} id={this.props.id} total={this.props.reports.length - ((REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total)*(activePage-1)} max={(REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
         <div className="ReportActivePages">
           <button className="ReportPageButtonArrow" onClick={() => {this.newPage(activePage - 1)}}>{this.state.backArrow}</button>
-          <div> {activePage} / {max} </div>
+          <div> {(max) ? activePage : 0} / {max} </div>
           <button className="ReportPageButtonArrow" onClick={() => {this.newPage(activePage + 1)}}>{this.state.nextArrow}</button>
         </div>
       </div>
