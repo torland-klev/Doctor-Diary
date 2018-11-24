@@ -3,7 +3,7 @@ import Header from '../../Components/Header/Header.js';
 import ReportHolder from '../../Components/Report/ReportHolder.jsx';
 import {Link} from 'react-router-dom';
 
-export default class HealthOfficerViewReport extends Component {
+export default class ViewReport extends Component {
     constructor() {
         super();
         this.state = {
