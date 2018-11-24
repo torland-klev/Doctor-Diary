@@ -13,7 +13,12 @@ export default class Home extends Component {
     }
     render () {
         return(
-            <Header title={this.state.title} />
+            <div>
+                <Header title={this.state.title} />
+                <main>
+                You either don't have the authorization to use this app or the server is down.
+                </main>
+            </div>
         );
     }
 }
