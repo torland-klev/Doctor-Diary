@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
 import ReportHolder from '../Components/Report/ReportHolder.jsx';
 import DropdownMenu from '../Components/DropdownMenu.js';
+import {RadioGroup, RadioButton} from 'react-radio-buttons';
 import {Link} from 'react-router-dom';
 
 export default class ApproveReject extends Component {
@@ -13,11 +14,10 @@ export default class ApproveReject extends Component {
           rows: [],
           newComment: "",
           oldComment: "",
-          status: "",
+          status: ""
       };
-      this.updateComment = this.updateComment.bind(this)
-      this.sendToAPi = this.sendToApi.bind(this)
-      this.setStatus = this.setStatus.bind(this)
+      this.updateComment = this.updateComment.bind(this);
+      this.sendToAPi = this.sendToApi.bind(this);
   }
 
 
@@ -25,12 +25,6 @@ export default class ApproveReject extends Component {
       var newComment = document.getElementById("newComment").value
       this.setState({newComment: newComment});
   }
-
-
-  setStatus(status) {
-      this.setState({status: status});
-  }
-
 
   sendToApi() {
       var report = this.props.location.state.report;
@@ -67,9 +61,16 @@ render() {
                 <ReportHolder report={report} id="reportHolder"/>
 
                 <input className="commentInput" type="text" onKeyUp={this.updateComment} id="newComment" placeholder="ADD COMMENT" />
-
-                {/** TODO Istedenfor dropdown kan vi bruke radiokapper? */}
-                <DropdownMenu id="dropdownMenu" setStatus={this.setStatus}/>
+                <div>
+                  <RadioGroup onChange={(value) => {this.setState({status: value})}} value='' horizontal>
+                    <RadioButton value="ACCEPT" padding={2} iconSize={7} iconInnerSize={7}>
+                      Accept
+                    </RadioButton>
+                    <RadioButton value="DECLINE" padding={2} iconSize={7} iconInnerSize={7}>
+                      Decline
+                    </RadioButton>
+                  </RadioGroup>
+                </div>
 
                 <div className="TemporaryContainer">
                     <Link className="ReportPageButton" to={{pathname: '/dho/reportlist/report', state: {report: report, id: this.props.location.state.id, user: 'DHO'}}}>

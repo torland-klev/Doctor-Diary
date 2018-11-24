@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReportListHolder from '../Report/ReportListHolder.jsx';
 import '../Components.css';
-
 import {RadioGroup, RadioButton} from 'react-radio-buttons';
 
 const STATUS_ID = "zrZADVnTtMa";
