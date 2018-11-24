@@ -5,7 +5,7 @@ import Home from './Views/Home.js';
 
 /* Pages for Health Officer */
 import HealthOfficerHome from './Views/DHO/HealthOfficerHome.js';
-import HealthOfficerViewReport from './Views/DHO/HealthOfficerViewReport.js'
+import ViewReport from './Views/DHO/ViewReport.js'
 import HealthOfficerReportList from './Views/DHO/HealthOfficerReportList.js'
 import ApproveReject from './Views/ApproveReject.js'
 
@@ -20,7 +20,7 @@ function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
   /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
   var user = "BjarneB" // dho
-  //var user = "AkselJ" //doctor
+  // var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authentKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
@@ -78,7 +78,7 @@ class App extends Component {
           <div>
             <Route exact={true} path='/doctor' render={() => (<div className="App"> <DoctorHome /> </div>)} />
             <Route exact={true} path='/doctor/newEntry' render={() => (<div className="App"> <NewEntry /> </div>)} />
-            <Route exact={true} path='/doctor/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
+            <Route exact={true} path='/doctor/report' render={(props) => (<div className="App"> <ViewReport {...props}/></div>)} />
             <Route exact={true} path='/doctor/newEntry/confirmSendReport' render={() => (<div className="App"> <ConfirmSendReport /> </div>)} />
             <Route exact path='/' component={ () => <Redirect to='/doctor' component={DoctorHome} /> } />
           </div>
@@ -90,7 +90,7 @@ class App extends Component {
           <div>
             <Route exact={true} path='/dho' render={() => (<div className="App"> <HealthOfficerHome /></div>)} />
 			      <Route exact={true} path='/dho/reportlist' render={(props) => (<div className="App"> <HealthOfficerReportList {...props}/></div>)} />
-            <Route exact={true} path='/dho/reportlist/report' render={(props) => (<div className="App"> <HealthOfficerViewReport {...props}/></div>)} />
+            <Route exact={true} path='/dho/reportlist/report' render={(props) => (<div className="App"> <ViewReport {...props}/></div>)} />
             <Route exact={true} path='/dho/reportlist/report/comment' render={(props) => (<div className="App"> <ApproveReject {...props}/></div>)} />
             <Route exact path='/' component={ () => <Redirect to='/dho' component={HealthOfficerHome} /> } />
           </div>
