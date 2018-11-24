@@ -13,26 +13,13 @@
     padding-left: 1.5vh;
 }
 
-.BackButton, .NextButton{
+.BackButton{
     width: 20vh;
     background-color: #bad5f4;
     margin: 5px;
     padding: 1.5%;
     border: 1px solid black;
     font-size: calc(10px +2vmin);
-}
-
-.NewButton{
-    text-align: center;
-    width: 40vh;
-    height: 5vh;
-    margin: 1%;
-    padding: 1.5%;
-    padding-top: 1.3vh;
-    padding-bottom: 1.5vh;
-    background-color: #9ab67b;
-    border: 1px solid black;
-    font-size: 30px;
 }
 
 .TemporaryContainer{
@@ -60,18 +47,12 @@
     width: 450px;
     height: 40px;
 }
-.ReportListItemName{
-    margin-left: 5px;
-}
 
-.ReportListItemDate{
-    margin-left: 5px;
-}
-
-.ReportListHolder{
+.ReportListHolder{ /* UNUSED?*/
     width:100%;
     align-items: center;
 }
+
 .ReportListHolderFlex{
     display: flex;
     flex-direction: row;
@@ -82,15 +63,6 @@
     
 }
 
-.ReportActivePages{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 5px;
-    margin: 5px;
-    width: 450px;
-    height: 20px;
-}
 .ReportView{
     display: flex;
     flex-direction: row;
@@ -128,9 +100,6 @@
     text-align: center;
     padding: 3px;
 }
-.CenterTable{
-    align-content: center;
-}
 
 /* Styling for input on ApproveReject */
 .commentInput{
@@ -142,4 +111,9 @@
     height: 30px;
     margin: 10px;
     font-size: 13px;
+}
+
+.tableCenter{
+    align-items: center;
+    align-content: center;
 }

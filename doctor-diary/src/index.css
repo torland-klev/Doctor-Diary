@@ -101,33 +101,5 @@ li{
 
 /* phone screens*/
 @media screen and (min-width:320px) and (max-width:480px){
-   .NewEntry-section{
-     flex-direction: row;
-     flex-wrap: wrap;
-     flex-basis: 0;
-     flex-grow: 1;
-   }
-   .NewEntry-input{
-    border: 1px solid #276696;
-    border-radius: 5px;
-   }
+
  }
-
-/* Views */
-.Home-iconcontainer{
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  align-content: flex-start;
-  text-align: center;
-}
-
-.NewEntry-section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 5px;
-}
-.NewEntry-input{
-  font-size: 18px;
-}
