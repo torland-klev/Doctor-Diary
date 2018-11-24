@@ -136,31 +136,29 @@ export default class HealthOfficerHome extends Component {
         reports = this.state.reports;
       }
     return (
-          <main>
-              <ReportListHolder user={this.props.user} reports={reports} id={this.props.id} total={this.state.reports.length}/>
-              <div className="RadioGroup">
-                <RadioGroup onChange={(value) => this.onRadioChange(value)} value='' horizontal>
-                  <RadioButton value="ALL" padding={2} iconSize={7} iconInnerSize={7}>
-                    All 
-                  </RadioButton>
-                  <RadioButton value="APPROVED" padding={2} iconSize={7} iconInnerSize={7}>
-                    Approved 
-                  </RadioButton>
-                  <RadioButton value="REJECTED" padding={2} iconSize={7} iconInnerSize={7}>
-                    Rejected 
-                  </RadioButton>
-                  <RadioButton value="PENDING" padding={2} iconSize={7} iconInnerSize={7}>
-                    Pending 
-                  </RadioButton>
-                  <RadioButton value="OTHERS" padding={2} iconSize={7} iconInnerSize={7}>
-                    Others 
-                  </RadioButton>
-                  <RadioButton value="NO_STATUS" padding={2} iconSize={7} iconInnerSize={7}>
-                    No Status 
-                  </RadioButton>
-                </RadioGroup>
-              </div>
-          </main>
+      <div className="RadioGroup">
+        <ReportListHolder user={this.props.user} reports={reports} id={this.props.id} total={this.state.reports.length}/>
+        <RadioGroup onChange={(value) => this.onRadioChange(value)} value='' horizontal>
+          <RadioButton value="ALL" padding={2} iconSize={7} iconInnerSize={7}>
+            All
+          </RadioButton>
+          <RadioButton value="APPROVED" padding={2} iconSize={7} iconInnerSize={7}>
+            Approved
+          </RadioButton>
+          <RadioButton value="REJECTED" padding={2} iconSize={7} iconInnerSize={7}>
+            Rejected
+          </RadioButton>
+          <RadioButton value="PENDING" padding={2} iconSize={7} iconInnerSize={7}>
+            Pending
+          </RadioButton>
+          <RadioButton value="OTHERS" padding={2} iconSize={7} iconInnerSize={7}>
+            Others
+          </RadioButton>
+          <RadioButton value="NO_STATUS" padding={2} iconSize={7} iconInnerSize={7}>
+            No Status
+          </RadioButton>
+        </RadioGroup>
+      </div>
     )
   }
 }

@@ -17,9 +17,9 @@ import OrganizationListHolder from '../../Components/Report/OrganizationListHold
  *
  * HealthOfficerReportList -> 1 ReportListHolder -> 1 ReportList -> Many (up to 8) ReportListItems
  *
- * Each ReportListItem can call on HealthOfficerViewReport with their own Event, which will be displayed.
+ * Each ReportListItem can call on ViewReport with their own Event, which will be displayed.
  *
- * HealthOfficerViewReport -> 1 ReportHolder -> Many DataElements
+ * ViewReport -> 1 ReportHolder -> Many DataElements
  *
  * You can at any point in the process take a step back.
  *
