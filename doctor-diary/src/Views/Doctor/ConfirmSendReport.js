@@ -3,7 +3,7 @@ import Header from '../../Components/Header/Header.js';
 import BackButton from '../../Components/Button/BackButton.js';
 
 /** Skal ikke være her i deployment */
-const authKey = 'Basic ' + btoa("AkselS:District1-");
+const authKey = 'Basic ' + btoa("AkselJ:District1-");
 const baseURL = "https://course.dhis2.org/dhis/api";
 
 
