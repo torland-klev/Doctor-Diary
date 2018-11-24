@@ -33,6 +33,9 @@ export default class ViewReport extends Component {
                   <Link to={{pathname: this.state.backbuttonlink, state: {id: this.props.location.state.id}}}>
                     <div className="ReportPageButton">{this.state.backbutton}</div>
                   </Link>
+                  <Link to={{pathname: '/doctor/editEntry', state: {report: report, id: this.props.location.state.id}}}>
+                    <div className="ReportPageButton">Edit</div>
+                  </Link>
               </main>
           </div>
       ) :
