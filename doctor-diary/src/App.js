@@ -15,6 +15,7 @@ import Pending from './Views/Doctor/Pending.js';
 import Declined from './Views/Doctor/Declined.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
+import EditEntry from './Views/Doctor/EditEntry.js';
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
@@ -80,6 +81,7 @@ class App extends Component {
             <Route exact={true} path='/doctor/newEntry' render={() => (<div className="App"> <NewEntry /> </div>)} />
             <Route exact={true} path='/doctor/report' render={(props) => (<div className="App"> <ViewReport {...props}/></div>)} />
             <Route exact={true} path='/doctor/newEntry/confirmSendReport' render={() => (<div className="App"> <ConfirmSendReport /> </div>)} />
+            <Route exact={true} path='/doctor/editEntry' render={(props) => (<div className="App"> <EditEntry {...props}/> </div>)} />
             <Route exact path='/' component={ () => <Redirect to='/doctor' component={DoctorHome} /> } />
           </div>
         </Router>

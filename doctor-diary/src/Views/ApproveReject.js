@@ -36,13 +36,14 @@ export default class ApproveReject extends Component {
             var d = new Date();
             var date = String(d.getDate()) + "." + String(d.getMonth()) + "."+ String(d.getFullYear());
             this.setState({newComment: this.state.oldComment + " *** Comment added by disctrict health officer on " + date + ":  " + this.state.newComment});
-            el.value = this.state.newComment
+            el.value = this.state.newComment;
           }
           //Setting status (accepted/rejected):
           if (el.dataElement === "zrZADVnTtMa") {
-            el.value = this.state.status
+            el.value = this.state.status;
           }
           //Sending the updated report back to api:
+
       })
       console.log(report)
   }
