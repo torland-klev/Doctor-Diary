@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
 import BackButton from '../Components/Button/BackButton.js';
 
-const authKey = 'Basic ' + btoa("CasperL" + ':' + "District1-");
+const authKey = 'Basic ' + btoa("AkselS" + ':' + "District1-");
 const baseURL = "https://course.dhis2.org/dhis/api";
 
 export default class ConfirmSendReport extends Component {
@@ -69,34 +69,47 @@ export default class ConfirmSendReport extends Component {
 
         var self = this;
 
-        this.findProgramStage(programID).then(function (pStage){
+        var isOnline = window.navigator.onLine;
+        
+        if(isOnline){
 
-            console.log("programStage: " + pStage);
-            programStageID = pStage;
+            this.findProgramStage(programID).then(function (pStage){
 
-            self.findTeiOrgUnit().then(function (orgUnit){
-
-                console.log("orgUnitID: " + orgUnit);
-                orgUnitID = orgUnit;
-
-                self.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
-
-                    console.log("teiID: " + tei);
-                    teiID = tei;
-
-                    const newEvent = {
-                        program: programID,
-                        trackedEntityInstance: teiID,
-                        programStage: programStageID,
-                        orgUnit: orgUnitID,
-                        dataValues: values
-                    };
-
-                    self.sendDataToApi(newEvent);
-
+                console.log("programStage: " + pStage);
+                programStageID = pStage;
+    
+                self.findTeiOrgUnit().then(function (orgUnit){
+    
+                    console.log("orgUnitID: " + orgUnit);
+                    orgUnitID = orgUnit;
+    
+                    self.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
+    
+                        console.log("teiID: " + tei);
+                        teiID = tei;
+    
+                        const newEvent = {
+                            program: programID,
+                            trackedEntityInstance: teiID,
+                            programStage: programStageID,
+                            orgUnit: orgUnitID,
+                            dataValues: values
+                        };
+    
+                        self.sendDataToApi(newEvent);
+                        
+                    })
                 })
-            })
-        })   
+            })  
+
+        }else{
+
+            localStorage.setItem("TOSEND_" + this.state.fullDate, JSON.stringify(values));  
+            //NO INTERNET
+            console.log("LAGRET UTEN INTERNET!!!");
+        }
+
+         
     }
 
     findTeiOrgUnit(){
