@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown, { DropdownTrigger, DropdownContent} from 'react-simple-dropdown';
+import Dropdown, { DropdownTrigger, DropdownContent} from 'react-simple-dropdown'; // npm install react-simple-dropdown
 
 class DropdownMenu extends React.Component {
 
@@ -23,10 +23,10 @@ render() {
             <DropdownContent>
                 <ul>
                     <li>
-                        <a onClick={this.sendStatus.bind(this, "Approved")}>Approve</a>
+                        <button onClick={this.sendStatus.bind(this, "Approved")}>Approve</button> {/** Her må en href legges inn, / for nå */}
                     </li>
                     <li>
-                        <a onClick={this.sendStatus.bind(this, "Rejected")}>Reject</a>
+                        <button href='/'onClick={this.sendStatus.bind(this, "Rejected")}>Reject</button> {/** Her må en href legges inn, / for nå */}
                     </li>
                 </ul>
             </DropdownContent>

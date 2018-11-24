@@ -1,0 +1,145 @@
+.HeaderImg{
+    width: 5vh;
+    height: 5vh;
+    padding-left: 1vh;
+
+}
+
+.Title{
+    font-family: "Helvetica-CondensedBold", sans-serif;
+    font-weight: bold;
+    font-size: calc(0.9em +2vmin);
+    color: white;
+    padding-left: 1.5vh;
+}
+
+.BackButton, .NextButton{
+    width: 20vh;
+    background-color: #bad5f4;
+    margin: 5px;
+    padding: 1.5%;
+    border: 1px solid black;
+    font-size: calc(10px +2vmin);
+}
+
+.NewButton{
+    text-align: center;
+    width: 40vh;
+    height: 5vh;
+    margin: 1%;
+    padding: 1.5%;
+    padding-top: 1.3vh;
+    padding-bottom: 1.5vh;
+    background-color: #9ab67b;
+    border: 1px solid black;
+    font-size: 30px;
+}
+
+.TemporaryContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+}
+
+/* Styling for new entry*/
+.NewButtonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px;
+    width: 200px;
+}
+
+/* Styling for list of reports */
+.ReportListItem{
+    align-items: center;
+    border: solid 1px #373737;
+    margin: 5px;
+    padding: 5px;
+    width: 450px;
+    height: 40px;
+}
+.ReportListItemName{
+    margin-left: 5px;
+}
+
+.ReportListItemDate{
+    margin-left: 5px;
+}
+
+.ReportListHolder{
+    width:100%;
+    align-items: center;
+}
+.ReportListHolderFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    
+}
+
+.ReportActivePages{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 5px;
+    width: 450px;
+    height: 20px;
+}
+.ReportView{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    width: 200px;
+}
+
+.ReportPageButtonArrow{
+  font-size: 10px;
+  background-color: #bad5f4;
+  border: 1px solid #373737;
+  text-align: center;
+}
+
+.ReportPageButton{
+    font-size: 15px;
+    padding: 5px;
+    background-color: #bad5f4;
+    border: 1px solid #373737;
+  }
+/* Styling for list of units (OrganizationListItem) */
+.OrganizationListItem{
+    font-size: calc(20px +2vmin);
+    border-style: solid;
+    border-color: #373737;
+    border-width: 1px;
+    margin: 5px;
+    height: 20px;
+    width: 30vh;
+    padding: 5px;
+}
+
+.CenterText{
+    text-align: center;
+    padding: 3px;
+}
+.CenterTable{
+    align-content: center;
+}
+
+/* Styling for input on ApproveReject */
+.commentInput{
+    border: 1px solid #373737;
+    background: #D0E4F5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 50%;
+    height: 30px;
+    margin: 10px;
+    font-size: 13px;
+}
