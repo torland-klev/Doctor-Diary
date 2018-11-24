@@ -24,8 +24,6 @@ export default class NewEntry extends Component {
             nextButton: "Next",
             nextButtonLink: '/doctor/newEntry/confirmSendReport',
             active: '#43CBCB',
-            dataElements: [{name: "Element one", valueType: "kristne verdier", id: "101"}, {name: "Element two", valueType: "okonomiske verdier", id: "007"}],
-            //dataElements: [],
             dataToBeStored: [],
             fullDate: "",
             rows: [],
@@ -45,29 +43,24 @@ export default class NewEntry extends Component {
 
 
   saveToLocalStorage() {
-      localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+    localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));   
   }
 
 
-    updateData(id, dataFromChild) {
-        console.log("dataToBeStored.length: " + this.state.dataToBeStored.length)
-        if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
-            /*for (var i=0; i<this.state.dataToBeStored.length; i++) {
-                if (this.state.dataToBeStored[i].id === id) {
-                    console.log(this.state.dataToBeStored[i])
-                    this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
-                    break;
-                }
-            }*/
-            this.state.dataToBeStored.forEach((element) => {
-                if(element.id === id) {
-                    console.log(element + "Heiiiii");
-                    element.setState({dataContent: this.state.tmpDataFromChild});
-                }
-            });
+  updateData(id, dataFromChild) {
+        
+    if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == id) {
+                console.log(this.state.dataToBeStored[i])
+                this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
+                break;
+            }
         }
-        this.setState({tmpDataFromChild: null}, {tmpID: null});
     }
+    this.state.tmpDataFromChild = null
+    this.state.tmpId = null
+}
 
 
 
@@ -78,7 +71,6 @@ export default class NewEntry extends Component {
 
     loadFromLocalStorage() {
         this.setState({dataToBeStore: []})
-        console.log("this.state.dataToBeStored.length : " + this.state.dataToBeStored.length)
         var l = localStorage.getItem(this.state.fullDate)
         var lista = JSON.parse(l)
         if (lista != null) {
@@ -88,7 +80,6 @@ export default class NewEntry extends Component {
               var dataContent = el.dataContent
               var nextElement = {id: id, name: name, dataContent: dataContent}
               this.state.dataToBeStored.push(nextElement);
-              console.log("Added element to dataToBeStored")
           })
           localStorage.removeItem(this.state.fullDate)
         }
@@ -109,18 +100,12 @@ export default class NewEntry extends Component {
 
     addToList(element) {
         var isNew = true;
-        /*for (var i=0; i<this.state.dataToBeStored.length; i++) {
-            if (this.state.dataToBeStored[i].id === element.id) {
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == element.id) {
                 this.state.dataToBeStored[i].dataContent = element.dataContent
                 isNew = false
             }
-        }*/
-        this.state.dataToBeStored.forEach((e) => {
-            if(e.id === element.id) {
-                e.setState({dataContent: element.dataContent});
-                isNew= false;
-            }
-        });
+        }
         if (isNew) {
             this.state.dataToBeStored.push(element)
         }
@@ -130,8 +115,7 @@ export default class NewEntry extends Component {
     fetchDataElements(_callback){
 
         var ref_findDataElementContent = this.findDataElementContent;      
-        var self = this;
-
+        
         this.findDataElementIDs().then(function (result){
 
             var dataElementIDs = result;
@@ -139,15 +123,11 @@ export default class NewEntry extends Component {
       
             for(var i = 0; i < dataElementIDs.length; i++){
               dataElementContent.push(ref_findDataElementContent(dataElementIDs[i]));
-              //console.log(dataElementIDs[i]);
             }
       
             Promise.all(dataElementContent).then(function (dataObjects){
               
-                self.setState({dataElements: dataObjects})
-
-                //console.log("STATE ARRAY: ", self.state.dataElements);
-                _callback();
+                _callback(dataObjects);
             })
           })
           
@@ -219,58 +199,48 @@ export default class NewEntry extends Component {
 
 
     componentWillMount() {
-
-        /*
         var self = this;
-        this.fetchDataElements(function(){
-            console.log(self.state.dataElements);
+        
+        this.fetchDataElements(function(objList){
+            
             var d = new Date();
             var year = String(d.getFullYear());
             var month = String(d.getMonth());
             var day = String(d.getDate());
             self.state.fullDate = day + "." + month + "."+ year;
-            self.loadFromLocalStorage()
-            var elements = self.state.dataElements;
+            self.loadFromLocalStorage();
+
+            var elements = objList;
+            
             elements.forEach((el) => {
-            //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
-            var nextId = el.id
-            var nextName = el.name
-            var nextDataContent = self.getDataContent(nextId)
-            console.log("nextDataContent " + nextDataContent)
-            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
-            var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
-            var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
-            self.state.rows.push(htmlDataElementContainer)
-            var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
-            self.addToList(newToBeStored)
+                
+                var nextId = el.id
+                var nextName = el.name
+                var nextValueType = el.valueType
+                var nextDataContent = self.getDataContent(nextId)
+
+                //Approved/Rejected Current Status is not shown to doctor
+                if(nextName === "Approved/Rejected Current Status"){
+                    nextDataContent = "Pending";
+                }else{
+                    var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, valueType: nextValueType, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
+                    var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
+                    self.state.rows.push(htmlDataElementContainer)
+                }
+
+                var newToBeStored = {id: nextId, name: nextName, dataContent: nextDataContent, valueType: nextValueType};
+                self.addToList(newToBeStored)
             })
-        });
-    
-        */
-        var d = new Date();
-        var year = String(d.getFullYear());
-        var month = String(d.getMonth());
-        var day = String(d.getDate());
-        this.setState({fullDate: day + "." + month + "."+ year});
-        this.loadFromLocalStorage()
-        var elements = this.state.dataElements;
-        elements.forEach((el) => {
-            //this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
-            var nextId = el.id
-            var nextName = el.name
-            var nextDataContent = this.getDataContent(nextId)
-            console.log("nextDataContent " + nextDataContent)
-            //var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent:""}, React.createElement(DataElementForm))
-            var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, dataContent: nextDataContent, callbackFromParent: this.myCallback}, null)
-            var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
-            this.state.rows.push(htmlDataElementContainer)
-            var newToBeStored = {id: nextId, name: nextName, dataContent: ""};
-            this.addToList(newToBeStored)
+
+            self.setState({ state: self.state }); //Force re-render
+            
         })
+        
     }
 
 
     render () {
+        this.updateData(this.state.tmpId, this.state.tmpDataFromChild);
         return(
             <div>
                 <Header title={this.state.title} />
@@ -279,6 +249,9 @@ export default class NewEntry extends Component {
                         <tbody>
                             {this.state.rows}
                         </tbody>
+                        <div id="errorMessage" type="text"></div>
+                        <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
+                        <a href='/doctor' className='Home-button'>Back</a>
                     </table>
                     <div className="NewButtonContainer">
                         <a href='/doctor'><div className='ReportPageButton'>Back</div></a>
@@ -289,7 +262,4 @@ export default class NewEntry extends Component {
             </div>
         );
     }
-
-
-
 }
