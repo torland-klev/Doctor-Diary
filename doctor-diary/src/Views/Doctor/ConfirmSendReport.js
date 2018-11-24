@@ -19,6 +19,7 @@ export default class ConfirmSendReport extends Component {
             report: {},
             rows: [],
             fullDate: "",
+            status: ""
         };
         this.componentWillMount = this.componentWillMount.bind(this)
         this.sendData = this.sendData.bind(this)
@@ -99,7 +100,7 @@ export default class ConfirmSendReport extends Component {
                         };
 
                         self.sendDataToApi(newEvent);
-
+                        self.setState({status: "Report sent successfully"});
                     })
                 })
             })
@@ -107,6 +108,7 @@ export default class ConfirmSendReport extends Component {
         }else{
 
             localStorage.setItem("TOSEND_" + this.state.fullDate, JSON.stringify(values));
+            this.setState({status: "No internett. Will send once reconnected."});
             //NO INTERNET
             console.log("LAGRET UTEN INTERNET!!!");
         }
@@ -199,7 +201,16 @@ export default class ConfirmSendReport extends Component {
 
 
     render () {
-        return (
+        return (this.state.status) ? (
+          <div>
+            <Header title={this.state.title} />
+            <main>
+              {this.state.status}
+              <a href='/' className='ReportPageButton'>Home</a>
+            </main>
+          </div>
+        )
+        : (
             <div>
                 <Header title={this.state.title} />
                 <main>
@@ -212,7 +223,7 @@ export default class ConfirmSendReport extends Component {
                     </tbody>
                  </table>
 
-                 <button onClick={this.sendData}>test send</button>
+                 <button onClick={() => this.sendData()}>test send</button>
                  <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
                  <div className="NewButtonContainer">
