@@ -71,14 +71,14 @@ export default class HealthOfficerHome extends Component {
           el.dataValues.forEach( (dv) => {
             if (dv.dataElement === STATUS_ID){
               hasStatus = true;
-              switch(dv.value){
-                case "approved":
+              switch(dv.value.toUpperCase()){
+                case "APPROVED":
                   approved.push(el);
                   break;
-                case "rejected":
+                case "REJECTED":
                   rejected.push(el);
                   break;
-                case "pending":
+                case "PENDING":
                   pending.push(el);
                   break;
                 default:
@@ -140,22 +140,22 @@ export default class HealthOfficerHome extends Component {
             <div className="RadioGroup">
               <RadioGroup onChange={(value) => this.onRadioChange(value)} value='' horizontal>
                 <RadioButton value="ALL" padding={2} iconSize={7} iconInnerSize={7}>
-                  All 
+                  All
                 </RadioButton>
                 <RadioButton value="APPROVED" padding={2} iconSize={7} iconInnerSize={7}>
-                  Approved 
+                  Approved
                 </RadioButton>
                 <RadioButton value="REJECTED" padding={2} iconSize={7} iconInnerSize={7}>
-                  Rejected 
+                  Rejected
                 </RadioButton>
                 <RadioButton value="PENDING" padding={2} iconSize={7} iconInnerSize={7}>
-                  Pending 
+                  Pending
                 </RadioButton>
                 <RadioButton value="OTHERS" padding={2} iconSize={7} iconInnerSize={7}>
-                  Others 
+                  Others
                 </RadioButton>
                 <RadioButton value="NO_STATUS" padding={2} iconSize={7} iconInnerSize={7}>
-                  No Status 
+                  No Status
                 </RadioButton>
               </RadioGroup>
             </div>
