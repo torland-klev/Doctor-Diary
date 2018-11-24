@@ -61,9 +61,11 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 /* Table styling */
 table{
   border: 1px solid #373737;
-  width: 50%;
+  width: auto;
+  margin: 10px;
   text-align: left;
   border-collapse: collapse;
+  align-items: center;
 }
 table, td, th {
   padding: 3px 2px;
@@ -81,7 +83,7 @@ table th {
   border-bottom: 1px solid #373737;
 }
 table.reportList{
-  width:100%;
+  width:auto;
 }
 
 

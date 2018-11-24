@@ -26,9 +26,9 @@ export default class HealthOfficerViewReport extends Component {
     render() {
       const {report} = this.props.location.state;
       return (this.props.location.state.user === "DOCTOR") ? (
-          <div className="Home">
+          <div>
               <Header title={this.state.title} />
-              <main className="Home-main">
+              <main>
                   <ReportHolder report={report}/>
                   <Link to={{pathname: this.state.backbuttonlink, state: {id: this.props.location.state.id}}}>
                     <div className="ReportPageButton">{this.state.backbutton}</div>

@@ -109,7 +109,7 @@ export default class ReportList extends Component{
 	render() {
 		if (this.props.reports.length){
 			return ((this.state.rows.length === this.props.max) || !(this.state.total)) ? (
-	      <table class="reportList"> {/** TODO fix the styling of this table -it borked */}
+	      <table> {/** TODO fix the styling of this table -it borked */}
 			  <tbody>
 				  <tr>
 					  <th> Doctor: </th>

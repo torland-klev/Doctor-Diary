@@ -48,7 +48,7 @@ export default class ReportListHolder extends Component{
     const reports = this.getReports(REPORTS_PER_PAGE*activePage-8,REPORTS_PER_PAGE*activePage);
     const max = (Math.ceil(this.props.reports.length/REPORTS_PER_PAGE));
 		return (
-      <div className="ReportListHolder">
+      <div>
         <ReportList user={this.props.user} reports={reports} id={this.props.id} total={this.props.reports.length - ((REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total)*(activePage-1)} max={(REPORTS_PER_PAGE < this.props.total) ? REPORTS_PER_PAGE : this.props.total}/>
         <div className="ReportListHolderFlex">
           <button className="ReportPageButtonArrow" onClick={() => {this.newPage(activePage - 1)}}>{this.state.backArrow}</button>

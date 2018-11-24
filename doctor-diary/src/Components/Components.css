@@ -78,7 +78,8 @@
     justify-content: space-between;
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 100%
+    width: 100%;
+    
 }
 
 .ReportActivePages{
@@ -126,6 +127,9 @@
 .CenterText{
     text-align: center;
     padding: 3px;
+}
+.CenterTable{
+    align-content: center;
 }
 
 /* Styling for input on ApproveReject */
