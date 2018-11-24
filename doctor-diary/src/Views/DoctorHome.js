@@ -28,11 +28,11 @@ export default class DoctorHome extends Component {
         console.log("WillMount");
         var itemKeys = Object.keys(localStorage);
         console.log(itemKeys);
-
+        /*
         for(var i = 0; i < itemKeys.length; i++){
             
             var isOnline = window.navigator.onLine;
-            
+
             if(itemKeys[i].startsWith("TOSEND") && isOnline){
                 
 
@@ -43,7 +43,7 @@ export default class DoctorHome extends Component {
 
                 var self = this;
                 
-                //Sjekk senere etter API flytting.
+                //Sjekk senere etter API flytting. confirmSend funksjonene skal ligge i /API!
                 ConfirmSendReport.findProgramStage(programID).then(function (pStage){
 
                     console.log("programStage: " + pStage);
@@ -75,7 +75,7 @@ export default class DoctorHome extends Component {
                 localStorage.removeItem(itemKeys[i]);
             
             }
-        }
+        } */
     }
 
     
