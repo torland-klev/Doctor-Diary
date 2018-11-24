@@ -39,9 +39,9 @@ export default class ConfirmSendReport extends Component {
     render () {
         return (
 
-            <div className="Home">
+            <div>
                 <Header title={this.state.title} />
-                <main className="Home-main">
+                <main>
 
                 <h1>Report for date {this.state.fullDate}</h1>
 

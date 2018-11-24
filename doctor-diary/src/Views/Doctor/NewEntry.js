@@ -272,9 +272,9 @@ export default class NewEntry extends Component {
 
     render () {
         return(
-            <div className="Home">
+            <div>
                 <Header title={this.state.title} />
-                <main className="Home-main">
+                <main>
                     <table>
                         <tbody>
                             {this.state.rows}

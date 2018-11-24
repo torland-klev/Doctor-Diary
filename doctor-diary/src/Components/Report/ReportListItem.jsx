@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
+import '../Components.css'
+import '../../index.css'
 
 export default class ReportList extends Component{
 	constructor(props){

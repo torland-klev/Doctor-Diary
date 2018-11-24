@@ -9,7 +9,7 @@ export default class ConfirmFeedback extends Component {
         return (
               <div className="Home">
               <Header title={this.state.title} />
-              <main className="Home-main">
+              <main>
 
               <h1>Hei</h1>
 

@@ -18,11 +18,10 @@ export default class HealthOfficerReportList extends Component {
 }
   render(){
     return (
-      <div className="Home">
+      <div>
           <Header title={this.state.title}/>
-          <h1> Reports for </h1>
-          <main className="Home-main">
-              {this.props.location.state.name}
+          <main>
+            <h1> Reports for {this.props.location.state.name} </h1>
               <MainReportList id={this.props.location.state.id} user="DHO" />
               <Link to={{pathname: '/dho'}}>
                       <div className="ReportPageButton">{this.state.backbutton}</div>

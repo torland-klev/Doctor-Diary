@@ -15,9 +15,9 @@ class Declined extends Component {
     }
     render() {
         return (
-            <div className="Home">
+            <div>
                 <Header title={this.state.title} />
-                <main className="Home-main">
+                <main>
                     <BackButton title={this.state.backbutton} link={this.state.backLink} />
                 </main>
                 <NavBar notificationFill={this.state.active}/>
