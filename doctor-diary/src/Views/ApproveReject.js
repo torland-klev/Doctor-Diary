@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
 import ReportHolder from '../Components/Report/ReportHolder.jsx';
-import DropdownMenu from '../Components/DropdownMenu.js';
 import {RadioGroup, RadioButton} from 'react-radio-buttons';
 import {Link} from 'react-router-dom';
 
