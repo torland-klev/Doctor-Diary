@@ -37,15 +37,15 @@ export default class ConfirmSendReport extends Component {
         parsedReport.forEach((el) => {
 
             if(!(el.name === "Approved/Rejected Current Status")){
-                
+
                 this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
                 this.state.rows.push(<tr><p type="text" id={el.dataContent}>{el.dataContent}</p></tr>);
             }
-              
+
         })
 
         this.setState({report: parsedReport})
-        
+
     }
 
     sendData(){
@@ -72,24 +72,24 @@ export default class ConfirmSendReport extends Component {
         var self = this;
 
         var isOnline = window.navigator.onLine;
-        
+
         if(isOnline){
 
             this.findProgramStage(programID).then(function (pStage){
 
                 console.log("programStage: " + pStage);
                 programStageID = pStage;
-    
+
                 self.findTeiOrgUnit().then(function (orgUnit){
-    
+
                     console.log("orgUnitID: " + orgUnit);
                     orgUnitID = orgUnit;
-    
+
                     self.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
-    
+
                         console.log("teiID: " + tei);
                         teiID = tei;
-    
+
                         const newEvent = {
                             program: programID,
                             trackedEntityInstance: teiID,
@@ -97,19 +97,19 @@ export default class ConfirmSendReport extends Component {
                             orgUnit: orgUnitID,
                             dataValues: values
                         };
-    
+
                         self.sendDataToApi(newEvent);
-                        
+
                     })
                 })
-            })  
+            })
 
         }else{
 
-            localStorage.setItem("TOSEND_" + this.state.fullDate, JSON.stringify(values));  
+            localStorage.setItem("TOSEND_" + this.state.fullDate, JSON.stringify(values));
             //NO INTERNET
             console.log("LAGRET UTEN INTERNET!!!");
-        } 
+        }
     }
 
     findTeiOrgUnit(){
@@ -124,9 +124,9 @@ export default class ConfirmSendReport extends Component {
           }).then(function (response){
             return response.json();
           }).then(function (data){
-              
+
             TeiOrgUnitID = data.teiSearchOrganisationUnits[0].id;
-              
+
             return TeiOrgUnitID;
           })
 
@@ -147,7 +147,7 @@ export default class ConfirmSendReport extends Component {
           }).then(function (response){
             return response.json();
           }).then(function (data){
-            
+
             //console.log(data);
             trackedEntityID = data.trackedEntityInstances[0].trackedEntityInstance;
             //console.log(data.trackedEntityInstances[0]);
@@ -159,7 +159,7 @@ export default class ConfirmSendReport extends Component {
 
         var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
         var programStageID = "";
-    
+
         return fetch(baseURL + "/programs/" + programID, {
           method: 'GET',
           headers: {
@@ -168,15 +168,15 @@ export default class ConfirmSendReport extends Component {
         }).then(function (response){
           return response.json();
         }).then(function (data){
-            
+
             programStageID = data.programStages[0].id;
-            
+
             return programStageID;
         })
     }
 
     sendDataToApi(eventElement){
-        
+
         fetch("https://course.dhis2.org/dhis/api/events", {
           method: 'POST',
           //credentials: 'include', //skal være med på deploy
@@ -188,11 +188,11 @@ export default class ConfirmSendReport extends Component {
           },
           body: JSON.stringify(eventElement)
         }).then(function(response) {
-          
+
           //console.log(response);
           return response.json();
         }).then(function(data) {
-          
+
           console.log(data);
         })
     }
@@ -211,7 +211,7 @@ export default class ConfirmSendReport extends Component {
                         {this.state.rows}
                     </tbody>
                  </table>
-                
+
                  <button onClick={this.sendData}>test send</button>
                  <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 

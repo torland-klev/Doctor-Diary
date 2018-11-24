@@ -1,3 +1,5 @@
+//REMOVE?
+
 import React from 'react';
 import Dropdown, { DropdownTrigger, DropdownContent} from 'react-simple-dropdown'; // npm install react-simple-dropdown
 
