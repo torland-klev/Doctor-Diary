@@ -11,13 +11,8 @@ export default class DoctorHome extends Component {
         super();
         this.state = {
             title: "DOCTOR",
-            pendingButton: "Pending",
-            pendingLink: "doctor/pending",
-            declinedButton: "Declined",
-            declinedLink: "doctor/declined",
             newButton: "New entry",
             newLink: "doctor/newEntry",
-            homeLink: '/doctor',
             active: '#43CBCB'
 
         }

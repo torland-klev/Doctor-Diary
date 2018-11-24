@@ -28,7 +28,7 @@ export default class ReportHolder extends Component{
 				});
 			})
 		})
-	}
+	} 
 
 	fetchElementName(id){
 		//Fetch the attributes
@@ -69,6 +69,7 @@ export default class ReportHolder extends Component{
 
     /** TODO: Style the table */
 		return (
+			<div>
       <table>
         <tbody>
           <tr>
@@ -78,6 +79,7 @@ export default class ReportHolder extends Component{
           {this.state.rows}
         </tbody>
       </table>
+			</div>
 		);
 	}
 

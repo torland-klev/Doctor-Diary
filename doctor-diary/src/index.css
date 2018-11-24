@@ -37,7 +37,6 @@ main{
   flex-direction: column;
   align-items: center;
 }
-
 /* Link styling */
 a{
   color: black;
@@ -61,8 +60,9 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 /* Table styling */
 table{
   border: 1px solid #373737;
-  width: auto;
+  width: 100%;
   margin: 5px;
+  padding: 5px;
   text-align: left;
   border-collapse: collapse;
   align-items: center;
