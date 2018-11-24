@@ -21,6 +21,7 @@ export default class HealthOfficerReportList extends Component {
       <div className="Home">
           <Header title={this.state.title}/>
           <main className="Home-main">
+              {this.props.location.state.name}
               <MainReportList id={this.props.location.state.id} user="DHO" />
               <Link to={{pathname: '/dho'}}>
                       <div className="ReportPageButton">{this.state.backbutton}</div>

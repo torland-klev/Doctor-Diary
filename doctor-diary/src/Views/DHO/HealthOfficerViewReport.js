@@ -45,7 +45,7 @@ export default class HealthOfficerViewReport extends Component {
                 <Link to={{pathname: this.state.backbuttonlink, state: {id: this.props.location.state.id}}}>
                   <div className="ReportPageButton">{this.state.backbutton}</div>
                 </Link>
-                <Link to={{pathname: '/dho/reportlist/report/comment', state: {report: report}}}>
+                <Link to={{pathname: '/dho/reportlist/report/comment', state: {report: report, id: this.props.location.state.id}}}>
                   <div className="ReportPageButton">Comment</div>
                 </Link>
               </div>
