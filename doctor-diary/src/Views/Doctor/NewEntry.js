@@ -28,7 +28,7 @@ export default class NewEntry extends Component {
             fullDate: "",
             rows: [],
             tmpId: null,
-            tmpDataFromChild: null,
+            tmpDataFromChild: null
       };
       this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
       this.updateData = this.updateData.bind(this)
@@ -43,12 +43,12 @@ export default class NewEntry extends Component {
 
 
   saveToLocalStorage() {
-    localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));   
+    localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
   }
 
 
   updateData(id, dataFromChild) {
-        
+
     if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
         /*for (var i=0; i<this.state.dataToBeStored.length; i++) {
             if (this.state.dataToBeStored[i].id === id) {
@@ -127,23 +127,23 @@ export default class NewEntry extends Component {
 
     fetchDataElements(_callback){
 
-        var ref_findDataElementContent = this.findDataElementContent;      
-        
+        var ref_findDataElementContent = this.findDataElementContent;
+
         this.findDataElementIDs().then(function (result){
 
             var dataElementIDs = result;
             var dataElementContent = [];
-      
+
             for(var i = 0; i < dataElementIDs.length; i++){
               dataElementContent.push(ref_findDataElementContent(dataElementIDs[i]));
             }
-      
+
             Promise.all(dataElementContent).then(function (dataObjects){
-              
+
                 _callback(dataObjects);
             })
           })
-          
+
     }
 
 
@@ -152,7 +152,7 @@ export default class NewEntry extends Component {
         var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
         var programStageID = "";
         var dataElementIDs = [];
-    
+
         return fetch(baseURL + "/programs/" + programID, {
           method: 'GET',
           headers: {
@@ -161,32 +161,32 @@ export default class NewEntry extends Component {
         }).then(function (response){
           return response.json();
         }).then(function (data){
-            
+
             programStageID = data.programStages[0].id;
-            
+
             return fetch(baseURL + "/programStages/" + programStageID,{
               method: 'GET',
               headers: {
               'Authorization': authKey
               }
             }).then(function (response){
-    
+
                 return response.json();
-    
+
             }).then(function (data){
-                
+
                 data.programStageDataElements.forEach((element) => {
-    
+
                   dataElementIDs.push(element.dataElement.id);
                 })
-    
+
                 return dataElementIDs;
             })
-          
+
         })
       }
-    
-    
+
+
     findDataElementContent(id){
     return fetch(baseURL + "/dataElements/" + id, {
         method: 'GET',
@@ -213,9 +213,9 @@ export default class NewEntry extends Component {
 
     componentWillMount() {
         var self = this;
-        
+
         this.fetchDataElements(function(objList){
-            
+
             var d = new Date();
             var year = String(d.getFullYear());
             var month = String(d.getMonth());
@@ -224,9 +224,9 @@ export default class NewEntry extends Component {
             self.loadFromLocalStorage();
 
             var elements = objList;
-            
+
             elements.forEach((el) => {
-                
+
                 var nextId = el.id
                 var nextName = el.name
                 var nextValueType = el.valueType
@@ -246,9 +246,9 @@ export default class NewEntry extends Component {
             })
 
             self.setState({ state: self.state }); //Force re-render
-            
+
         })
-        
+
     }
 
 

@@ -109,17 +109,27 @@ export default class ReportList extends Component{
 	render() {
 		if (this.props.reports.length){
 			return ((this.state.rows.length === this.props.max) || !(this.state.total)) ? (
-				<table> {/** TODO fix the styling of this table -it borked */}
+				<table>{/** TODO fix the styling of this table -it borked */}
 					<tbody>
 						<tr>
-							<th> Doctor: </th>
-							<th> Date : </th>
+							<th>Doctor:</th>
+							<th>Date:</th>
 						</tr>
 						{this.state.rows}
 					</tbody>
 				</table>
 			) : (
-				<div className="CenterText">Loading... {this.state.rows}</div>
+				<div className="CenterText">Loading...
+					<table>{/** TODO fix the styling of this table -it borked */}
+						<tbody>
+							<tr>
+								<th>Doctor:</th>
+								<th>Date:</th>
+							</tr>
+							{this.state.rows}
+						</tbody>
+					</table>
+				</div>
 			)
 		}
 		else {

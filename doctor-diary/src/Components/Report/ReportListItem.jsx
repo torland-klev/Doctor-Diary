@@ -20,10 +20,10 @@ export default class ReportList extends Component{
 		}
 	}
 	render() {
-		return ( 
+		return (
         <tr>
-          <td> <Link to={{pathname: this.state.pathname, state: {report: this.props.report, id: this.props.id, user: this.props.user}}}>{this.props.creator}</Link></td> {/* only use creator? */}
-          <td> <Link to={{pathname: this.state.pathname, state: {report: this.props.report, id: this.props.id, user: this.props.user}}}> {this.props.date} </Link></td> {/** only use date? */}
+          <td><Link to={{pathname: this.state.pathname, state: {report: this.props.report, id: this.props.id, user: this.props.user}}}>{this.props.creator}</Link></td>{/* only use creator? */}
+          <td><Link to={{pathname: this.state.pathname, state: {report: this.props.report, id: this.props.id, user: this.props.user}}}> {this.props.date} </Link></td>{/** only use date? */}
         </tr>
 		);
 	}
