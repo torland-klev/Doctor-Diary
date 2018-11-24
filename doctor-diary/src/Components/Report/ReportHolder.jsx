@@ -72,8 +72,8 @@ export default class ReportHolder extends Component{
       <table>
         <tbody>
           <tr>
-            <th>Question</th> {/** Data element */}
-            <th>Answer</th> {/** Value */}
+            <th>Question</th>{/** Data element */}
+            <th>Answer</th>{/** Value */}
           </tr>
           {this.state.rows}
         </tbody>
