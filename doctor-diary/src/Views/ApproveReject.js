@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header/Header.js';
-import ReportHolder from '../Components/Report/ReportHolder.jsx'
-import DropdownMenu from '../Components/DropdownMenu.js'
+import ReportHolder from '../Components/Report/ReportHolder.jsx';
+import DropdownMenu from '../Components/DropdownMenu.js';
+import {Link} from 'react-router-dom';
 
 export default class ApproveReject extends Component {
 
@@ -71,7 +72,9 @@ render() {
                 <DropdownMenu id="dropdownMenu" setStatus={this.setStatus}/>
 
                 <div className="TemporaryContainer">
-                    {/** <a href='/dho/reportlist/report'><button className="ReportPageButton">Back</button></a>*/} {/** TODO: Back knapp funker ikke, sikkert pga indeksering */}
+                    <Link className="ReportPageButton" to={{pathname: '/dho/reportlist/report', state: {report: report, id: this.props.location.state.id, user: 'DHO'}}}>
+                      Back
+                    </Link>
                     <a href='/confirmFeedback' onClick={this.sendToAPi}> <button className="ReportPageButton">Submit</button></a>
                 </div>
             </main>
