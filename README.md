@@ -1,7 +1,17 @@
 ### Note: egwene & linneak is the same user
 
 # Functionality of the app
-* Add this Sunday 25.11.2018
+### DOCTOR
+* View his/her reports
+* Filter reports on all, accepted, pending, rejected
+* Create a new report
+* Send new report
+### DHO
+* View units he/she is responsible for
+* View reports from selected unit
+* Filter reports on all, accepted, pending, rejected
+* Comment on a specific report
+* Reject or Accept a report
 
 # How the functionality is implemented
 * Add this Sunday 25.11.2018
