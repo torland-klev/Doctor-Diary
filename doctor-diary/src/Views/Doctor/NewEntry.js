@@ -106,16 +106,12 @@ export default class NewEntry extends Component {
 
     addToList(element) {
         var isNew = true;
-<<<<<<< HEAD
-        /*for (var i=0; i<this.state.dataToBeStored.length; i++) {
-=======
         for (var i=0; i<this.state.dataToBeStored.length; i++) {
->>>>>>> f69af20234f5bb0ea043d1b1ec741583e7a03f6c
             if (this.state.dataToBeStored[i].id === element.id) {
                 this.state.dataToBeStored[i].dataContent = element.dataContent
                 isNew = false
             }
-        }*/
+        }
         this.state.dataToBeStored.forEach((e) => {
             if(e.id === element.id) {
                 e.setState({dataContent: element.dataContent})
