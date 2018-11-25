@@ -14,14 +14,21 @@
 * Reject or Accept a report
 
 # How the functionality is implemented
-* Add this Sunday 25.11.2018
-* How this is implemented (just a brief explanation)
+* Our app is divided into separate parts: DHO and Doctor. The two parts share some of the same components, and some views. 
+* All of our API calls are collected in one file. 
+* We have tried to reuse code to a reasonable extent. Even so, with more time we could have generalised the code further. For example: The two views ConfirmSendReport and ConfirmEditedReport should have been one file. Unfortunately, with the server down for day we did not have time to fix this. 
+* We are routing between different views using buttons.
+* Components are reused wherever it makes sense. 
+* We are using callback functions to send data upstream.
+* We have attempted to limit hard coding of values to a minimum.
 
 # Missing functionality/implementations
 ### DOCTOR
 * The navigationbar only has two active buttons ("home" and "add new", we did not get to implement the buttons "show list" or "notifications".
 ### DHO
-* 
+* All core functionality is implemented.
+### MainReportList
+* If you switch between radio buttons before the report list is finished loading. There will be an error where some reports stack on top of each other.
 
 
 # Licensing
