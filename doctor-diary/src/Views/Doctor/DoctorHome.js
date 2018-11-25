@@ -4,6 +4,12 @@ import NavBar from '../../Components/NavBar/NavBar.js';
 import MainReportList from '../../Components/Report/MainReportList.js';
 import {Link} from 'react-router-dom';
 
+/**
+This is the main view of the doctor side of the app.
+It shows a MainReportList.
+The site is similar to HealthOfficerReportList.
+**/
+
 const TEI_ID = "vjVNrMa4zvc";
 
 export default class DoctorHome extends Component {
