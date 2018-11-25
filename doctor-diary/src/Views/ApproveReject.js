@@ -4,6 +4,9 @@ import ReportHolder from '../Components/Report/ReportHolder.jsx';
 import {RadioGroup, RadioButton} from 'react-radio-buttons';
 import {Link} from 'react-router-dom';
 
+const authKey = 'Basic ' + btoa("BjarneB:District1-");
+const url = 'https://course.dhis2.org/dhis/api';
+
 export default class ApproveReject extends Component {
   constructor(props) {
       super(props);
@@ -20,6 +23,14 @@ export default class ApproveReject extends Component {
       this.sendToAPi = this.sendToApi.bind(this);
       this.UpdateDataToApi = this.UpdateDataToApi.bind(this);
   }
+
+  config = {
+    baseURL: url
+  };
+
+  setConfig = config => {
+    this.config = config;
+  };
 
 
   updateComment() {
@@ -62,14 +73,13 @@ export default class ApproveReject extends Component {
       this.UpdateDataToApi(report);
   }
 
-  //Duplikat fra confirmsendreport med put
   UpdateDataToApi(eventElement){
 
-      const authKey = 'Basic ' + btoa("BjarneB:District1-");
+      
       var id = eventElement.event;
       var self = this;
 
-      fetch("https://course.dhis2.org/dhis/api/events/"+id, {
+      fetch(this.config.baseURL+ "/events/" + id, {
         method: 'PUT',
         //credentials: 'include', //skal være med på deploy
         mode: 'cors',
