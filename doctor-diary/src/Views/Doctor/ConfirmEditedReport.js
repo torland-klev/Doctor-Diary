@@ -19,6 +19,7 @@ export default class ConfirmEditedReport extends Component {
       rows: [],
       tmpDataFromChild: "",
       tmpId: "",
+      sent: false
     }
     this.updateData = this.updateData.bind(this)
     this.myCallback = this.myCallback.bind(this)
@@ -45,6 +46,7 @@ export default class ConfirmEditedReport extends Component {
   }
 
   sendToAPI(report) {
+    this.setState({sent: true});
     Api.UpdateDataToApi(report);
   }
 
@@ -86,7 +88,14 @@ export default class ConfirmEditedReport extends Component {
   render(){
     this.updateData();
     console.log(this.state.report.dueDate);
-    return(
+    return (this.state.sent) ? (
+      <div>
+        <Header title={this.state.title} />
+        <main>
+          <h2>Report successfully edited</h2>
+          <a href='/' className='ReportPageButton'>Home</a>
+        </main>
+      </div>) :(
         <div>
 
             <main>
@@ -96,7 +105,7 @@ export default class ConfirmEditedReport extends Component {
                     {this.state.rows}
                 </tbody>
             </table>
-            <button onClick={() => this.sendToAPI(this.state.report)}>Send!</button>
+            <button onClick={() => this.sendToAPI(this.state.report)}>Send</button>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>
