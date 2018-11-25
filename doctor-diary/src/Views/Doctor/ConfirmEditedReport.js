@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
+import Api from '../../Api.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
 
@@ -41,34 +42,19 @@ export default class ConfirmEditedReport extends Component {
     }
     this.state.tmpDataFromChild = null
     this.state.tmpId = null
-}
+  }
 
-
-sendToAPI() {
-  var report = this.state.report
-}
-
+  sendToAPI(report) {
+    Api.UpdateDataToApi(report);
+  }
 
   componentWillMount(){
     var rep = localStorage.getItem("ready")
-<<<<<<< HEAD
-<<<<<<< HEAD
-    var rep2 = JSON.parse(rep)
-    this.state.report = rep2;
-    console.log("this.state.report")
-=======
-=======
-
->>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
     var report = JSON.parse(rep)
     this.state.report = report
     var nameList = JSON.parse(localStorage.getItem("nameList"))
     this.state.nameList = nameList
     console.log("this.state.report: ")
-<<<<<<< HEAD
->>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
-=======
->>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
     console.log(this.state.report)
     console.log("this.state.nameList: ")
     console.log(this.state.nameList)
@@ -110,7 +96,7 @@ sendToAPI() {
                     {this.state.rows}
                 </tbody>
             </table>
-
+            <button onClick={() => this.sendToAPI(this.state.report)}>Send!</button>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>

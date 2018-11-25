@@ -160,13 +160,13 @@ class Api {
 	}
 
 	////////////////////////////////////
-	
+
 	/************************
   **from ConfirmSendReport*
   ************************/
 
  	findTeiOrgUnit(){
-	
+
 		var TeiOrgUnitID = "";
 
 		return fetch(this.config.baseURL + "/me", {
@@ -320,7 +320,7 @@ class Api {
 	//APP.JS
 
 	checkRole(){
-		
+
 		var role = "";
 		return fetch(this.config.baseURL + "/me", {
 			method: 'GET',
@@ -334,20 +334,20 @@ class Api {
 				//var doctorRoleID = "noe"; //for testing at man kommer til hjemsiden hvis ingen gyldig rolle
 				var dhoRoleID = "RYOicE8XVw9";
 				var roles = [];
-	
+
 				data.userCredentials.userRoles.forEach(element => {
 						roles.push(element.id);
 				})
-	
+
 				if(roles.includes(doctorRoleID)){
 					role="doctor";
 					return Promise.resolve(role);
-	
-	
+
+
 				}else if(roles.includes(dhoRoleID)){
 					role="dho"
 					return Promise.resolve(role);
-	
+
 				}
 			}).catch(function (error){
 				return "error";
@@ -355,7 +355,27 @@ class Api {
 		})
 	}
 
+  UpdateDataToApi(eventElement){
 
+      var id = eventElement.event;
+
+      fetch(this.config.baseURL + "/events/" + id, {
+        method: 'PUT',
+        //credentials: 'include', //skal være med på deploy
+        mode: 'cors',
+        headers: {
+          'Authorization': authKey, //FJERNES VED DEPLOY
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(eventElement)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+
+        console.log(data);
+      })
+  }
 
 
 
