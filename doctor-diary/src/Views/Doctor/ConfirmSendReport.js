@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import BackButton from '../../Components/Button/BackButton.js';
-
-/** Skal ikke være her i deployment */
-const authKey = 'Basic ' + btoa("AkselJ:District1-");
-const baseURL = "https://course.dhis2.org/dhis/api";
+import Api from '../../Api.js';
 
 
 export default class ConfirmSendReport extends Component {
@@ -71,21 +68,17 @@ export default class ConfirmSendReport extends Component {
 
         var self = this;
 
-        var isOnline = window.navigator.onLine;
-
-        if(isOnline){
-
-            this.findProgramStage(programID).then(function (pStage){
+            Api.findProgramStage(programID).then(function (pStage){
 
                 console.log("programStage: " + pStage);
                 programStageID = pStage;
 
-                self.findTeiOrgUnit().then(function (orgUnit){
+                Api.findTeiOrgUnit().then(function (orgUnit){
 
                     console.log("orgUnitID: " + orgUnit);
                     orgUnitID = orgUnit;
 
-                    self.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
+                    Api.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
 
                         console.log("teiID: " + tei);
                         teiID = tei;
@@ -98,106 +91,12 @@ export default class ConfirmSendReport extends Component {
                             dataValues: values
                         };
 
-                        self.sendDataToApi(newEvent);
+                        Api.sendDataToApi(newEvent);
                         self.setState({status: "Report sent successfully"});
                     })
                 })
             })
-
-        }else{
-
-            localStorage.setItem("TOSEND_" + this.state.fullDate, JSON.stringify(values));
-            this.setState({status: "No internett. Will send once reconnected."});
-            //NO INTERNET
-            console.log("LAGRET UTEN INTERNET!!!");
-        }
     }
-
-    findTeiOrgUnit(){
-
-        var TeiOrgUnitID = "";
-
-        return fetch(baseURL + "/me", {
-            method: 'GET',
-            headers: {
-              'Authorization': authKey
-            }
-          }).then(function (response){
-            return response.json();
-          }).then(function (data){
-
-            TeiOrgUnitID = data.teiSearchOrganisationUnits[0].id;
-
-            return TeiOrgUnitID;
-          })
-
-    }
-
-    findTrackedEntityInstance(teiOrgID, programID){
-
-        var trackedEntityID = "";
-
-        var filters = "/trackedEntityInstances.json?ou=" + teiOrgID + "&program=" + programID;
-
-        console.log(filters);
-        return fetch(baseURL + filters, {
-            method: 'GET',
-            headers: {
-              'Authorization': authKey
-            }
-          }).then(function (response){
-            return response.json();
-          }).then(function (data){
-
-            //console.log(data);
-            trackedEntityID = data.trackedEntityInstances[0].trackedEntityInstance;
-            //console.log(data.trackedEntityInstances[0]);
-            return trackedEntityID;
-          })
-    }
-
-    findProgramStage(){
-
-        var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
-        var programStageID = "";
-
-        return fetch(baseURL + "/programs/" + programID, {
-          method: 'GET',
-          headers: {
-            'Authorization': authKey
-          }
-        }).then(function (response){
-          return response.json();
-        }).then(function (data){
-
-            programStageID = data.programStages[0].id;
-
-            return programStageID;
-        })
-    }
-
-    sendDataToApi(eventElement){
-
-        fetch("https://course.dhis2.org/dhis/api/events", {
-          method: 'POST',
-          //credentials: 'include', //skal være med på deploy
-          mode: 'cors',
-          headers: {
-            'Authorization': authKey, //FJERNES VED DEPLOY
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(eventElement)
-        }).then(function(response) {
-
-          //console.log(response);
-          return response.json();
-        }).then(function(data) {
-
-          console.log(data);
-        })
-    }
-
 
     render () {
         return (this.state.status) ? (

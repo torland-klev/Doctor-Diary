@@ -14,6 +14,7 @@ import DoctorHome from './Views/Doctor/DoctorHome.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
+<<<<<<< HEAD
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
@@ -55,6 +56,9 @@ function checkRole(){
     })
   }) ;
 }
+=======
+import Api from './Api.js';
+>>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
 
 class App extends Component {
   constructor() {
@@ -65,7 +69,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    checkRole().then(response => {
+    Api.checkRole().then(response => {
       this.setState({checkRoleResult: response});
     })
   }
