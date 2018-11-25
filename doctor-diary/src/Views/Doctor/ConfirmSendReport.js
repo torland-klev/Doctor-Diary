@@ -38,8 +38,7 @@ export default class ConfirmSendReport extends Component {
         parsedReport.forEach((el) => {
 
             if(!(el.name === "Approved/Rejected Current Status")){
-
-                this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
+                this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}:</p></tr>)
                 this.state.rows.push(<tr><p type="text" id={el.dataContent}>{el.dataContent}</p></tr>);
             }
 
@@ -214,23 +213,21 @@ export default class ConfirmSendReport extends Component {
             <div>
                 <Header title={this.state.title} />
                 <main>
+                    <h2>Report for date {this.state.fullDate}</h2>
 
-                <h1>Report for date {this.state.fullDate}</h1>
+                    <table className="newEntryTable">
+                        <tbody>
+                            {this.state.rows}
+                        </tbody>
+                    </table>
 
-                <table>
-                    <tbody>
-                        {this.state.rows}
-                    </tbody>
-                 </table>
+                    <button onClick={() => this.sendData()}>test send</button>
+                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
 
-                 <button onClick={() => this.sendData()}>test send</button>
-                 <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
-
-                 <div className="NewButtonContainer">
-                    <a href={this.state.backbuttonlink}><div className='ReportPageButton'>{this.state.backbutton}</div></a>
-                </div>
-
-
+                    <div className="NewButtonContainer">
+                        <a href={this.state.backbuttonlink}><div className='ReportPageButton'>{this.state.backbutton}</div></a>
+                    </div>
+                    
                 </main>
             </div>
           )

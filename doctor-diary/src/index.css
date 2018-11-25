@@ -16,9 +16,6 @@
   table{
     align-content: center;
   }
-  form.dataForm label {
-    display: nonee;
-  }
 }
 
 /* main for pages*/
@@ -83,6 +80,7 @@ form.dataForm input {
   border: none;
   border-bottom: 1px solid #276696;
   float: right;
+  height: 15px;
 }
 form.dataForm label {
   display: flex; 
