@@ -8,11 +8,8 @@ import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
+import Api from '../../Api.js';
 
-const baseURL = "https://course.dhis2.org/dhis/api";
-var userNew = "AkselJ" //doctor
-var passNew = "District1-" //hardkodet for nå
-var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
 
 export default class NewEntry extends Component {
   constructor(props) {
@@ -37,8 +34,6 @@ export default class NewEntry extends Component {
       this.loadFromLocalStorage = this.loadFromLocalStorage.bind(this)
 
       this.fetchDataElements = this.fetchDataElements.bind(this)
-      this.findDataElementIDs = this.findDataElementIDs.bind(this)
-      this.findDataElementContent = this.findDataElementContent.bind(this)
   }
 
 
@@ -134,15 +129,15 @@ export default class NewEntry extends Component {
 
     fetchDataElements(_callback){
 
-        var ref_findDataElementContent = this.findDataElementContent;
+        //var ref_findDataElementContent = this.findDataElementContent;
 
-        this.findDataElementIDs().then(function (result){
+        Api.findDataElementIDs().then(function (result){
 
             var dataElementIDs = result;
             var dataElementContent = [];
 
             for(var i = 0; i < dataElementIDs.length; i++){
-              dataElementContent.push(ref_findDataElementContent(dataElementIDs[i]));
+              dataElementContent.push(Api.findDataElementContent(dataElementIDs[i]));
             }
 
             Promise.all(dataElementContent).then(function (dataObjects){
@@ -151,70 +146,6 @@ export default class NewEntry extends Component {
             })
           })
 
-    }
-
-
-    findDataElementIDs(){
-
-        var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
-        var programStageID = "";
-        var dataElementIDs = [];
-
-        return fetch(baseURL + "/programs/" + programID, {
-          method: 'GET',
-          headers: {
-            'Authorization': authKey
-          }
-        }).then(function (response){
-          return response.json();
-        }).then(function (data){
-
-            programStageID = data.programStages[0].id;
-
-            return fetch(baseURL + "/programStages/" + programStageID,{
-              method: 'GET',
-              headers: {
-              'Authorization': authKey
-              }
-            }).then(function (response){
-
-                return response.json();
-
-            }).then(function (data){
-
-                data.programStageDataElements.forEach((element) => {
-
-                  dataElementIDs.push(element.dataElement.id);
-                })
-
-                return dataElementIDs;
-            })
-
-        })
-      }
-
-
-  findDataElementContent(id){
-    return fetch(baseURL + "/dataElements/" + id, {
-        method: 'GET',
-        headers: {
-        'Authorization': authKey
-        }
-    }).then(function (response){
-        return response.json().then(function (data){
-
-        var newElement = {
-            "name": data.name,
-            "id": data.id,
-            "valueType": data.valueType,
-        };
-
-        return newElement;
-        }).catch(function (error){
-
-        //console.log(error);
-        })
-    })
     }
 
 

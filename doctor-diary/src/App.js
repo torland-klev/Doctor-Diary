@@ -14,6 +14,8 @@ import DoctorHome from './Views/Doctor/DoctorHome.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
+import Api from './Api.js';
+
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
@@ -65,7 +67,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    checkRole().then(response => {
+    Api.checkRole().then(response => {
       this.setState({checkRoleResult: response});
     })
   }

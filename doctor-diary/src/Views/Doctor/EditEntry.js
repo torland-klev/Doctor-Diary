@@ -48,6 +48,7 @@ export default class EditEntry extends Component {
       this.makeComponents();
     })
   }
+
   fetchElementName(id, value){
     //Fetch the attributes
     const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;
@@ -127,6 +128,7 @@ export default class EditEntry extends Component {
     console.log("Ready to save: ")
     console.log(this.state.report)
     var key = "ready";
+    localStorage.setItem("nameList", JSON.stringify(this.state.rowsDataElement));
     localStorage.setItem(key, JSON.stringify(this.state.report));
   }
 
