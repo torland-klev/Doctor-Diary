@@ -17,13 +17,10 @@ export default class EditEntry extends Component {
       rows: [],
       rowsDataElement: [],
       tmpDataFromChild: "",
-      tmpId: "",
+      tmpId: ""
     }
-    this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
-    this.makeComponents = this.makeComponents.bind(this)
-    this.updateData = this.updateData.bind(this)
-    this.componentWillMount = this.componentWillMount.bind(this)
-    this.myCallback = this.myCallback.bind(this)
+    this.saveToLocalStorage = this.saveToLocalStorage.bind(this);
+    this.myCallback = this.myCallback.bind(this);
   }
 
 
@@ -31,8 +28,30 @@ export default class EditEntry extends Component {
     this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
   }
 
+  componentDidMount(){
+    this.updateRows();
+  }
 
-  fetchElementName(id){
+  updateRows(){
+    const dataValues = this.props.location.state.report.dataValues;
+    var promises = [];
+    dataValues.forEach((el) => {
+      promises.push(this.fetchElementName(el.dataElement, el.value));
+    });
+    Promise.all(promises)
+    .then( (result) => {
+      result.forEach( (el) => {
+        this.setState({rowsDataElement: this.state.rowsDataElement.concat([
+          <DataElement dataElement={el.name} value={el.value} key={el.id}/>])
+        });
+      })
+      this.makeComponents();
+    })
+  }
+
+
+
+  fetchElementName(id, value){
     //Fetch the attributes
     const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;
     return fetch(url, {
@@ -46,7 +65,8 @@ export default class EditEntry extends Component {
         const el = responseJson;
         var element = {
           name: el.name,
-          id: id
+          id: id,
+          value: value
         };
         return element;
       })
@@ -55,22 +75,9 @@ export default class EditEntry extends Component {
     );
   }
 
-
-  updateRows(){
-    const report = this.state.report.dataValues
-    report.forEach((el) => {
-      this.fetchElementName(el.dataElement).then((result) => {
-        this.setState({rowsDataElement: this.state.rowsDataElement.concat([
-          <DataElement dataElement={result.name} value={el.value} key={result.id}/>])
-        });
-      })
-    })
-  }
-
-
   updateData() {
     if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
-        this.state.report.dataValues.forEach((el) => {
+        this.props.location.state.report.dataValues.forEach((el) => {
           if (el.dataElement.id === this.state.tmpId) {
             el.value = this.state.tmpDataFromChild
           }
@@ -78,21 +85,13 @@ export default class EditEntry extends Component {
     }
     this.state.tmpDataFromChild = null
     this.state.tmpId = null
-}
-
-
-  componentWillMount(){
-    //this.setState({report: this.props.location.state.report});
-    this.state.report = this.props.location.state.report
-    this.makeComponents()
-    this.updateRows()
   }
 
 
   makeComponents() {
-    console.log(this.state.rowsDataElement)
-    console.log(this.state.report)
-    this.state.report.dataValues.forEach((el) => {
+    console.log(this.state.rowsDataElement);
+    console.log(this.props.location.state.report);
+    this.props.location.state.report.dataValues.forEach((el) => {
       //Hvis det er statusen:
       if (el.dataElement === "zrZADVnTtMa") {
         el.value = "Pending";
@@ -110,32 +109,35 @@ export default class EditEntry extends Component {
         }
       }
     })
+    this.setState(this.state);
   }
 
 
   saveToLocalStorage() {
-    var v = this.state.report
-    var value = JSON.stringify(v)
-    var key = "ready"
+    var v = this.state.report;
+    var value = JSON.stringify(v);
+    var key = "ready";
     localStorage.setItem(key, value);
   }
-  
+
   render(){
     this.updateData();
     return(
         <div>
             <Header title={this.state.title} />
             <main>
-            <table>
+              <table>
+                <tr>
+                  <th>Question</th>{/** Data element */}
+                  <th>Answer</th>{/** Value */}
+                </tr>
                 <tbody>
                     {this.state.rows}
                 </tbody>
                 <div id="errorMessage" type="text"></div>
                 <a href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
                 <a href='/doctor' className='Home-button'>Back</a>
-            </table>
-
-
+              </table>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>
