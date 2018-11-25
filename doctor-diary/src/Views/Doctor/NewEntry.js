@@ -47,6 +47,23 @@ export default class NewEntry extends Component {
     }
 
 
+  updateData(id, dataFromChild) {
+
+    if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
+        for (var i=0; i<this.state.dataToBeStored.length; i++) {
+            if (this.state.dataToBeStored[i].id == id) {
+                console.log(this.state.dataToBeStored[i])
+                this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
+                break;
+            }
+        }
+    }
+    this.state.tmpDataFromChild = null
+    this.state.tmpId = null
+}
+
+/*
+
     updateData(id, dataFromChild) {
         if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
             for (var i=0; i<this.state.dataToBeStored.length; i++) {
@@ -66,7 +83,7 @@ export default class NewEntry extends Component {
         }
         this.setState({tmpDataFromChild: null}, {tmpId: null});
     }
-
+*/
     myCallback(id, dataFromChild) {
           this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
     }
@@ -104,17 +121,11 @@ export default class NewEntry extends Component {
     addToList(element) {
         var isNew = true;
         for (var i=0; i<this.state.dataToBeStored.length; i++) {
-            if (this.state.dataToBeStored[i].id === element.id) {
+            if (this.state.dataToBeStored[i].id == element.id) {
                 this.state.dataToBeStored[i].dataContent = element.dataContent
                 isNew = false
             }
         }
-        this.state.dataToBeStored.forEach((e) => {
-            if(e.id === element.id) {
-                e.setState({dataContent: element.dataContent})
-                isNew = false;
-            }
-        })
         if (isNew) {
             this.state.dataToBeStored.push(element)
         }
@@ -232,12 +243,12 @@ export default class NewEntry extends Component {
                 if(nextName === "Approved/Rejected Current Status"){
                     nextDataContent = "Pending";
                 }else{
-                    var newDataElementForm = React.createElement(DataElementForm, {id: nextId, key: nextId, name: nextName, valueType: nextValueType, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
+                    var newDataElementForm = React.createElement(DataElementForm, {id: nextId, name: nextName, valueType: nextValueType, dataContent: nextDataContent, callbackFromParent: self.myCallback}, null)
                     var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
                     self.state.rows.push(htmlDataElementContainer)
                 }
 
-                var newToBeStored = {id: nextId, key: nextId, name: nextName, dataContent: nextDataContent, valueType: nextValueType};
+                var newToBeStored = {id: nextId, name: nextName, dataContent: nextDataContent, valueType: nextValueType};
                 self.addToList(newToBeStored)
             })
 
@@ -255,7 +266,10 @@ export default class NewEntry extends Component {
                 <Header title={this.state.title} />
                 <main>
                     <table>
-                        <tbody>{this.state.rows}</tbody>
+                        <tbody>
+                            {this.state.rows}
+                        </tbody>
+                        <div id="errorMessage" type="text"></div>
                     </table>
                     <div className="NewButtonContainer">
                         <a href='/doctor'><div className='ReportPageButton'>Back</div></a>
