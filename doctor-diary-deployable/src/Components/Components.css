@@ -1,0 +1,156 @@
+.HeaderImg{
+    width: 5vh;
+    height: 5vh;
+    padding-left: 1vh;
+
+}
+
+.Title{
+    font-family: "Helvetica-CondensedBold", sans-serif;
+    font-weight: bold;
+    font-size: calc(0.9em +2vmin);
+    color: white;
+    padding-left: 1.5vh;
+}
+
+.BackButton{
+    width: 20vh;
+    background-color: #bad5f4;
+    margin: 5px;
+    padding: 1.5%;
+    border: 1px solid black;
+    font-size: calc(10px +2vmin);
+}
+
+.TemporaryContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+}
+
+/* Styling for new entry*/
+.NewButtonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px;
+    width: 200px;
+}
+
+/* Styling for list of reports */
+.ReportListItem{
+    align-items: center;
+    border: solid 1px #373737;
+    margin: 5px;
+    padding: 5px;
+    width: 450px;
+    height: 40px;
+}
+
+.ReportListHolderFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    
+}
+
+.ReportView{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    width: 200px;
+}
+
+/* Button styles*/
+.ReportPageButtonArrow{
+  font-size: 10px;
+  background-color: #bad5f4;
+  border: 1px solid #373737;
+  text-align: center;
+}
+
+.ReportPageButton{
+    font-size: 15px;
+    padding: 5px;
+    background-color: #bad5f4;
+    border: 1px solid #373737;
+}
+.SendButton{
+    border: 1px solid #373737;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    border-radius:100%;
+}
+.ArrowButton{
+    border: 1px solid #373737;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ca0c0f;
+    border-radius:100%;
+}
+
+
+/* Styling for list of units (OrganizationListItem) */
+.OrganizationListItem{
+    font-size: calc(20px +2vmin);
+    border-style: solid;
+    border-color: #373737;
+    border-width: 1px;
+    margin: 5px;
+    height: 20px;
+    width: 30vh;
+    padding: 5px;
+}
+
+.CenterText{
+    text-align: center;
+    padding: 3px;
+}
+
+/* Styling for input on ApproveReject */
+.commentInput{
+    border: 1px solid #373737;
+    background: #D0E4F5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 80vh;
+    height: 30px;
+    margin: 10px;
+    font-size: 13px;
+}
+
+.tableCenter{
+    align-items: center;
+    align-content: center;
+    padding: 5px;
+    max-width: 100%;
+}
+
+/* phone screens*/
+@media screen and (min-width:320px) and (max-width:480px){
+    .tableCenter{
+        align-items: center;
+        align-content: center;
+        padding: 5px;
+        max-width:auto!important;
+    }
+    .RadioGroup {
+        display: flex;
+        flex-direction: column;
+    }
+    .commentInput{
+        width: 50vh;
+    }
+}
