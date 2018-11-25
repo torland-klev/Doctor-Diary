@@ -1,159 +1,166 @@
-/* TODO: SLETTE DENNE FILEN? */
+//REMOVE
 
-const baseURL = "https://course.dhis2.org/dhis/api/";
+// const authKey = btoa('AkselJ:District1-');
+const authKey = 'Basic ' + btoa('BjarneB:District1-');
+const url = 'https://course.dhis2.org/dhis/api';
+const STATUS_ID = "zrZADVnTtMa";
+const FIRST_NAME_ID = "w75KJ2mc4zz";
+const LAST_NAME_ID = "zDhUuAYrxNC";
 
 class Api {
+  config = {
+    baseUrl: url
+  };
 
-    /*
-    TILTENKT AA BRUKES FOR AA KOMBINERE checkAuthentication og getDoctorDiaryRoles
-
-
-    roles = {
-        'doctorID': '',
-        'dhoID': ''
-    };
-
-    rolesSetup(doctorID, dhoID){
-
-        this.roles.doctorID = doctorID;
-        this.roles.dhoID = dhoID;
-
-        console.log("NEW doctorID: " + doctorID + " | NEW dhoID: " + dhoID);
-    }
-
-    printRoles(){
-
-        console.log("printRoles: " + this.roles.doctorID + " | " + this.roles.dhoID);
+  setConfig = config => {
+    this.config = config;
+  };
 
 
-    }
-    */
+  /*******************************
+  ***  From HealthOfficerHome  ***
+  *******************************/
 
+  fetchReports(){
+		return fetch(this.config.baseUrl + '/me', {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+        var ou = [];
+	      responseJson.teiSearchOrganisationUnits.forEach((el) => {
+          ou.push(el);
+				})
+        return ou;
+	    })
+	    .catch((error) => {
+	      console.error(error);
+	    }
+		);
+  }
 
-    /* Tror dette kan gjøres i App.js */
+  /****************************
+  ***  From MainReportList  ***
+  ****************************/
 
-
-    checkAuthenication(user, pass){
-        var authKey = 'Basic ' + btoa(user + ':' + pass);
-
-        return fetch(baseURL + '/me', {
-            method: 'GET', 
-            headers: {
-            'Accept': 'application/json',
-            'Authorization': authKey,
+  fetchReportsForList(url2){
+		return fetch(this.config.baseUrl + url2, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+        var reports = [];
+        var approved = [];
+        var rejected = [];
+        var pending = [];
+        var others = [];
+        var noStatus = [];
+	      responseJson.events.forEach((el) => {
+          reports.push(el);
+          var hasStatus = false;
+          el.dataValues.forEach( (dv) => {
+            if (dv.dataElement === STATUS_ID){
+              hasStatus = true;
+              switch(dv.value.toUpperCase()){
+                case "APPROVED":
+                  approved.push(el);
+                  break;
+                case "REJECTED":
+                  rejected.push(el);
+                  break;
+                case "PENDING":
+                  pending.push(el);
+                  break;
+                default:
+                  others.push(el);
+              }
             }
-        }).then(function(response){ 
-            
-            var profile = {
-                'exists': false,
-                'user': "",
-                'role': "",
-            };
+          })
+          if(!hasStatus){
+            noStatus.push(el);
+          }
+				})
+        const results = {
+          reports: reports,
+          approved: approved,
+          rejected: rejected,
+          pending: pending,
+          others: others,
+          noStatus: noStatus
+        }
+        return results;
+	    })
+	    .catch((error) => {
+	      console.error(error);
+	    }
+		);
+  }
 
-            return response.json().then(function (data){
+  /**************************
+  ***  From ReportHolder  ***
+  **************************/
 
-                //var orgTarget = "ImspTQPwCqd"
-                var doctorRoleID = "kNIhGGdyWFp";
-                var dhoRoleID = "RYOicE8XVw9";
+  fetchElementName(id){
+		//Fetch the attributes
+		const url2 = '/dataElements/' + id;
+		return fetch(this.config.baseUrl+url2, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+	      const el = responseJson;
+				var element = {
+					name: el.name,
+					id: id
+				};
+				return element;
+			})
+	    .catch((error) => {
+	    }
+		);
+	}
 
-                var user = data.name;
-                var userRoles = [];
-            
-                data.userCredentials.userRoles.forEach(element => {
-                    userRoles.push(element.id);
-                })
+  /************************
+  ***  From ReportList  ***
+  ************************/
 
-                if(userRoles.includes(doctorRoleID)){
-                        
-                    //console.log("inne i doctor");
-            
-                    profile.exists = true;
-                    profile.user = user;
-                    profile.role = "doctor";
-                        
-                }else if(userRoles.includes(dhoRoleID)){
-            
-                    //console.log("inne i dho");
-            
-                    profile.exists = true;
-                    profile.user = user;
-                    profile.role = "dho";
-                }
-                
-                return profile;
-            }).catch(function (error){
-                console.log("User not found");
-                return profile;
-            }) 
-        }) 
-    }
+  getTeiName(id){
+		var firstname = '';
+		var lastname = '';
+		//Fetch the attributes
+		const url2 = '/trackedEntityInstances/' + id;
+		return fetch(this.config.baseUrl+url2, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+	      responseJson.attributes.forEach((el) => {
+					if (el.attribute === FIRST_NAME_ID){
+						firstname = el.value;
+					}
+					else if (el.attribute === LAST_NAME_ID) {
+						lastname = el.value;
+					}
+				})
+				return (firstname + " " + lastname);
+	    })
+	    .catch((error) => {
+	    }
+		);
+	}
 
-    //Ikke i bruk noen steder
-    getDoctorDiaryRoles(user, pass){
-    
-        var authKey = 'Basic ' + btoa(user + ':' + pass);
-
-        return fetch(baseURL + '/userRoles', {
-            method: 'GET', 
-            headers: {
-            'Accept': 'application/json',
-            'Authorization': authKey,
-            }
-        }).then(function(response){ 
-
-            //var diaryRoles = [];
-
-            return response.json().then(function (data){
-
-                //console.log(data);
-
-                var dho = '';
-                var doc = '';
-
-                data.userRoles.forEach(element => {
-
-                    /*
-                    var role = {
-
-                        'roleName': "",
-                        'roleID': "",
-                    }
-                    */
-
-                    if(element.displayName === "DHO"){
-
-                        //role.roleName = "DHO";
-                        //role.roleID = element.id;
-                        //diaryRoles.push(role);
-
-                        dho = element.id;
-                    }
-
-                    if(element.displayName === "Doctor"){
-                        
-                        //role.roleName = "Doctor";
-                        //role.roleID = element.id;
-                        //diaryRoles.push(role);
-
-                        doc = element.id;
-                    }
-                    
-                })
-                console.log("OPPDATERER! " + doc + " " + dho);
-                this.rolesSetup(doc, dho);
-                //return diaryRoles;
-
-            }).catch(function (error){
-
-                //console.log(error);
-            })
-        })
-
-    }
-
-
-
-  
 }
 
 export default new Api();

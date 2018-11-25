@@ -14,13 +14,12 @@ import DoctorHome from './Views/Doctor/DoctorHome.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
-import ConfirmEditedReport from './Views/Doctor/ConfirmEditedReport.js';
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
   /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
-  // var user = "BjarneB" // dho
-  var user = "AkselJ" //doctor
+  var user = "BjarneB" // dho
+  // var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authentKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
@@ -81,7 +80,6 @@ class App extends Component {
             <Route exact={true} path='/doctor/report' render={(props) => (<div className="App"> <ViewReport {...props}/></div>)} />
             <Route exact={true} path='/doctor/newEntry/confirmSendReport' render={() => (<div className="App"> <ConfirmSendReport /> </div>)} />
             <Route exact={true} path='/doctor/editEntry' render={(props) => (<div className="App"> <EditEntry {...props}/> </div>)} />
-            <Route exact={true} path='/doctor/editEntry/confirmEditedReport' render={(props) => (<div className="App"> <ConfirmEditedReport /> </div>)} />
             <Route exact path='/' component={ () => <Redirect to='/doctor' component={DoctorHome} /> } />
           </div>
         </Router>

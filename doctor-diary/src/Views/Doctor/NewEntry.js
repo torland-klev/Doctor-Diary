@@ -194,7 +194,7 @@ export default class NewEntry extends Component {
       }
 
 
-    findDataElementContent(id){
+  findDataElementContent(id){
     return fetch(baseURL + "/dataElements/" + id, {
         method: 'GET',
         headers: {
