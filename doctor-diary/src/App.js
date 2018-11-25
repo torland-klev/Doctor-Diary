@@ -13,60 +13,9 @@ import ApproveReject from './Views/ApproveReject.js'
 import DoctorHome from './Views/Doctor/DoctorHome.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
+import ConfirmEditedReport from './Views/Doctor/ConfirmEditedReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import Api from './Api.js';
-
->>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
-
-function checkRole(){
-  const meAPI = "https://course.dhis2.org/dhis/api/me";
-  /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
-  // var user = "BjarneB" // dho
-  var user = "AkselJ" //doctor
-  var pass = "District1-" //hardkodet for nå
-  var authentKey = 'Basic ' + btoa(user + ':' + pass);
-  var role = "";
-  return fetch(meAPI, {
-    method: 'GET',
-    headers: {
-    'Accept': 'application/json',
-    'Authorization': authentKey,
-  }
-  }).then(function(response){
-    return response.json().then(data => {
-      var doctorRoleID = "kNIhGGdyWFp";
-      //var doctorRoleID = "noe"; //for testing at man kommer til hjemsiden hvis ingen gyldig rolle
-      var dhoRoleID = "RYOicE8XVw9";
-      var roles = [];
-
-      data.userCredentials.userRoles.forEach(element => {
-          roles.push(element.id);
-      })
-
-      if(roles.includes(doctorRoleID)){
-        role="doctor";
-        return Promise.resolve(role);
-
-
-      }else if(roles.includes(dhoRoleID)){
-        role="dho"
-        return Promise.resolve(role);
-
-      }
-    }).catch(function (error){
-      return "error";
-    })
-  }) ;
-}
-<<<<<<< HEAD
-=======
-import Api from './Api.js';
->>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
-=======
->>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
 
 class App extends Component {
   constructor() {
@@ -92,6 +41,7 @@ class App extends Component {
             <Route exact={true} path='/doctor/report' render={(props) => (<div className="App"> <ViewReport {...props}/></div>)} />
             <Route exact={true} path='/doctor/newEntry/confirmSendReport' render={() => (<div className="App"> <ConfirmSendReport /> </div>)} />
             <Route exact={true} path='/doctor/editEntry' render={(props) => (<div className="App"> <EditEntry {...props}/> </div>)} />
+            <Route exact={true} path='/doctor/editEntry/confirmEditedReport' render={() => (<div className="App"> <ConfirmEditedReport /> </div>)} />
             <Route exact path='/' component={ () => <Redirect to='/doctor' component={DoctorHome} /> } />
           </div>
         </Router>
