@@ -265,7 +265,7 @@ export default class NewEntry extends Component {
             <div>
                 <Header title={this.state.title} />
                 <main>
-                    <table>
+                    <table className="newEntryTable">
                         <tbody>
                             {this.state.rows}
                         </tbody>

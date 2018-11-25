@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './Components.css';
+import '../index.css';
 
 
 export default class DataElementForm extends Component {
@@ -36,11 +38,10 @@ export default class DataElementForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="dataForm">
         <label>
-          <p type="text" id={this.name}>{this.name}</p>
-          <p type="text"><small>Expected value: {this.expected}</small></p>
-          <input type={this.valueType} name={this.name} onKeyUp={this.updateData} id={this.id} defaultValue={this.dataContent} placeholder="..." />
+         {this.name}
+          <input type={this.valueType} name={this.name} onKeyUp={this.updateData} id={this.id} defaultValue={this.dataContent} placeholder={this.expected} />
         </label>
       </form>
     );

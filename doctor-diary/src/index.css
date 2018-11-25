@@ -16,7 +16,10 @@
   table{
     align-content: center;
   }
- }
+  form.dataForm label {
+    display: nonee;
+  }
+}
 
 /* main for pages*/
 body {
@@ -68,9 +71,29 @@ a:hover{
   text-decoration: underline;
 }
 
+/* Form styling */
+form.dataForm{
+  width: auto; 
+  padding: 15px;
+  border-bottom: 1px solid #373737;
+}
+
+form.dataForm input {
+  font-size: 13px;
+  border: none;
+  border-bottom: 1px solid #276696;
+  float: right;
+}
+form.dataForm label {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
 /* Placeholder styling */
 input::placeholder{
-  text-align: center;
+  text-align: left;
 }
 input:focus::-webkit-input-placeholder { color:transparent; }
 input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
@@ -104,6 +127,17 @@ table th {
   background: #276696;
   color: white;
   border-bottom: 1px solid #373737;
+}
+
+table.newEntryTable {
+  width: auto;
+  text-align: left;
+  align-items: center;
+  padding: 5px;
+}
+table.newEntryTable tbody td {
+  font-size: 13px;
+  padding: 5px;
 }
 
 /* List styling*/
