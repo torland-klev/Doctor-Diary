@@ -18,14 +18,10 @@
 * How this is implemented (just a brief explanation)
 
 # Missing functionality/implementations
-* Add this Sunday 25.11.2018
-* Any missing functionality/implementations, and things that do not work optimally. 
 ### DOCTOR
-* What functionality/implementations is missing from doctor?
-* What doesn't work properly in doctor?
+* The navigationbar only has two active buttons ("home" and "add new", we did not get to implement the buttons "show list" or "notifications".
 ### DHO
-* What functionality/implementations is missing from DHO?
-* What doesn't work properly in DHO?
+* 
 
 
 # Licensing
