@@ -19,7 +19,7 @@ function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
   /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
   var user = "BjarneB" // dho
-  // var user = "AkselJ" //doctor
+  //var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authentKey = 'Basic ' + btoa(user + ':' + pass);
   var role = "";
