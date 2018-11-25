@@ -16,6 +16,9 @@
   table{
     align-content: center;
   }
+  label{
+    font-size: 13px;
+  }
 }
 
 /* main for pages*/

@@ -34,7 +34,6 @@ export default class ConfirmSendReport extends Component {
         this.state.fullDate = day + "." + month + "." + year
         var obj = localStorage.getItem(this.state.fullDate)
         var parsedReport = JSON.parse(obj)
-        console.log("parsedReport: " + parsedReport)
         parsedReport.forEach((el) => {
 
             if(!(el.name === "Approved/Rejected Current Status")){
@@ -60,7 +59,6 @@ export default class ConfirmSendReport extends Component {
                 value: obj.dataContent,
             };
 
-            console.log(valueElement);
             values.push(valueElement);
         })
 
@@ -73,17 +71,14 @@ export default class ConfirmSendReport extends Component {
 
             Api.findProgramStage(programID).then(function (pStage){
 
-                console.log("programStage: " + pStage);
                 programStageID = pStage;
 
                 Api.findTeiOrgUnit().then(function (orgUnit){
 
-                    console.log("orgUnitID: " + orgUnit);
                     orgUnitID = orgUnit;
 
                     Api.findTrackedEntityInstance(orgUnit, programID).then(function (tei){
 
-                        console.log("teiID: " + tei);
                         teiID = tei;
 
                         const newEvent = {
@@ -122,9 +117,10 @@ export default class ConfirmSendReport extends Component {
                             {this.state.rows}
                         </tbody>
                     </table>
+
                     <div className="NewButtonContainer">
-                    <a href={this.state.backbuttonlink}><button className="ArrowButton"><IconBack /> <b>BACK</b></button></a>
-                    <button className="SendButton" onClick={() => this.sendData()}> <IconSend /> <b>SEND</b></button>
+                        <a href={this.state.backbuttonlink}><button className="ArrowButton"><IconBack /> <b>BACK</b></button></a>
+                        <button className="SendButton" onClick={() => this.sendData()}> <IconSend /> <b>SEND</b></button>
                     </div>
                 </main>
             </div>

@@ -5,11 +5,6 @@ import Api from '../../Api.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
 
-const baseURL = "https://course.dhis2.org/dhis/api";
-var userNew = "AkselJ" //doctor
-var passNew = "District1-" //hardkodet for nå
-var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
-
 export default class ConfirmEditedReport extends Component {
   constructor(props){
     super(props);
@@ -51,25 +46,17 @@ export default class ConfirmEditedReport extends Component {
   }
 
   componentWillMount(){
-    var rep = localStorage.getItem("ready")
-    var report = JSON.parse(rep)
-    this.state.report = report
-    var nameList = JSON.parse(localStorage.getItem("nameList"))
-    this.state.nameList = nameList
-    console.log("this.state.report: ")
-    console.log(this.state.report)
-    console.log("this.state.nameList: ")
-    console.log(this.state.nameList)
+    var rep = localStorage.getItem("ready");
+    var report = JSON.parse(rep);
+    this.state.report = report;
+    var nameList = JSON.parse(localStorage.getItem("nameList"));
+    this.state.nameList = nameList;
     this.makeComponents();
   }
 
 
   makeComponents() {
-    console.log("THIS REPORT: ")
-    console.log(this.state.report)
     for (var i=0; i<this.state.report.dataValues.length; i++) {
-      console.log("this.state.report[i].dataElement")
-      console.log(this.state.report.dataValues[i].dataElement)
       if (!(this.state.report.dataValues[i].dataElement === "zrZADVnTtMa")) {
         for (var j=0; j<this.state.nameList.length; j++) {
           if (this.state.nameList[i].key === this.state.report.dataValues[i].dataElement) {
@@ -104,7 +91,7 @@ export default class ConfirmEditedReport extends Component {
                     {this.state.rows}
                 </tbody>
             </table>
-            <button onClick={() => this.sendToAPI(this.state.report)}>Send</button>
+            <button className="ReportPageButton" onClick={() => this.sendToAPI(this.state.report)}>Send</button>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>

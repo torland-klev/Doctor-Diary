@@ -41,7 +41,6 @@ export default class HealthOfficerHome extends Component {
   }
 
   authenticate(){
-    var authKey = "";
     var id = "";
     var url = "";
     if (this.props.user === "DOCTOR") {

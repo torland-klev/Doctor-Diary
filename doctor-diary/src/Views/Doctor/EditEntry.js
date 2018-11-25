@@ -3,11 +3,7 @@ import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
 import DataElement from '../../Components/Report/DataElement.jsx';
 import DataElementForm from '../../Components/DataElementForm.js';
-
-const baseURL = "https://course.dhis2.org/dhis/api";
-var userNew = "AkselJ" //doctor
-var passNew = "District1-" //hardkodet for nå
-var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
+import Api from '../../Api.js';
 
 export default class EditEntry extends Component {
   constructor(props){
@@ -36,7 +32,7 @@ export default class EditEntry extends Component {
     const dataValues = this.props.location.state.report.dataValues;
     var promises = [];
     dataValues.forEach((el) => {
-      promises.push(this.fetchElementName(el.dataElement, el.value));
+      promises.push(Api.fetchElementName(el.dataElement, el.value));
     });
     Promise.all(promises)
     .then( (result) => {
@@ -48,31 +44,6 @@ export default class EditEntry extends Component {
       this.makeComponents();
     })
   }
-
-  fetchElementName(id, value){
-    //Fetch the attributes
-    const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Basic YWRtaW46ZGlzdHJpY3Q='
-      }
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        const el = responseJson;
-        var element = {
-          name: el.name,
-          id: id,
-          value: value
-        };
-        return element;
-      })
-      .catch((error) => {
-      }
-    );
-  }
-
 
   updateData() {
     var report = this.state.report;
@@ -132,22 +103,21 @@ export default class EditEntry extends Component {
 
   render(){
     this.updateData();
-    console.log(this.state.report.dueDate)
     return(
         <div>
             <Header title={this.state.title} />
             <main>
             <h1>Report for date {(String(this.state.report.dueDate)).substring(0, 10)}</h1>
               <table>
-                <tr>
-                </tr>
                 <tbody>
                     {this.state.rows}
                 </tbody>
                 <div id="errorMessage" type="text"></div>
               </table>
-              <a className="ReportPageButton" href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage}>Next</a>
-              <a className="ReportPageButton" href='/doctor'>Back</a>
+              <div className="NewButtonContainer">
+                <a href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage} className="ReportPageButton">Next</a>
+                <a href='/doctor' className='ReportPageButton'>Back</a>
+              </div>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>
