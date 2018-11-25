@@ -10,6 +10,7 @@ export default class ApproveReject extends Component {
   constructor(props) {
       super(props);
       this.state = {
+          title: "REVIEW REPORT",
           rows: [],
           newComment: "",
           oldComment: "",

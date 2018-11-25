@@ -48,11 +48,6 @@
     height: 40px;
 }
 
-.ReportListHolder{ /* UNUSED?*/
-    width:100%;
-    align-items: center;
-}
-
 .ReportListHolderFlex{
     display: flex;
     flex-direction: row;
@@ -71,6 +66,7 @@
     width: 200px;
 }
 
+/* Button styles*/
 .ReportPageButtonArrow{
   font-size: 10px;
   background-color: #bad5f4;
@@ -83,7 +79,9 @@
     padding: 5px;
     background-color: #bad5f4;
     border: 1px solid #373737;
-  }
+}
+
+
 /* Styling for list of units (OrganizationListItem) */
 .OrganizationListItem{
     font-size: calc(20px +2vmin);
@@ -107,7 +105,7 @@
     background: #D0E4F5;
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 50%;
+    width: 80vh;
     height: 30px;
     margin: 10px;
     font-size: 13px;
@@ -116,4 +114,23 @@
 .tableCenter{
     align-items: center;
     align-content: center;
+    padding: 5px;
+    max-width: 100%;
+}
+
+/* phone screens*/
+@media screen and (min-width:320px) and (max-width:480px){
+    .tableCenter{
+        align-items: center;
+        align-content: center;
+        padding: 5px;
+        max-width:auto!important;
+    }
+    .RadioGroup {
+        display: flex;
+        flex-direction: column;
+    }
+    .commentInput{
+        width: 50vh;
+    }
 }

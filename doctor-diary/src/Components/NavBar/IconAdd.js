@@ -2,7 +2,7 @@ import React from 'react';
 
 function IconAdd(props) {
     const addFill = props.addFill || 'white'
-    const addLink = props.addLink || '/doctor/newEntry'
+    const addLink = props.addLink || 'doctor/newEntry'
     return(
         <a href={addLink}>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" aria-labelledby="add">
