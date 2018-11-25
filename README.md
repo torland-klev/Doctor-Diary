@@ -6,8 +6,8 @@
 Our app is deployable, BUT our app is based on URL pathing, which doesn't seem to be supported in the platform. 
 We think this would be rather easy to fix by using memory-router instead of router. We tried to be prepared for all sorts of problems that could show up when deploying, and we started thinking about this once this requirement was published. But we had never heard that the routing could turn out to be a problem. Because the server was down for most of saturday, we did not have enough time to fix this.
 
-We have two versions of our code on GitHub. 
-* doctor-diary is the one you should use to run on localhost. 
+We have two versions of our code on GitHub:
+* doctor-diary is the one you should use to run on localhost. To decide which user type to be logged in as: Go in the Api.js file. Comment out either line nr.1 or line nr.2. This sets the authKey to either doctor or dho.
 * doctor-diary-deployable is the code that was prepared for the deploying. This will not run on localhost. The app will show up in the DHIS2 app store, but it will not function because of the routing issue.
 
 
