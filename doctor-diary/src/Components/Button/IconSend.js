@@ -1,7 +1,7 @@
 import React from 'react';
 
 function IconSend(props) {
-    const sendFill = "black";
+    const sendFill = "white";
     return(
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
         <path fill={sendFill} d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>

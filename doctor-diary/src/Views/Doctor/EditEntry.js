@@ -145,8 +145,9 @@ export default class EditEntry extends Component {
                 <div id="errorMessage" type="text"></div>
               </table>
               <div className="NewButtonContainer">
+              <a href='/doctor' className='ReportPageButton'>Back</a>
                 <a href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage} className="ReportPageButton">Next</a>
-                <a href='/doctor' className='ReportPageButton'>Back</a>
+                
               </div>
             </main>
             <NavBar addFill={this.state.active}/>

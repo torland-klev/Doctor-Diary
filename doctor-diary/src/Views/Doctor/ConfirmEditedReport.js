@@ -4,6 +4,7 @@ import NavBar from '../../Components/NavBar/NavBar.js';
 import Api from '../../Api.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
+import IconSend from '../../Components/Button/IconSend.js';
 
 export default class ConfirmEditedReport extends Component {
   constructor(props){
@@ -91,15 +92,16 @@ export default class ConfirmEditedReport extends Component {
         </main>
       </div>) :(
         <div>
-
+            <Header title={this.state.title} />
             <main>
-            <h1>New report for date {this.state.report.dueDate.substring(0, 10)}</h1>
+            <h2>New report for date {this.state.report.dueDate.substring(0, 10)}</h2>
             <table>
                 <tbody>
                     {this.state.rows}
                 </tbody>
             </table>
-            <button onClick={() => this.sendToAPI(this.state.report)}>Send</button>
+            <button className="SendButton" onClick={() => this.sendToAPI(this.state.report)}> <IconSend /> <b>SEND</b></button>
+
             </main>
             <NavBar addFill={this.state.active}/>
         </div>
