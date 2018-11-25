@@ -47,7 +47,6 @@ export default class NewEntry extends Component {
     if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
         for (var i=0; i<this.state.dataToBeStored.length; i++) {
             if (this.state.dataToBeStored[i].id == id) {
-                console.log(this.state.dataToBeStored[i])
                 this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
                 break;
             }
@@ -63,7 +62,6 @@ export default class NewEntry extends Component {
         if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
             for (var i=0; i<this.state.dataToBeStored.length; i++) {
                 if (this.state.dataToBeStored[i].id === id) {
-                    console.log(this.state.dataToBeStored[i]);
                     this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
                     break;
                 }

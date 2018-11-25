@@ -15,7 +15,6 @@ export default class ViewReport extends Component {
 
     componentDidMount(){
       const user = this.props.location.state.user;
-      console.log(user);
       if (user === "DOCTOR"){
         this.setState({backbuttonlink: '/doctor', title: 'DOCTOR VIEW REPORTS'});
       } else {
@@ -24,7 +23,7 @@ export default class ViewReport extends Component {
     }
 
     render() {
-      const {report} = this.props.location.state; 
+      const {report} = this.props.location.state;
       return (this.props.location.state.user === "DOCTOR") ? (
           <div>
               <Header title={this.state.title} />
