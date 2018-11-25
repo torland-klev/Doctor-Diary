@@ -48,6 +48,7 @@ export default class EditEntry extends Component {
       this.makeComponents();
     })
   }
+
   fetchElementName(id, value){
     //Fetch the attributes
     const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;
@@ -124,8 +125,6 @@ export default class EditEntry extends Component {
 
 
   saveToLocalStorage() {
-    console.log("Ready to save: ")
-    console.log(this.state.report)
     var key = "ready";
     localStorage.setItem("nameList", JSON.stringify(this.state.rowsDataElement));
     localStorage.setItem(key, JSON.stringify(this.state.report));
@@ -133,10 +132,12 @@ export default class EditEntry extends Component {
 
   render(){
     this.updateData();
+    console.log(this.state.report.dueDate)
     return(
         <div>
             <Header title={this.state.title} />
             <main>
+            <h1>Report for date {(String(this.state.report.dueDate)).substring(0, 10)}</h1>
               <table>
                 <tbody>
                     {this.state.rows}

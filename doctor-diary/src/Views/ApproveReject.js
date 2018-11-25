@@ -3,9 +3,7 @@ import Header from '../Components/Header/Header.js';
 import ReportHolder from '../Components/Report/ReportHolder.jsx';
 import {RadioGroup, RadioButton} from 'react-radio-buttons';
 import {Link} from 'react-router-dom';
-
-const authKey = 'Basic ' + btoa("BjarneB:District1-");
-const url = 'https://course.dhis2.org/dhis/api';
+import Api from '../Api.js';
 
 export default class ApproveReject extends Component {
   constructor(props) {
@@ -21,17 +19,7 @@ export default class ApproveReject extends Component {
       };
       this.updateComment = this.updateComment.bind(this);
       this.sendToAPi = this.sendToApi.bind(this);
-      this.UpdateDataToApi = this.UpdateDataToApi.bind(this);
   }
-
-  config = {
-    baseURL: url
-  };
-
-  setConfig = config => {
-    this.config = config;
-  };
-
 
   updateComment() {
       var newComment = document.getElementById("newComment").value
@@ -70,40 +58,14 @@ export default class ApproveReject extends Component {
       if(!hasStatus){
         report.dataValues.push({dataElement: "zrZADVnTtMa", value: this.state.status});
       }
-      this.UpdateDataToApi(report);
-  }
-
-  UpdateDataToApi(eventElement){
-
-      
-      var id = eventElement.event;
-      var self = this;
-
-      fetch(this.config.baseURL + "/events/" + id, {
-        method: 'PUT',
-        //credentials: 'include', //skal være med på deploy
-        mode: 'cors',
-        headers: {
-          'Authorization': authKey, //FJERNES VED DEPLOY
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(eventElement)
-      }).then(function(response) {
-
-        if(response.status === 200){
-          self.setState({success: true});
+      Api.UpdateDataToApiAR(report).then ( (status) => {
+        if(status === 200){
+          this.setState({success: true});
         } else {
-          self.setState({success: false, error: response.status});
+          this.setState({success: false, error: status});
         }
-        return response.json();
-      }).then(function(data) {
-
-        console.log(data);
-      })
+      });
   }
-
-
 
 render() {
     const report = this.props.location.state.report;

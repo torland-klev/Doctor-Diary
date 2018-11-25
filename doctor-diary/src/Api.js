@@ -5,13 +5,14 @@ const STATUS_ID = "zrZADVnTtMa";
 const FIRST_NAME_ID = "w75KJ2mc4zz";
 const LAST_NAME_ID = "zDhUuAYrxNC";
 
-class Api {
+class Api{
   config = {
-    baseURL: url
+    baseURL: ''
   };
 
   setConfig = config => {
     this.config = config;
+    console.log(config.baseURL);
   };
 
 
@@ -38,6 +39,29 @@ class Api {
 	      console.error(error);
 	    }
 		);
+  }
+
+  fetchOuName(id){
+    const url2 = '/organisationUnits/' + id;
+    var obj = {name: "", id: ""};
+    return fetch(this.config.baseURL + url2, {
+      method: 'GET',
+      headers: {
+        'Authorization': authKey
+      }
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        obj = {
+          name: responseJson.name,
+          id: id
+        }
+        return obj;
+      })
+      .catch((error) => {
+        console.error(error);
+      }
+    );
   }
 
   /****************************
@@ -160,13 +184,13 @@ class Api {
 	}
 
 	////////////////////////////////////
-	
+
 	/************************
   **from ConfirmSendReport*
   ************************/
 
  	findTeiOrgUnit(){
-	
+
 		var TeiOrgUnitID = "";
 
 		return fetch(this.config.baseURL + "/me", {
@@ -320,7 +344,7 @@ class Api {
 	//APP.JS
 
 	checkRole(){
-		
+
 		var role = "";
 		return fetch(this.config.baseURL + "/me", {
 			method: 'GET',
@@ -334,20 +358,20 @@ class Api {
 				//var doctorRoleID = "noe"; //for testing at man kommer til hjemsiden hvis ingen gyldig rolle
 				var dhoRoleID = "RYOicE8XVw9";
 				var roles = [];
-	
+
 				data.userCredentials.userRoles.forEach(element => {
 						roles.push(element.id);
 				})
-	
+
 				if(roles.includes(doctorRoleID)){
 					role="doctor";
 					return Promise.resolve(role);
-	
-	
+
+
 				}else if(roles.includes(dhoRoleID)){
 					role="dho"
 					return Promise.resolve(role);
-	
+
 				}
 			}).catch(function (error){
 				return "error";
@@ -355,8 +379,47 @@ class Api {
 		})
 	}
 
+  UpdateDataToApi(eventElement){
 
+      var id = eventElement.event;
 
+      fetch(this.config.baseURL + "/events/" + id, {
+        method: 'PUT',
+        //credentials: 'include', //skal være med på deploy
+        mode: 'cors',
+        headers: {
+          'Authorization': authKey, //FJERNES VED DEPLOY
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(eventElement)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+
+        console.log(data);
+      })
+  }
+
+/////////////////////////////
+// ApproveReject
+UpdateDataToApiAR(eventElement){
+    var id = eventElement.event;
+    var obj ={respone: "", status: 0};
+    return fetch(this.config.baseURL + "/events/" + id, {
+      method: 'PUT',
+      //credentials: 'include', //skal være med på deploy
+      mode: 'cors',
+      headers: {
+        'Authorization': authKey, //FJERNES VED DEPLOY
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(eventElement)
+    }).then(function(response) {
+      return response.status;
+    })
+}
 
 
 

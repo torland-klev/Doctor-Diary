@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
+import Api from '../../Api.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
-
-const baseURL = "https://course.dhis2.org/dhis/api";
-var userNew = "AkselJ" //doctor
-var passNew = "District1-" //hardkodet for nå
-var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
 
 export default class ConfirmEditedReport extends Component {
   constructor(props){
@@ -18,6 +14,7 @@ export default class ConfirmEditedReport extends Component {
       rows: [],
       tmpDataFromChild: "",
       tmpId: "",
+      sent: false,
     }
     this.updateData = this.updateData.bind(this)
     this.myCallback = this.myCallback.bind(this)
@@ -41,34 +38,20 @@ export default class ConfirmEditedReport extends Component {
     }
     this.state.tmpDataFromChild = null
     this.state.tmpId = null
-}
+  }
 
-
-sendToAPI() {
-  var report = this.state.report
-}
-
+  sendToAPI(report) {
+    this.setState({sent: true});
+    Api.UpdateDataToApi(report);
+  }
 
   componentWillMount(){
     var rep = localStorage.getItem("ready")
-<<<<<<< HEAD
-<<<<<<< HEAD
-    var rep2 = JSON.parse(rep)
-    this.state.report = rep2;
-    console.log("this.state.report")
-=======
-=======
-
->>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
     var report = JSON.parse(rep)
     this.state.report = report
     var nameList = JSON.parse(localStorage.getItem("nameList"))
     this.state.nameList = nameList
     console.log("this.state.report: ")
-<<<<<<< HEAD
->>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
-=======
->>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
     console.log(this.state.report)
     console.log("this.state.nameList: ")
     console.log(this.state.nameList)
@@ -99,18 +82,24 @@ sendToAPI() {
 
   render(){
     this.updateData();
-    console.log(this.state.report.dueDate);
-    return(
+    return (this.state.sent) ? (
+      <div>
+        <Header title={this.state.title} />
+        <main>
+          <h2>Report successfully edited</h2>
+          <a href='/' className='ReportPageButton'>Home</a>
+        </main>
+      </div>) :(
         <div>
 
             <main>
-            <h1>Report</h1>
+            <h1>New report for date {this.state.report.dueDate.substring(0, 10)}</h1>
             <table>
                 <tbody>
                     {this.state.rows}
                 </tbody>
             </table>
-
+            <button onClick={() => this.sendToAPI(this.state.report)}>Send</button>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>
