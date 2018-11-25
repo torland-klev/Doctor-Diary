@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReportListHolder from '../Report/ReportListHolder.jsx';
 import '../Components.css';
+import '../../index.css';
 import {RadioGroup, RadioButton} from 'react-radio-buttons';
 
 const STATUS_ID = "zrZADVnTtMa";
@@ -67,7 +68,6 @@ export default class HealthOfficerHome extends Component {
 	      responseJson.events.forEach((el) => {
           reports.push(el);
           var hasStatus = false;
-          var status = "";
           el.dataValues.forEach( (dv) => {
             if (dv.dataElement === STATUS_ID){
               hasStatus = true;
