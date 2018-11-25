@@ -65,7 +65,7 @@ export default class ConfirmEditedReport extends Component {
       }
     })
   }
-  
+
   render(){
     this.updateData();
     console.log(this.state.report.dueDate);
