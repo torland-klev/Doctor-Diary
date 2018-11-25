@@ -22,6 +22,7 @@ class Api{
   fetchReports(){
 		return fetch(this.config.baseURL + '/me', {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -45,6 +46,7 @@ class Api{
     var obj = {name: "", id: ""};
     return fetch(this.config.baseURL + url2, {
       method: 'GET',
+      mode: 'cors',
       headers: {
         'Authorization': authKey
       }
@@ -70,6 +72,7 @@ class Api{
   fetchReportsForList(url2){
 		return fetch(this.config.baseURL + url2, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -132,6 +135,7 @@ class Api{
 		const url2 = '/dataElements/' + id;
 		return fetch(this.config.baseURL+url2, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -161,6 +165,7 @@ class Api{
 		const url2 = '/trackedEntityInstances/' + id;
 		return fetch(this.config.baseURL+url2, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -194,6 +199,7 @@ class Api{
 
 		return fetch(this.config.baseURL + "/me", {
 				method: 'GET',
+        mode: 'cors',
 				headers: {
 					'Authorization': authKey
 				}
@@ -215,6 +221,7 @@ class Api{
 
 		return fetch(this.config.baseURL + filters, {
 				method: 'GET',
+        mode: 'cors',
 				headers: {
 					'Authorization': authKey
 				}
@@ -234,6 +241,7 @@ class Api{
 
 		return fetch(this.config.baseURL + "/programs/" + programID, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -280,6 +288,7 @@ class Api{
 
 		return fetch(this.config.baseURL + "/programs/" + programID, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -291,6 +300,7 @@ class Api{
 
 				return fetch(self.config.baseURL + "/programStages/" + programStageID,{
 					method: 'GET',
+          mode: 'cors',
 					headers: {
 					'Authorization': authKey
 					}
@@ -315,6 +325,7 @@ class Api{
 	findDataElementContent(id){
   	return fetch(this.config.baseURL + "/dataElements/" + id, {
   		method: 'GET',
+      mode: 'cors',
   		headers: {
   		'Authorization': authKey
   		}
@@ -342,6 +353,7 @@ class Api{
 		var role = "";
 		return fetch(this.config.baseURL + "/me", {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 			'Accept': 'application/json',
 			'Authorization': authKey,
