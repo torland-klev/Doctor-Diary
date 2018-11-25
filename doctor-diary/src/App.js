@@ -14,47 +14,7 @@ import DoctorHome from './Views/Doctor/DoctorHome.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
-
-function checkRole(){
-  const meAPI = "https://course.dhis2.org/dhis/api/me";
-  /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
-  var user = "BjarneB" // dho
-  // var user = "AkselJ" //doctor
-  var pass = "District1-" //hardkodet for nå
-  var authentKey = 'Basic ' + btoa(user + ':' + pass);
-  var role = "";
-  return fetch(meAPI, {
-    method: 'GET',
-    headers: {
-    'Accept': 'application/json',
-    'Authorization': authentKey,
-  }
-  }).then(function(response){
-    return response.json().then(data => {
-      var doctorRoleID = "kNIhGGdyWFp";
-      //var doctorRoleID = "noe"; //for testing at man kommer til hjemsiden hvis ingen gyldig rolle
-      var dhoRoleID = "RYOicE8XVw9";
-      var roles = [];
-
-      data.userCredentials.userRoles.forEach(element => {
-          roles.push(element.id);
-      })
-
-      if(roles.includes(doctorRoleID)){
-        role="doctor";
-        return Promise.resolve(role);
-
-
-      }else if(roles.includes(dhoRoleID)){
-        role="dho"
-        return Promise.resolve(role);
-
-      }
-    }).catch(function (error){
-      return "error";
-    })
-  }) ;
-}
+import Api from './Api.js';
 
 class App extends Component {
   constructor() {
@@ -65,7 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    checkRole().then(response => {
+    Api.checkRole().then(response => {
       this.setState({checkRoleResult: response});
     })
   }
