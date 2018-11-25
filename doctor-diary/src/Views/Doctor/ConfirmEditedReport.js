@@ -5,11 +5,6 @@ import Api from '../../Api.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
 
-const baseURL = "https://course.dhis2.org/dhis/api";
-var userNew = "AkselJ" //doctor
-var passNew = "District1-" //hardkodet for nå
-var authKey = 'Basic ' + btoa(userNew + ':' + passNew);
-
 export default class ConfirmEditedReport extends Component {
   constructor(props){
     super(props);

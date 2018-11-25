@@ -3,9 +3,8 @@ import Header from '../../Components/Header/Header.js';
 import OrganizationListHolder from '../../Components/Report/OrganizationListHolder.jsx';
 import Api from '../../Api.js';
 
-
-const url = 'https://course.dhis2.org/dhis/api';
 const authKey = 'Basic ' + btoa('BjarneB:District1-');
+const url = 'https://course.dhis2.org/dhis/api';
 /*
  * This is the start of the District Health Officer wild ride.
  * The entire DHO adventure is like a recurisve waterfall. One component
@@ -43,13 +42,6 @@ export default class HealthOfficerHome extends Component {
           sortSymbol: "sort list"
       }
   }
-  config = {
-    baseUrl: url
-  };
-
-  setConfig = config => {
-    this.config = config;
-  };
 
 
   /* When the component mounts, every teiSearchOrganisationUnit ID from /api/me
@@ -64,28 +56,11 @@ export default class HealthOfficerHome extends Component {
     Api.fetchReports().then( (ou) => {
       this.setState({ids: ou});
       ou.forEach( (el) => {
-        this.fetchOuName(el.id);
+        Api.fetchOuName(el.id).then( (result) => {
+          this.setState({i: this.state.i.concat([result.id]), n: this.state.n.concat([result.name])});
+        });
       })
     });
-  }
-
-  fetchOuName(id){
-    const url2 = '/organisationUnits/' + id;
-    return fetch(this.config.baseUrl + url2, {
-			method: 'GET',
-			headers: {
-				'Authorization': authKey
-			}
-		})
-			.then((response) => response.json())
-	    .then((responseJson) => {
-        this.setState({i: this.state.i.concat([id]), n: this.state.n.concat([responseJson.name])});
-	      return responseJson.name;
-	    })
-	    .catch((error) => {
-	      console.error(error);
-	    }
-		);
   }
 
   sortNumber(){
