@@ -47,6 +47,7 @@ export default class ConfirmEditedReport extends Component {
     var rep = localStorage.getItem("ready")
     var rep2 = JSON.parse(rep)
     this.state.report = rep2;
+    console.log("this.state.report")
     console.log(this.state.report)
     this.makeComponents();
   }
@@ -65,6 +66,7 @@ export default class ConfirmEditedReport extends Component {
       }
     })
   }
+
 
   render(){
     this.updateData();
