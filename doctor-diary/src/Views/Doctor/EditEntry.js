@@ -49,7 +49,6 @@ export default class EditEntry extends Component {
     })
   }
 
-
   fetchElementName(id, value){
     //Fetch the attributes
     const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;

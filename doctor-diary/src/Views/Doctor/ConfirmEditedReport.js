@@ -51,6 +51,7 @@ sendToAPI() {
 
   componentWillMount(){
     var rep = localStorage.getItem("ready")
+
     var report = JSON.parse(rep)
     this.state.report = report
     var nameList = JSON.parse(localStorage.getItem("nameList"))
