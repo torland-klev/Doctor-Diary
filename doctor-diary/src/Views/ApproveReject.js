@@ -13,10 +13,12 @@ export default class ApproveReject extends Component {
           rows: [],
           newComment: "",
           oldComment: "",
-          status: ""
+          status: "",
+          error: ""
       };
       this.updateComment = this.updateComment.bind(this);
       this.sendToAPi = this.sendToApi.bind(this);
+      this.UpdateDataToApi = this.UpdateDataToApi.bind(this);
   }
 
 
@@ -26,11 +28,19 @@ export default class ApproveReject extends Component {
   }
 
   sendToApi() {
+      if(!(this.state.status)){
+        this.setState({error: "Please select approve or reject"});
+        return;
+      }
+      this.setState({error: ""});
       var report = this.props.location.state.report;
       console.log(report);
+      var hasComment = false;
+      var hasStatus = false;
       report.dataValues.forEach((el) => {
           //Setting new comment:
           if (el.dataElement === "yiAhmn4q7wJ") {
+            hasComment = true;
             this.setState({oldComment: el.value})
             var d = new Date();
             var date = String(d.getDate()) + "." + String(d.getMonth()) + "."+ String(d.getFullYear());
@@ -39,12 +49,47 @@ export default class ApproveReject extends Component {
           }
           //Setting status (accepted/rejected):
           if (el.dataElement === "zrZADVnTtMa") {
+            hasStatus = false;
             el.value = this.state.status;
           }
-          //Sending the updated report back to api:
-
       })
+      //Element not in report, so adds them
+      if(!hasComment){
+        report.dataValues.push({dataElement: "yiAhmn4q7wJ", value: this.state.newComment});
+      }
+      if(!hasStatus){
+        report.dataValues.push({dataElement: "zrZADVnTtMa", value: this.state.status});
+      }
+      console.log(report);
+      this.UpdateDataToApi(report);
+
       console.log(report)
+  }
+
+  //Duplikat fra confirmsendreport med put
+  UpdateDataToApi(eventElement){
+
+      const authKey = 'Basic ' + btoa("BjarneB:District1-");
+      var id = eventElement.event;
+
+      fetch("https://course.dhis2.org/dhis/api/events/"+id, {
+        method: 'PUT',
+        //credentials: 'include', //skal være med på deploy
+        mode: 'cors',
+        headers: {
+          'Authorization': authKey, //FJERNES VED DEPLOY
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(eventElement)
+      }).then(function(response) {
+
+        //console.log(response);
+        return response.json();
+      }).then(function(data) {
+
+        console.log(data);
+      })
   }
 
 
@@ -57,17 +102,17 @@ render() {
             <main>
                 <h1>Report for {report.dueDate.substring(0, 10)}</h1>
                 <h2>Created by {report.storedBy}</h2>
-
+                <h2>{this.state.error}</h2>
                 <ReportHolder report={report} id="reportHolder"/>
 
                 <input className="commentInput" type="text" onKeyUp={this.updateComment} id="newComment" placeholder="ADD COMMENT" />
                 <div>
-                  <RadioGroup onChange={(value) => {this.setState({status: value})}} value='' horizontal>
-                    <RadioButton value="ACCEPT" padding={2} iconSize={7} iconInnerSize={7}>
-                      Accept
+                  <RadioGroup onChange={(value) => {this.setState({status: value})}} horizontal>
+                    <RadioButton value="APPROVED" padding={2} iconSize={7} iconInnerSize={7}>
+                      Approve
                     </RadioButton>
-                    <RadioButton value="DECLINE" padding={2} iconSize={7} iconInnerSize={7}>
-                      Decline
+                    <RadioButton value="REJECTED" padding={2} iconSize={7} iconInnerSize={7}>
+                      Rejected
                     </RadioButton>
                   </RadioGroup>
                 </div>
@@ -76,7 +121,7 @@ render() {
                     <Link className="ReportPageButton" to={{pathname: '/dho/reportlist/report', state: {report: report, id: this.props.location.state.id, user: 'DHO'}}}>
                       Back
                     </Link>
-                    <a href='/confirmFeedback' onClick={this.sendToAPi}> <button className="ReportPageButton">Submit</button></a>
+                    <a  onClick={this.sendToAPi}> <button className="ReportPageButton">Submit</button></a>
                 </div>
             </main>
         </div>
