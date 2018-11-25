@@ -1,17 +1,17 @@
 {
-    "version": "0.1.3",
-    "name": "Doctor Diary 20",
-    "description": "An application that lets a doctor report the different activities and challenges faced during a day. The report is then handled by a district health officer, who will accept or reject the report depending on the information given. A doctor will be able to correct a rejected report",
-    "launch_path": "/index.html",
-    "appType": "APP",
-    "developer": {
-        "name": "henriktk, jkriland, egwene, eliskir",
-		"url": "https://github.uio.no/egwene/IN5320_Project"
-    },
-    "default_locale": "en",
-    "activities": {
-        "dhis": {
-            "href": "*",
-        }
+  "version": "0.2.0",
+  "name": "Group 20 Doctor Diary",
+  "description": "An app to report the different activities and challenges faced by a doctor",
+  "launch_path": "/index.html",
+  "appType": "APP",
+  "developer": {
+    "name": "Group 20: henriktk, jkriland, egwene, eliskir",
+    "url": "https://github.uio.no/egwene/IN5320_Project"
+  },
+  "default_locale": "en",
+  "activities": {
+    "dhis": {
+      "href": "*"
     }
+  }
 }
