@@ -15,7 +15,8 @@ export default class ApproveReject extends Component {
           newComment: "",
           oldComment: "",
           status: "",
-          error: ""
+          error: "", //Error messages will be added to here
+          success: false //true is successfully sent
       };
       this.updateComment = this.updateComment.bind(this);
       this.sendToAPi = this.sendToApi.bind(this);
@@ -35,7 +36,6 @@ export default class ApproveReject extends Component {
       }
       this.setState({error: ""});
       var report = this.props.location.state.report;
-      console.log(report);
       var hasComment = false;
       var hasStatus = false;
       report.dataValues.forEach((el) => {
@@ -61,10 +61,7 @@ export default class ApproveReject extends Component {
       if(!hasStatus){
         report.dataValues.push({dataElement: "zrZADVnTtMa", value: this.state.status});
       }
-      console.log(report);
       this.UpdateDataToApi(report);
-
-      console.log(report)
   }
 
   //Duplikat fra confirmsendreport med put
@@ -72,6 +69,7 @@ export default class ApproveReject extends Component {
 
       const authKey = 'Basic ' + btoa("BjarneB:District1-");
       var id = eventElement.event;
+      var self = this;
 
       fetch("https://course.dhis2.org/dhis/api/events/"+id, {
         method: 'PUT',
@@ -85,7 +83,11 @@ export default class ApproveReject extends Component {
         body: JSON.stringify(eventElement)
       }).then(function(response) {
 
-        //console.log(response);
+        if(response.status === 200){
+          self.setState({success: true});
+        } else {
+          self.setState({success: false, error: response.status});
+        }
         return response.json();
       }).then(function(data) {
 
@@ -97,7 +99,16 @@ export default class ApproveReject extends Component {
 
 render() {
     const report = this.props.location.state.report;
-    return (
+    return (this.state.success) ? (
+        <div>
+          <Header title={this.state.title} />
+          <main>
+            Report successfully edited.
+            <a href='/' className='ReportPageButton'>Home</a>
+          </main>
+        </div>
+      )
+      : (
         <div>
             <Header title={this.state.title} />
             <main>
@@ -122,7 +133,7 @@ render() {
                     <Link className="ReportPageButton" to={{pathname: '/dho/reportlist/report', state: {report: report, id: this.props.location.state.id, user: 'DHO'}}}>
                       Back
                     </Link>
-                    <a  onClick={this.sendToAPi}> <button className="ReportPageButton">Submit</button></a>
+                    <a onClick={this.sendToAPi}> <button className="ReportPageButton">Submit</button></a>
                 </div>
             </main>
         </div>
