@@ -1,17 +1,18 @@
-const authKey = 'Basic ' + btoa('AkselJ:District1-');
-// const authKey = 'Basic ' + btoa('BjarneB:District1-');
-const url = 'https://course.dhis2.org/dhis/api';
+
+// const authKey = 'Basic ' + btoa('AkselJ:District1-');
+const authKey = 'Basic ' + btoa('BjarneB:District1-');
 const STATUS_ID = "zrZADVnTtMa";
 const FIRST_NAME_ID = "w75KJ2mc4zz";
 const LAST_NAME_ID = "zDhUuAYrxNC";
 
-class Api {
+class Api{
   config = {
-    baseURL: url
+    baseURL: ''
   };
 
   setConfig = config => {
     this.config = config;
+    console.log(config.baseURL);
   };
 
 
@@ -38,6 +39,29 @@ class Api {
 	      console.error(error);
 	    }
 		);
+  }
+
+  fetchOuName(id){
+    const url2 = '/organisationUnits/' + id;
+    var obj = {name: "", id: ""};
+    return fetch(this.config.baseURL + url2, {
+      method: 'GET',
+      headers: {
+        'Authorization': authKey
+      }
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        obj = {
+          name: responseJson.name,
+          id: id
+        }
+        return obj;
+      })
+      .catch((error) => {
+        console.error(error);
+      }
+    );
   }
 
   /****************************
@@ -377,6 +401,25 @@ class Api {
       })
   }
 
+/////////////////////////////
+// ApproveReject
+UpdateDataToApiAR(eventElement){
+    var id = eventElement.event;
+    var obj ={respone: "", status: 0};
+    return fetch(this.config.baseURL + "/events/" + id, {
+      method: 'PUT',
+      //credentials: 'include', //skal være med på deploy
+      mode: 'cors',
+      headers: {
+        'Authorization': authKey, //FJERNES VED DEPLOY
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(eventElement)
+    }).then(function(response) {
+      return response.status;
+    })
+}
 
 
 
