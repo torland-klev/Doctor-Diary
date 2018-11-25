@@ -79,7 +79,7 @@ export default class ApproveReject extends Component {
       var id = eventElement.event;
       var self = this;
 
-      fetch(this.config.baseURL+ "/events/" + id, {
+      fetch(this.config.baseURL + "/events/" + id, {
         method: 'PUT',
         //credentials: 'include', //skal være med på deploy
         mode: 'cors',
