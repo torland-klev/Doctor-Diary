@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import ReportListItem from '../Report/ReportListItem.jsx';
-import '../Components.css'
-import '../../index.css'
+import '../Components.css';
+import '../../index.css';
+import Api from '../../Api.js';
 
 /* Input: Array of reports/events
  * Displays: Creator and creation date of every report
  * Function: Can click on any given report to access it
  */
-
-const FIRST_NAME_ID = "w75KJ2mc4zz";
-const LAST_NAME_ID = "zDhUuAYrxNC";
 
 export default class ReportList extends Component{
 	constructor(props){
@@ -70,40 +68,12 @@ export default class ReportList extends Component{
 	updateReports(){
 		const reports = this.props.reports;
 		reports.forEach((el) => {
-			this.getTeiName(el.trackedEntityInstance).then((result) => {
+			Api.getTeiName(el.trackedEntityInstance).then((result) => {
 				this.setState({total: this.state.total-1, rows: this.state.rows.concat([
 					<ReportListItem user={this.props.user} report={el} id={this.props.id} creator={(result) ? result : "NO_NAME_GIVEN"} date={el.created} key={el.event}/>])
 				});
 			})
 		})
-	}
-
-	getTeiName(id){
-		var firstname = '';
-		var lastname = '';
-		//Fetch the attributes
-		const url = 'https://course.dhis2.org/dhis/api/trackedEntityInstances/' + id;
-		return fetch(url, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Basic YWRtaW46ZGlzdHJpY3Q='
-			}
-		})
-			.then((response) => response.json())
-	    .then((responseJson) => {
-	      responseJson.attributes.forEach((el) => {
-					if (el.attribute === FIRST_NAME_ID){
-						firstname = el.value;
-					}
-					else if (el.attribute === LAST_NAME_ID) {
-						lastname = el.value;
-					}
-				})
-				return (firstname + " " + lastname);
-	    })
-	    .catch((error) => {
-	    }
-		);
 	}
 
 	render() {

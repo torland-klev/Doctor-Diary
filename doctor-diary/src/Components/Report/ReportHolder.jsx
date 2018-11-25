@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import DataElement from '../Report/DataElement.jsx'
-import '../Components.css'
-import '../../index.css'
+import DataElement from '../Report/DataElement.jsx';
+import '../Components.css';
+import '../../index.css';
+import Api from '../../Api.js';
 
 export default class ReportHolder extends Component{
 	constructor(props){
@@ -22,35 +23,12 @@ export default class ReportHolder extends Component{
 	updateRows(){
 		const reports = this.props.report.dataValues;
 		reports.forEach((el) => {
-			this.fetchElementName(el.dataElement).then((result) => {
+			Api.fetchElementName(el.dataElement).then((result) => {
 				this.setState({rows: this.state.rows.concat([
 					<DataElement dataElement={result.name} value={el.value} key={result.id}/>])
 				});
 			})
 		})
-	}
-
-	fetchElementName(id){
-		//Fetch the attributes
-		const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;
-		return fetch(url, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Basic YWRtaW46ZGlzdHJpY3Q='
-			}
-		})
-			.then((response) => response.json())
-	    .then((responseJson) => {
-	      const el = responseJson;
-				var element = {
-					name: el.name,
-					id: id
-				};
-				return element;
-			})
-	    .catch((error) => {
-	    }
-		);
 	}
 
 	render() {

@@ -5,8 +5,6 @@ import {RadioGroup, RadioButton} from 'react-radio-buttons';
 import {Link} from 'react-router-dom';
 
 export default class ApproveReject extends Component {
-
-
   constructor(props) {
       super(props);
       this.state = {
@@ -119,7 +117,7 @@ render() {
 
                 <input className="commentInput" type="text" onKeyUp={this.updateComment} id="newComment" placeholder="ADD COMMENT" />
                 <div>
-                  <RadioGroup onChange={(value) => {this.setState({status: value})}} horizontal>
+                  <RadioGroup onChange={(value) => {this.setState({status: value})}}>
                     <RadioButton value="APPROVED" padding={2} iconSize={7} iconInnerSize={7}>
                       Approve
                     </RadioButton>

@@ -3,8 +3,7 @@ import ReportListHolder from '../Report/ReportListHolder.jsx';
 import '../Components.css';
 import '../../index.css';
 import {RadioGroup, RadioButton} from 'react-radio-buttons';
-
-const STATUS_ID = "zrZADVnTtMa";
+import Api from '../../Api.js';
 
 export default class HealthOfficerHome extends Component {
   constructor() {
@@ -31,8 +30,8 @@ export default class HealthOfficerHome extends Component {
   componentDidMount(){
     this.updateSize();
     window.addEventListener("resize", this.updateSize);
-
-    this.fetchReports().then((result) => {
+    const url = this.authenticate();
+    Api.fetchReportsForList(url).then((result) => {
       this.setState({reports: result.reports, approved: result.approved, rejected: result.rejected, pending: result.pending, others: result.others, noStatus: result.noStatus});
     });
   }
@@ -41,79 +40,22 @@ export default class HealthOfficerHome extends Component {
     this.setState({ web: window.innerWidth > 650 });
   }
 
-  fetchReports(){
+  authenticate(){
     var authKey = "";
     var id = "";
     var url = "";
     if (this.props.user === "DOCTOR") {
       //Doctor
-      var user = "AkselJ"; //doctor
-      var pass = "District1-"; //hardkodet for nå
       id = this.props.id;
-      authKey = 'Basic ' + btoa(user + ':' + pass);
-      url = 'https://course.dhis2.org/dhis/api/events?paging=false&trackedEntityInstance=' + id;
+      url = '/events?paging=false&trackedEntityInstance=' + id;
       this.setState({pathname: '/doctor'});
     } else {
       //DHO
       id = this.props.id;
-      authKey = 'Basic YWRtaW46ZGlzdHJpY3Q=';
-      url = 'https://course.dhis2.org/dhis/api/events?paging=false&orgUnit=' + id;
+      url = '/events?paging=false&orgUnit=' + id;
       this.setState({pathname: '/dho'});
     }
-
-		return fetch(url, {
-			method: 'GET',
-			headers: {
-				'Authorization': authKey
-			}
-		})
-			.then((response) => response.json())
-	    .then((responseJson) => {
-        var reports = [];
-        var approved = [];
-        var rejected = [];
-        var pending = [];
-        var others = [];
-        var noStatus = [];
-	      responseJson.events.forEach((el) => {
-          reports.push(el);
-          var hasStatus = false;
-          el.dataValues.forEach( (dv) => {
-            if (dv.dataElement === STATUS_ID){
-              hasStatus = true;
-              switch(dv.value.toUpperCase()){
-                case "APPROVED":
-                  approved.push(el);
-                  break;
-                case "REJECTED":
-                  rejected.push(el);
-                  break;
-                case "PENDING":
-                  pending.push(el);
-                  break;
-                default:
-                  others.push(el);
-              }
-            }
-          })
-          if(!hasStatus){
-            noStatus.push(el);
-          }
-				})
-        const results = {
-          reports: reports,
-          approved: approved,
-          rejected: rejected,
-          pending: pending,
-          others: others,
-          noStatus: noStatus
-        }
-        return results;
-	    })
-	    .catch((error) => {
-	      console.error(error);
-	    }
-		);
+    return url;
   }
 
   onRadioChange(value){
