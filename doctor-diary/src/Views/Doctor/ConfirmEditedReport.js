@@ -3,6 +3,7 @@ import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
 import Api from '../../Api.js';
 import DataElementForm from '../../Components/DataElementForm.js';
+import IconSend from '../../Components/Button/IconSend.js';
 
 /**
 This view lets the doctor user see a preview of the rejected report
@@ -92,6 +93,7 @@ export default class ConfirmEditedReport extends Component {
           <a href='/' className='ReportPageButton'>Home</a>
         </main>
       </div>) :(
+
       <div>
         <main>
           <h1>New report for date {this.state.report.dueDate.substring(0, 10)}</h1>

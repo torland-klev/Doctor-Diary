@@ -118,6 +118,7 @@ export default class EditEntry extends Component {
   render(){
     this.updateData();
     return(
+
       <div>
         <Header title={this.state.title} />
         <main>
@@ -135,6 +136,7 @@ export default class EditEntry extends Component {
         </main>
         <NavBar addFill={this.state.active}/>
       </div>
+
     );
   }
 
