@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
-import BackButton from '../../Components/Button/BackButton.js';
+import IconSend from '../../Components/Button/IconSend.js';
+import IconBack from '../../Components/Button/IconBack.js';
+import '../../Components/Components.css'
+
 import Api from '../../Api.js';
 
 
@@ -119,10 +122,10 @@ export default class ConfirmSendReport extends Component {
                             {this.state.rows}
                         </tbody>
                     </table>
-
-                    <button className="ReportPageButton" onClick={() => this.sendData()}>Send</button>
-                    <BackButton title={this.state.backbutton} link={this.state.backbuttonlink} />
-
+                    <div className="NewButtonContainer">
+                    <a href={this.state.backbuttonlink}><button className="ArrowButton"><IconBack /> <b>BACK</b></button></a>
+                    <button className="SendButton" onClick={() => this.sendData()}> <IconSend /> <b>SEND</b></button>
+                    </div>
                 </main>
             </div>
           )

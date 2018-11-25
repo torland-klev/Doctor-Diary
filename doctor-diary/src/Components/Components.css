@@ -80,6 +80,26 @@
     background-color: #bad5f4;
     border: 1px solid #373737;
 }
+.SendButton{
+    border: 1px solid #373737;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    border-radius:100%;
+}
+.ArrowButton{
+    border: 1px solid #373737;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ca0c0f;
+    border-radius:100%;
+}
 
 
 /* Styling for list of units (OrganizationListItem) */

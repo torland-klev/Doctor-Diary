@@ -17,6 +17,7 @@ import ConfirmEditedReport from './Views/Doctor/ConfirmEditedReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
 import Api from './Api.js';
 
+
 class App extends Component {
   constructor() {
     super();
