@@ -405,7 +405,6 @@ class Api{
 // ApproveReject
 UpdateDataToApiAR(eventElement){
     var id = eventElement.event;
-    var obj ={respone: "", status: 0};
     return fetch(this.config.baseURL + "/events/" + id, {
       method: 'PUT',
       //credentials: 'include', //skal være med på deploy

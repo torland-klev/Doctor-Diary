@@ -99,7 +99,7 @@ export default class ConfirmEditedReport extends Component {
                     {this.state.rows}
                 </tbody>
             </table>
-            <button onClick={() => this.sendToAPI(this.state.report)}>Send</button>
+            <button className="ReportPageButton" onClick={() => this.sendToAPI(this.state.report)}>Send</button>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>

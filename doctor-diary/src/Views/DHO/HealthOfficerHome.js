@@ -3,8 +3,6 @@ import Header from '../../Components/Header/Header.js';
 import OrganizationListHolder from '../../Components/Report/OrganizationListHolder.jsx';
 import Api from '../../Api.js';
 
-const authKey = 'Basic ' + btoa('BjarneB:District1-');
-const url = 'https://course.dhis2.org/dhis/api';
 /*
  * This is the start of the District Health Officer wild ride.
  * The entire DHO adventure is like a recurisve waterfall. One component
