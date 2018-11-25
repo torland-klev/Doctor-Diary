@@ -49,10 +49,14 @@ export default class EditEntry extends Component {
     })
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 >>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
+=======
+
+>>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
   fetchElementName(id, value){
     //Fetch the attributes
     const url = 'https://course.dhis2.org/dhis/api/dataElements/' + id;
@@ -133,9 +137,13 @@ export default class EditEntry extends Component {
     console.log(this.state.report)
     var key = "ready";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     localStorage.setItem("nameList", JSON.stringify(this.state.rowsDataElement));
 >>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
+=======
+    localStorage.setItem("nameList", JSON.stringify(this.state.rowsDataElement));
+>>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
     localStorage.setItem(key, JSON.stringify(this.state.report));
   }
 

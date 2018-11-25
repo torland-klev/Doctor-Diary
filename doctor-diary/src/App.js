@@ -15,6 +15,11 @@ import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import Api from './Api.js';
+
+>>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
 
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
@@ -56,9 +61,12 @@ function checkRole(){
     })
   }) ;
 }
+<<<<<<< HEAD
 =======
 import Api from './Api.js';
 >>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
+=======
+>>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
 
 class App extends Component {
   constructor() {
