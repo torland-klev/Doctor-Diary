@@ -103,7 +103,6 @@ export default class EditEntry extends Component {
 
   render(){
     this.updateData();
-    console.log(this.state.report.dueDate)
     return(
         <div>
             <Header title={this.state.title} />
