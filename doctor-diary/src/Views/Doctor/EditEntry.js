@@ -5,7 +5,20 @@ import DataElement from '../../Components/Report/DataElement.jsx';
 import DataElementForm from '../../Components/DataElementForm.js';
 import Api from '../../Api.js';
 
+/**
+This is the view where the doctor can edit a report that has been rejected
+by the DHO.
+It opens the rejected report in edit mode, meaning the dataValues appears
+in DataElementForms which populates the input-fields with the data from
+the report. The doctor can see the comment from the dho, and comment back
+if he needs to.
+When the next-button is clicked, the edited report gets put to localStorage,
+and the user is routed to ConfirmEditedReport.
+**/
+
 export default class EditEntry extends Component {
+
+
   constructor(props){
     super(props);
     this.state = {
@@ -24,9 +37,11 @@ export default class EditEntry extends Component {
     this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
   }
 
+
   componentWillMount(){
     this.updateRows();
   }
+
 
   updateRows(){
     const dataValues = this.props.location.state.report.dataValues;
@@ -45,6 +60,7 @@ export default class EditEntry extends Component {
     })
   }
 
+
   updateData() {
     var report = this.state.report;
     if (this.state.tmpId && this.state.tmpDataFromChild)  {
@@ -53,15 +69,12 @@ export default class EditEntry extends Component {
         if (this.state.tmpId === el.dataElement) {
           newElement = false
           el.value = this.state.tmpDataFromChild
-
-        //  this.setState(report: this.state.report.concat([putInList]))
         }
       })
       if (newElement) {
         var value = this.state.tmpDataFromChild
         var dataElement = this.state.tmpId
         var putInList = {dataElement: dataElement, value: value}
-        //this.setState(report: this.state.report.concat([putInList]));
       }
       this.setState({report: report});
       this.setState({tmpId: null});
@@ -73,7 +86,7 @@ export default class EditEntry extends Component {
   makeComponents() {
     var report = this.props.location.state.report;
     report.dataValues.forEach((el) => {
-      //Hvis det er statusen:
+      //Automatically sets status to pending:
       if (el.dataElement === "zrZADVnTtMa") {
         el.value = "Pending";
       }
@@ -101,26 +114,29 @@ export default class EditEntry extends Component {
     localStorage.setItem(key, JSON.stringify(this.state.report));
   }
 
+
   render(){
     this.updateData();
     return(
-        <div>
-            <Header title={this.state.title} />
-            <main>
-            <h1>Report for date {(String(this.state.report.dueDate)).substring(0, 10)}</h1>
-              <table>
-                <tbody>
-                    {this.state.rows}
-                </tbody>
-                <div id="errorMessage" type="text"></div>
-              </table>
-              <div className="NewButtonContainer">
-                <a href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage} className="ReportPageButton">Next</a>
-                <a href='/doctor' className='ReportPageButton'>Back</a>
-              </div>
-            </main>
-            <NavBar addFill={this.state.active}/>
-        </div>
+      <div>
+        <Header title={this.state.title} />
+        <main>
+          <h1>Report for date {(String(this.state.report.dueDate)).substring(0, 10)}</h1>
+            <table>
+              <tbody>
+                {this.state.rows}
+              </tbody>
+              <div id="errorMessage" type="text"></div>
+            </table>
+            <div className="NewButtonContainer">
+              <a href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage} className="ReportPageButton">Next</a>
+              <a href='/doctor' className='ReportPageButton'>Back</a>
+            </div>
+        </main>
+        <NavBar addFill={this.state.active}/>
+      </div>
     );
   }
+
+
 }

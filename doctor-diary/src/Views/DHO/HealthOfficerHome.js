@@ -28,16 +28,16 @@ import Api from '../../Api.js';
 
 export default class HealthOfficerHome extends Component {
   constructor() {
-      super();
+    super();
       this.state = {
-          title: "HEALTH OFFICER",
-          active: '#43CBCB',
-          homeLink: "/dho",
-          ids: [],
-          i: [],
-          n: [],
-          sort: 0,
-          sortSymbol: "sort list"
+        title: "HEALTH OFFICER",
+        active: '#43CBCB',
+        homeLink: "/dho",
+        ids: [],
+        i: [],
+        n: [],
+        sort: 0,
+        sortSymbol: "sort list"
       }
   }
 
@@ -61,6 +61,7 @@ export default class HealthOfficerHome extends Component {
     });
   }
 
+
   sortNumber(){
     var number = this.state.sort;
     if (number === 2){
@@ -75,6 +76,7 @@ export default class HealthOfficerHome extends Component {
     }
     return number;
   }
+
 
   render() {
     return (this.state.ids.length === this.state.i.length) ? (
