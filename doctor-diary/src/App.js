@@ -11,8 +11,6 @@ import ApproveReject from './Views/ApproveReject.js'
 
 /* Pages for Doctor */
 import DoctorHome from './Views/Doctor/DoctorHome.js';
-import Pending from './Views/Doctor/Pending.js';
-import Declined from './Views/Doctor/Declined.js';
 import NewEntry from './Views/Doctor/NewEntry.js';
 import ConfirmSendReport from './Views/Doctor/ConfirmSendReport.js';
 import EditEntry from './Views/Doctor/EditEntry.js';
@@ -21,7 +19,7 @@ import ConfirmEditedReport from './Views/Doctor/ConfirmEditedReport.js';
 function checkRole(){
   const meAPI = "https://course.dhis2.org/dhis/api/me";
   /** For å endre hvilken side dere ser på (dho/doctor) fjern // */
-  //var user = "BjarneB" // dho
+  // var user = "BjarneB" // dho
   var user = "AkselJ" //doctor
   var pass = "District1-" //hardkodet for nå
   var authentKey = 'Basic ' + btoa(user + ':' + pass);

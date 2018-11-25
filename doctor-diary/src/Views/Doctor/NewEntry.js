@@ -42,9 +42,9 @@ export default class NewEntry extends Component {
   }
 
 
-  saveToLocalStorage() {
-    localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
-  }
+    saveToLocalStorage() {
+        localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+    }
 
 
   updateData(id, dataFromChild) {
@@ -62,8 +62,28 @@ export default class NewEntry extends Component {
     this.state.tmpId = null
 }
 
+/*
 
+    updateData(id, dataFromChild) {
+        if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
+            for (var i=0; i<this.state.dataToBeStored.length; i++) {
+                if (this.state.dataToBeStored[i].id === id) {
+                    console.log(this.state.dataToBeStored[i]);
+                    this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
+                    break;
+                }
+            }
 
+            this.state.dataToBeStored.forEach((e) => {
+                if(e.id === id) {
+                    e.setState({dataContent: this.state.tmpDataFromChild})
+                    return;
+                }
+            })
+        }
+        this.setState({tmpDataFromChild: null}, {tmpId: null});
+    }
+*/
     myCallback(id, dataFromChild) {
           this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
     }
@@ -245,13 +265,11 @@ export default class NewEntry extends Component {
             <div>
                 <Header title={this.state.title} />
                 <main>
-                    <table>
+                    <table className="newEntryTable">
                         <tbody>
                             {this.state.rows}
                         </tbody>
                         <div id="errorMessage" type="text"></div>
-                        <a href='/doctor/newEntry/confirmSendReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
-                        <a href='/doctor' className='Home-button'>Back</a>
                     </table>
                     <div className="NewButtonContainer">
                         <a href='/doctor'><div className='ReportPageButton'>Back</div></a>

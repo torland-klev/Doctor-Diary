@@ -1,3 +1,23 @@
+/* laptop screens*/ 
+@media screen and (min-width: 700px) and (-webkit-min-device-pixel-ratio: 1) { 
+  header {
+    min-width: 600px;
+    max-width: 1200px;
+    min-height: 70px;
+    max-height: 87px;
+  }
+}
+
+/* phone screens*/
+@media screen and (min-width:320px) and (max-width:480px){
+  table td{
+    width:200px;
+  }
+  table{
+    align-content: center;
+  }
+}
+
 /* main for pages*/
 body {
   margin: 0;
@@ -37,7 +57,6 @@ main{
   flex-direction: column;
   align-items: center;
 }
-
 /* Link styling */
 a{
   color: black;
@@ -49,9 +68,30 @@ a:hover{
   text-decoration: underline;
 }
 
+/* Form styling */
+form.dataForm{
+  width: auto; 
+  padding: 15px;
+  border-bottom: 1px solid #373737;
+}
+
+form.dataForm input {
+  font-size: 13px;
+  border: none;
+  border-bottom: 1px solid #276696;
+  float: right;
+  height: 15px;
+}
+form.dataForm label {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
 /* Placeholder styling */
 input::placeholder{
-  text-align: center;
+  text-align: left;
 }
 input:focus::-webkit-input-placeholder { color:transparent; }
 input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
@@ -63,6 +103,7 @@ table{
   border: 1px solid #373737;
   width: auto;
   margin: 5px;
+  padding: 5px;
   text-align: left;
   border-collapse: collapse;
   align-items: center;
@@ -74,6 +115,9 @@ table, td, th {
 table tbody td {
   font-size: 13px;
 }
+table td{
+  width:500px;
+}
 table tr:nth-child(even) {
   background: #D0E4F5;
 }
@@ -83,51 +127,18 @@ table th {
   border-bottom: 1px solid #373737;
 }
 
+table.newEntryTable {
+  width: auto;
+  text-align: left;
+  align-items: center;
+  padding: 5px;
+}
+table.newEntryTable tbody td {
+  font-size: 13px;
+  padding: 5px;
+}
 
 /* List styling*/
 li{
   list-style-type: none;
-}
-
-/* laptop screens*/ 
-@media screen and (min-width: 700px) and (-webkit-min-device-pixel-ratio: 1) { 
-  header {
-    min-width: 600px;
-    max-width: 1200px;
-    min-height: 70px;
-    max-height: 87px;
-  }
-}
-
-/* phone screens*/
-@media screen and (min-width:320px) and (max-width:480px){
-   .NewEntry-section{
-     flex-direction: row;
-     flex-wrap: wrap;
-     flex-basis: 0;
-     flex-grow: 1;
-   }
-   .NewEntry-input{
-    border: 1px solid #276696;
-    border-radius: 5px;
-   }
- }
-
-/* Views */
-.Home-iconcontainer{
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  align-content: flex-start;
-  text-align: center;
-}
-
-.NewEntry-section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 5px;
-}
-.NewEntry-input{
-  font-size: 18px;
 }

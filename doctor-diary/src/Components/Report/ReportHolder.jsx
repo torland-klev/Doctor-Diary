@@ -54,21 +54,9 @@ export default class ReportHolder extends Component{
 	}
 
 	render() {
-		var comment = "";
-
-    // dataValues.forEach((el) => {
-		// 	if (el.dataElement === "yiAhmn4q7wJ") {
-		// 		comment = el.value;
-		// 	}
-    //   rows.push(
-    //     <DataElement
-    //       dataElement={el.dataElement}
-    //       value={el.value}
-    //       key={el.dataElement}/>);
-    // })
-
     /** TODO: Style the table */
 		return (
+			<div>
       <table>
         <tbody>
           <tr>
@@ -78,6 +66,7 @@ export default class ReportHolder extends Component{
           {this.state.rows}
         </tbody>
       </table>
+			</div>
 		);
 	}
 

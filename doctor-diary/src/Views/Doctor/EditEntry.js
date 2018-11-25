@@ -120,7 +120,7 @@ export default class EditEntry extends Component {
     localStorage.setItem(key, value);
   }
 
-
+    
   render(){
     this.updateData();
     return(
