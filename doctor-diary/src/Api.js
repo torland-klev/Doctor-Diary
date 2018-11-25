@@ -1,5 +1,5 @@
-//const authKey = 'Basic ' + btoa('AkselJ:District1-');
-const authKey = 'Basic ' + btoa('BjarneB:District1-');
+const authKey = 'Basic ' + btoa('AkselJ:District1-');
+//const authKey = 'Basic ' + btoa('BjarneB:District1-');
 const url = 'https://course.dhis2.org/dhis/api';
 const STATUS_ID = "zrZADVnTtMa";
 const FIRST_NAME_ID = "w75KJ2mc4zz";

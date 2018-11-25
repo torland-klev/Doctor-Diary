@@ -122,9 +122,10 @@ export default class ConfirmSendReport extends Component {
                             {this.state.rows}
                         </tbody>
                     </table>
+
                     <div className="NewButtonContainer">
-                    <a href={this.state.backbuttonlink}><button className="ArrowButton"><IconBack /> <b>BACK</b></button></a>
-                    <button className="SendButton" onClick={() => this.sendData()}> <IconSend /> <b>SEND</b></button>
+                        <a href={this.state.backbuttonlink}><button className="ArrowButton"><IconBack /> <b>BACK</b></button></a>
+                        <button className="SendButton" onClick={() => this.sendData()}> <IconSend /> <b>SEND</b></button>
                     </div>
                 </main>
             </div>
