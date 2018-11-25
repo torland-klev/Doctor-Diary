@@ -12,7 +12,6 @@ class Api{
 
   setConfig = config => {
     this.config = config;
-    console.log(config.baseURL);
   };
 
 
@@ -23,6 +22,7 @@ class Api{
   fetchReports(){
 		return fetch(this.config.baseURL + '/me', {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -46,6 +46,7 @@ class Api{
     var obj = {name: "", id: ""};
     return fetch(this.config.baseURL + url2, {
       method: 'GET',
+      mode: 'cors',
       headers: {
         'Authorization': authKey
       }
@@ -71,6 +72,7 @@ class Api{
   fetchReportsForList(url2){
 		return fetch(this.config.baseURL + url2, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -133,6 +135,7 @@ class Api{
 		const url2 = '/dataElements/' + id;
 		return fetch(this.config.baseURL+url2, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -162,6 +165,7 @@ class Api{
 		const url2 = '/trackedEntityInstances/' + id;
 		return fetch(this.config.baseURL+url2, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -195,6 +199,7 @@ class Api{
 
 		return fetch(this.config.baseURL + "/me", {
 				method: 'GET',
+        mode: 'cors',
 				headers: {
 					'Authorization': authKey
 				}
@@ -214,9 +219,9 @@ class Api{
 
 		var filters = "/trackedEntityInstances.json?ou=" + teiOrgID + "&program=" + programID;
 
-		console.log(filters);
 		return fetch(this.config.baseURL + filters, {
 				method: 'GET',
+        mode: 'cors',
 				headers: {
 					'Authorization': authKey
 				}
@@ -236,6 +241,7 @@ class Api{
 
 		return fetch(this.config.baseURL + "/programs/" + programID, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -264,9 +270,6 @@ class Api{
 		}).then(function(response) {
 
 			return response.json();
-		}).then(function(data) {
-
-			console.log(data);
 		})
 	}
 
@@ -285,6 +288,7 @@ class Api{
 
 		return fetch(this.config.baseURL + "/programs/" + programID, {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 				'Authorization': authKey
 			}
@@ -296,6 +300,7 @@ class Api{
 
 				return fetch(self.config.baseURL + "/programStages/" + programStageID,{
 					method: 'GET',
+          mode: 'cors',
 					headers: {
 					'Authorization': authKey
 					}
@@ -318,26 +323,26 @@ class Api{
 
 
 	findDataElementContent(id){
-	return fetch(this.config.baseURL + "/dataElements/" + id, {
-		method: 'GET',
-		headers: {
-		'Authorization': authKey
-		}
-	}).then(function (response){
-		return response.json().then(function (data){
+  	return fetch(this.config.baseURL + "/dataElements/" + id, {
+  		method: 'GET',
+      mode: 'cors',
+  		headers: {
+  		'Authorization': authKey
+  		}
+  	}).then(function (response){
+  		return response.json().then(function (data){
 
-		var newElement = {
-				"name": data.name,
-				"id": data.id,
-				"valueType": data.valueType,
-		};
+  		var newElement = {
+  				"name": data.name,
+  				"id": data.id,
+  				"valueType": data.valueType,
+  		};
 
-		return newElement;
-		}).catch(function (error){
-
-		//console.log(error);
-		})
-	})
+  		return newElement;
+  		}).catch(function (error){
+        console.error(error);
+  		})
+  	})
 	}
 
 /////////////////////////////
@@ -348,6 +353,7 @@ class Api{
 		var role = "";
 		return fetch(this.config.baseURL + "/me", {
 			method: 'GET',
+      mode: 'cors',
 			headers: {
 			'Accept': 'application/json',
 			'Authorization': authKey,
@@ -381,31 +387,27 @@ class Api{
 
   UpdateDataToApi(eventElement){
 
-      var id = eventElement.event;
+    var id = eventElement.event;
 
-      fetch(this.config.baseURL + "/events/" + id, {
-        method: 'PUT',
-        //credentials: 'include', //skal være med på deploy
-        mode: 'cors',
-        headers: {
-          'Authorization': authKey, //FJERNES VED DEPLOY
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(eventElement)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(data) {
-
-        console.log(data);
-      })
+    fetch(this.config.baseURL + "/events/" + id, {
+      method: 'PUT',
+      //credentials: 'include', //skal være med på deploy
+      mode: 'cors',
+      headers: {
+        'Authorization': authKey, //FJERNES VED DEPLOY
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(eventElement)
+    }).then(function(response) {
+      return response.json();
+    })
   }
 
 /////////////////////////////
 // ApproveReject
 UpdateDataToApiAR(eventElement){
     var id = eventElement.event;
-    var obj ={respone: "", status: 0};
     return fetch(this.config.baseURL + "/events/" + id, {
       method: 'PUT',
       //credentials: 'include', //skal være med på deploy
