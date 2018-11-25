@@ -13,7 +13,7 @@ export default class EditEntry extends Component {
   constructor(props){
     super(props);
     this.state = {
-      report: "",
+      report: [],
       rows: [],
       rowsDataElement: [],
       tmpDataFromChild: "",
@@ -28,7 +28,7 @@ export default class EditEntry extends Component {
     this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.updateRows();
   }
 
@@ -75,36 +75,49 @@ export default class EditEntry extends Component {
     );
   }
 
+
   updateData() {
-    if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
-        this.props.location.state.report.dataValues.forEach((el) => {
-          if (el.dataElement.id === this.state.tmpId) {
-            el.value = this.state.tmpDataFromChild
-          }
-        })
+    if (this.state.tmpId != null && this.state.tmpDataFromChild != null)  {
+      var newElement = true
+      this.state.report.dataValues.forEach((el) => {
+        if (this.state.tmpId === el.dataElement) {
+          newElement = false
+          el.value = this.state.tmpDataFromChild
+
+        //  this.setState(report: this.state.report.concat([putInList]))
+        }
+      })
+      if (newElement) {
+        var value = this.state.tmpDataFromChild
+        var dataElement = this.state.tmpId
+        var putInList = {dataElement: dataElement, value: value}
+        //this.setState(report: this.state.report.concat([putInList]));
+      }
+      this.setState({tmpId: null})
+      this.setState({tmpDataFromChild: null})
     }
-    this.state.tmpDataFromChild = null
-    this.state.tmpId = null
   }
 
 
   makeComponents() {
-    console.log(this.state.rowsDataElement);
-    console.log(this.props.location.state.report);
-    this.props.location.state.report.dataValues.forEach((el) => {
+    console.log("REPORT:")
+    console.log(this.state.report)
+    //this.props.location.state.report
+    this.state.report.dataValues.forEach((el) => {
       //Hvis det er statusen:
       if (el.dataElement === "zrZADVnTtMa") {
         el.value = "Pending";
       }
       else {
         for (var i=0; i<this.state.rowsDataElement.length; i++) {
-          if (this.state.rowsDataElement[i].id === el.DataElement) {
-            var name = this.state.rowsDataElement[i].name
-            var id = this.state.rowsDataElement[i].id
-            var valueType = this.state.rowsDataElement[i].valueType
+          if (this.state.rowsDataElement[i].key === el.dataElement) {
+            var name = this.state.rowsDataElement[i].props.dataElement
+            var id = this.state.rowsDataElement[i].key
+            var valueType = this.state.rowsDataElement[i].props.value
             var newDataElementForm = React.createElement(DataElementForm, {id: id, name: name, valueType: valueType, dataContent: el.value, callbackFromParent: this.myCallback}, null)
             var htmlDataElementContainer = React.createElement("div", null, newDataElementForm)
             this.state.rows.push(htmlDataElementContainer)
+            break;
           }
         }
       }
@@ -114,28 +127,27 @@ export default class EditEntry extends Component {
 
 
   saveToLocalStorage() {
-    var v = this.state.report;
-    var value = JSON.stringify(v);
+    console.log("Ready to save: ")
+    console.log(this.state.report)
     var key = "ready";
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, JSON.stringify(this.state.report));
   }
 
   render(){
     this.updateData();
+    //href='/doctor/editEntry/confirmEditedReport'
     return(
         <div>
             <Header title={this.state.title} />
             <main>
               <table>
                 <tr>
-                  <th>Question</th>{/** Data element */}
-                  <th>Answer</th>{/** Value */}
                 </tr>
                 <tbody>
                     {this.state.rows}
                 </tbody>
                 <div id="errorMessage" type="text"></div>
-                <a href='/doctor/editEntry/confirmEditedReport' onClick={this.saveToLocalStorage} className="Home-button">Next</a>
+                <a  onClick={this.saveToLocalStorage} className="Home-button">Next</a>
                 <a href='/doctor' className='Home-button'>Back</a>
               </table>
             </main>
