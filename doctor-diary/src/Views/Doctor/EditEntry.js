@@ -119,7 +119,8 @@ export default class EditEntry extends Component {
     var key = "ready"
     localStorage.setItem(key, value);
   }
-  
+
+    
   render(){
     this.updateData();
     return(
