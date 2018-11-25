@@ -13,7 +13,8 @@ export default class ConfirmEditedReport extends Component {
   constructor(props){
     super(props);
     this.state = {
-      report: "",
+      report: [],
+      nameList: [],
       rows: [],
       tmpDataFromChild: "",
       tmpId: "",
@@ -43,28 +44,58 @@ export default class ConfirmEditedReport extends Component {
 }
 
 
+sendToAPI() {
+  var report = this.state.report
+}
+
+
   componentWillMount(){
     var rep = localStorage.getItem("ready")
+<<<<<<< HEAD
+<<<<<<< HEAD
     var rep2 = JSON.parse(rep)
     this.state.report = rep2;
+    console.log("this.state.report")
+=======
+=======
+
+>>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
+    var report = JSON.parse(rep)
+    this.state.report = report
+    var nameList = JSON.parse(localStorage.getItem("nameList"))
+    this.state.nameList = nameList
+    console.log("this.state.report: ")
+<<<<<<< HEAD
+>>>>>>> 4d0721134b66c9c3e709c53c6815a3d8a169bbee
+=======
+>>>>>>> 9384b404ceb8db46d77f2992a1fb68e50fd9487b
     console.log(this.state.report)
+    console.log("this.state.nameList: ")
+    console.log(this.state.nameList)
     this.makeComponents();
   }
 
 
   makeComponents() {
-    var rep = this.state.report.dataValues
-    rep.forEach((el) => {
-      //Hvis det er statusen:
-      if (!(el.dataElement === "zrZADVnTtMa")) {
-        this.state.rows.push(<tr><p type="text" id={el.name}>{el.name}</p></tr>)
-        this.state.rows.push(<tr><p type="text" id={el.value}>{el.value}</p></tr>)
-        console.log(el.name)
-        console.log(el.value)
-        console.log(el.dataElement)
+    console.log("THIS REPORT: ")
+    console.log(this.state.report)
+    for (var i=0; i<this.state.report.dataValues.length; i++) {
+      console.log("this.state.report[i].dataElement")
+      console.log(this.state.report.dataValues[i].dataElement)
+      if (!(this.state.report.dataValues[i].dataElement === "zrZADVnTtMa")) {
+        for (var j=0; j<this.state.nameList.length; j++) {
+          if (this.state.nameList[i].key === this.state.report.dataValues[i].dataElement) {
+              this.state.rows.push(<tr><p type="text" id={this.state.nameList[i].props.dataElement}>{this.state.nameList[i].props.dataElement}</p></tr>)
+              this.state.rows.push(<tr><p type="text" id={this.state.report.dataValues[i].value}>{this.state.report.dataValues[i].value}</p></tr>)
+              break;
+          }
+        }
       }
-    })
+    }
+    localStorage.removeItem("ready")
+    localStorage.removeItem("nameList")
   }
+
 
   render(){
     this.updateData();
