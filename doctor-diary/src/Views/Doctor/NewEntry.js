@@ -42,9 +42,9 @@ export default class NewEntry extends Component {
   }
 
 
-  saveToLocalStorage() {
-    localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
-  }
+    saveToLocalStorage() {
+        localStorage.setItem(this.state.fullDate, JSON.stringify(this.state.dataToBeStored));
+    }
 
 
   updateData(id, dataFromChild) {
@@ -62,8 +62,28 @@ export default class NewEntry extends Component {
     this.state.tmpId = null
 }
 
+/*
 
+    updateData(id, dataFromChild) {
+        if (this.state.tmpId != null && this.state.tmpDataFromChild != null) {
+            for (var i=0; i<this.state.dataToBeStored.length; i++) {
+                if (this.state.dataToBeStored[i].id === id) {
+                    console.log(this.state.dataToBeStored[i]);
+                    this.state.dataToBeStored[i].dataContent = this.state.tmpDataFromChild;
+                    break;
+                }
+            }
 
+            this.state.dataToBeStored.forEach((e) => {
+                if(e.id === id) {
+                    e.setState({dataContent: this.state.tmpDataFromChild})
+                    return;
+                }
+            })
+        }
+        this.setState({tmpDataFromChild: null}, {tmpId: null});
+    }
+*/
     myCallback(id, dataFromChild) {
           this.setState({tmpDataFromChild: dataFromChild, tmpId: id})
     }
