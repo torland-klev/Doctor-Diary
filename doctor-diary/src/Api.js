@@ -1,159 +1,386 @@
-/* TODO: SLETTE DENNE FILEN? */
-
-const baseURL = "https://course.dhis2.org/dhis/api/";
+const authKey = 'Basic ' + btoa('AkselJ:District1-');
+// const authKey = 'Basic ' + btoa('BjarneB:District1-');
+const url = 'https://course.dhis2.org/dhis/api';
+const STATUS_ID = "zrZADVnTtMa";
+const FIRST_NAME_ID = "w75KJ2mc4zz";
+const LAST_NAME_ID = "zDhUuAYrxNC";
 
 class Api {
+  config = {
+    baseURL: url
+  };
 
-    /*
-    TILTENKT AA BRUKES FOR AA KOMBINERE checkAuthentication og getDoctorDiaryRoles
-
-
-    roles = {
-        'doctorID': '',
-        'dhoID': ''
-    };
-
-    rolesSetup(doctorID, dhoID){
-
-        this.roles.doctorID = doctorID;
-        this.roles.dhoID = dhoID;
-
-        console.log("NEW doctorID: " + doctorID + " | NEW dhoID: " + dhoID);
-    }
-
-    printRoles(){
-
-        console.log("printRoles: " + this.roles.doctorID + " | " + this.roles.dhoID);
+  setConfig = config => {
+    this.config = config;
+  };
 
 
-    }
-    */
+  /*******************************
+  ***  From HealthOfficerHome  ***
+  *******************************/
 
+  fetchReports(){
+		return fetch(this.config.baseURL + '/me', {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+        var ou = [];
+	      responseJson.teiSearchOrganisationUnits.forEach((el) => {
+          ou.push(el);
+				})
+        return ou;
+	    })
+	    .catch((error) => {
+	      console.error(error);
+	    }
+		);
+  }
 
-    /* Tror dette kan gjøres i App.js */
+  /****************************
+  ***  From MainReportList  ***
+  ****************************/
 
-
-    checkAuthenication(user, pass){
-        var authKey = 'Basic ' + btoa(user + ':' + pass);
-
-        return fetch(baseURL + '/me', {
-            method: 'GET', 
-            headers: {
-            'Accept': 'application/json',
-            'Authorization': authKey,
+  fetchReportsForList(url2){
+		return fetch(this.config.baseURL + url2, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+        var reports = [];
+        var approved = [];
+        var rejected = [];
+        var pending = [];
+        var others = [];
+        var noStatus = [];
+	      responseJson.events.forEach((el) => {
+          reports.push(el);
+          var hasStatus = false;
+          el.dataValues.forEach( (dv) => {
+            if (dv.dataElement === STATUS_ID){
+              hasStatus = true;
+              switch(dv.value.toUpperCase()){
+                case "APPROVED":
+                  approved.push(el);
+                  break;
+                case "REJECTED":
+                  rejected.push(el);
+                  break;
+                case "PENDING":
+                  pending.push(el);
+                  break;
+                default:
+                  others.push(el);
+              }
             }
-        }).then(function(response){ 
-            
-            var profile = {
-                'exists': false,
-                'user': "",
-                'role': "",
-            };
+          })
+          if(!hasStatus){
+            noStatus.push(el);
+          }
+				})
+        const results = {
+          reports: reports,
+          approved: approved,
+          rejected: rejected,
+          pending: pending,
+          others: others,
+          noStatus: noStatus
+        }
+        return results;
+	    })
+	    .catch((error) => {
+	      console.error(error);
+	    }
+		);
+  }
 
-            return response.json().then(function (data){
+  /**************************
+  ***  From ReportHolder  ***
+  **************************/
 
-                //var orgTarget = "ImspTQPwCqd"
-                var doctorRoleID = "kNIhGGdyWFp";
-                var dhoRoleID = "RYOicE8XVw9";
+  fetchElementName(id){
+		//Fetch the attributes
+		const url2 = '/dataElements/' + id;
+		return fetch(this.config.baseURL+url2, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+	      const el = responseJson;
+				var element = {
+					name: el.name,
+					id: id
+				};
+				return element;
+			})
+	    .catch((error) => {
+	    }
+		);
+	}
 
-                var user = data.name;
-                var userRoles = [];
-            
-                data.userCredentials.userRoles.forEach(element => {
-                    userRoles.push(element.id);
-                })
+  /************************
+  ***  From ReportList  ***
+  ************************/
 
-                if(userRoles.includes(doctorRoleID)){
-                        
-                    //console.log("inne i doctor");
-            
-                    profile.exists = true;
-                    profile.user = user;
-                    profile.role = "doctor";
-                        
-                }else if(userRoles.includes(dhoRoleID)){
-            
-                    //console.log("inne i dho");
-            
-                    profile.exists = true;
-                    profile.user = user;
-                    profile.role = "dho";
-                }
-                
-                return profile;
-            }).catch(function (error){
-                console.log("User not found");
-                return profile;
-            }) 
-        }) 
-    }
+  getTeiName(id){
+		var firstname = '';
+		var lastname = '';
+		//Fetch the attributes
+		const url2 = '/trackedEntityInstances/' + id;
+		return fetch(this.config.baseURL+url2, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		})
+			.then((response) => response.json())
+	    .then((responseJson) => {
+	      responseJson.attributes.forEach((el) => {
+					if (el.attribute === FIRST_NAME_ID){
+						firstname = el.value;
+					}
+					else if (el.attribute === LAST_NAME_ID) {
+						lastname = el.value;
+					}
+				})
+				return (firstname + " " + lastname);
+	    })
+	    .catch((error) => {
+	    }
+		);
+	}
 
-    //Ikke i bruk noen steder
-    getDoctorDiaryRoles(user, pass){
-    
-        var authKey = 'Basic ' + btoa(user + ':' + pass);
+	////////////////////////////////////
 
-        return fetch(baseURL + '/userRoles', {
-            method: 'GET', 
-            headers: {
-            'Accept': 'application/json',
-            'Authorization': authKey,
-            }
-        }).then(function(response){ 
+	/************************
+  **from ConfirmSendReport*
+  ************************/
 
-            //var diaryRoles = [];
+ 	findTeiOrgUnit(){
 
-            return response.json().then(function (data){
+		var TeiOrgUnitID = "";
 
-                //console.log(data);
+		return fetch(this.config.baseURL + "/me", {
+				method: 'GET',
+				headers: {
+					'Authorization': authKey
+				}
+			}).then(function (response){
+				return response.json();
+			}).then(function (data){
 
-                var dho = '';
-                var doc = '';
+				TeiOrgUnitID = data.teiSearchOrganisationUnits[0].id;
 
-                data.userRoles.forEach(element => {
+				return TeiOrgUnitID;
+			})
+	}
 
-                    /*
-                    var role = {
+	findTrackedEntityInstance(teiOrgID, programID){
 
-                        'roleName': "",
-                        'roleID': "",
-                    }
-                    */
+		var trackedEntityID = "";
 
-                    if(element.displayName === "DHO"){
+		var filters = "/trackedEntityInstances.json?ou=" + teiOrgID + "&program=" + programID;
 
-                        //role.roleName = "DHO";
-                        //role.roleID = element.id;
-                        //diaryRoles.push(role);
+		console.log(filters);
+		return fetch(this.config.baseURL + filters, {
+				method: 'GET',
+				headers: {
+					'Authorization': authKey
+				}
+			}).then(function (response){
+				return response.json();
+			}).then(function (data){
+				trackedEntityID = data.trackedEntityInstances[0].trackedEntityInstance;
 
-                        dho = element.id;
-                    }
+				return trackedEntityID;
+			})
+	}
 
-                    if(element.displayName === "Doctor"){
-                        
-                        //role.roleName = "Doctor";
-                        //role.roleID = element.id;
-                        //diaryRoles.push(role);
+	findProgramStage(){
 
-                        doc = element.id;
-                    }
-                    
-                })
-                console.log("OPPDATERER! " + doc + " " + dho);
-                this.rolesSetup(doc, dho);
-                //return diaryRoles;
+		var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
+		var programStageID = "";
 
-            }).catch(function (error){
+		return fetch(this.config.baseURL + "/programs/" + programID, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		}).then(function (response){
+			return response.json();
+		}).then(function (data){
 
-                //console.log(error);
-            })
-        })
+				programStageID = data.programStages[0].id;
 
-    }
+				return programStageID;
+		})
+	}
+
+	sendDataToApi(eventElement){
+
+		fetch(this.config.baseURL+"/events", {
+			method: 'POST',
+			//credentials: 'include', //skal være med på deploy
+			mode: 'cors',
+			headers: {
+				'Authorization': authKey, //FJERNES VED DEPLOY
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+			},
+			body: JSON.stringify(eventElement)
+		}).then(function(response) {
+
+			return response.json();
+		}).then(function(data) {
+
+			console.log(data);
+		})
+	}
 
 
 
-  
+	///////////////////////
+	//From NewEntry
+
+	findDataElementIDs(){
+
+		var programID = "r6qGL4AmFV4"; //Hardcoded 'Anaesthetist - PBR monitoring' ID
+		var programStageID = "";
+		var dataElementIDs = [];
+
+		var self = this;
+
+		return fetch(this.config.baseURL + "/programs/" + programID, {
+			method: 'GET',
+			headers: {
+				'Authorization': authKey
+			}
+		}).then(function (response){
+			return response.json();
+		}).then(function (data){
+
+				programStageID = data.programStages[0].id;
+
+				return fetch(self.config.baseURL + "/programStages/" + programStageID,{
+					method: 'GET',
+					headers: {
+					'Authorization': authKey
+					}
+				}).then(function (response){
+
+						return response.json();
+
+				}).then(function (data){
+
+						data.programStageDataElements.forEach((element) => {
+
+							dataElementIDs.push(element.dataElement.id);
+						})
+
+						return dataElementIDs;
+				})
+
+		})
+	}
+
+
+	findDataElementContent(id){
+	return fetch(this.config.baseURL + "/dataElements/" + id, {
+		method: 'GET',
+		headers: {
+		'Authorization': authKey
+		}
+	}).then(function (response){
+		return response.json().then(function (data){
+
+		var newElement = {
+				"name": data.name,
+				"id": data.id,
+				"valueType": data.valueType,
+		};
+
+		return newElement;
+		}).catch(function (error){
+
+		//console.log(error);
+		})
+	})
+	}
+
+/////////////////////////////
+	//APP.JS
+
+	checkRole(){
+
+		var role = "";
+		return fetch(this.config.baseURL + "/me", {
+			method: 'GET',
+			headers: {
+			'Accept': 'application/json',
+			'Authorization': authKey,
+		}
+		}).then(function(response){
+			return response.json().then(data => {
+				var doctorRoleID = "kNIhGGdyWFp";
+				//var doctorRoleID = "noe"; //for testing at man kommer til hjemsiden hvis ingen gyldig rolle
+				var dhoRoleID = "RYOicE8XVw9";
+				var roles = [];
+
+				data.userCredentials.userRoles.forEach(element => {
+						roles.push(element.id);
+				})
+
+				if(roles.includes(doctorRoleID)){
+					role="doctor";
+					return Promise.resolve(role);
+
+
+				}else if(roles.includes(dhoRoleID)){
+					role="dho"
+					return Promise.resolve(role);
+
+				}
+			}).catch(function (error){
+				return "error";
+			})
+		})
+	}
+
+  UpdateDataToApi(eventElement){
+
+      var id = eventElement.event;
+
+      fetch(this.config.baseURL + "/events/" + id, {
+        method: 'PUT',
+        //credentials: 'include', //skal være med på deploy
+        mode: 'cors',
+        headers: {
+          'Authorization': authKey, //FJERNES VED DEPLOY
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(eventElement)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+
+        console.log(data);
+      })
+  }
+
+
+
+
+
 }
 
 export default new Api();

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import OrganizationListHolder from '../../Components/Report/OrganizationListHolder.jsx';
+import Api from '../../Api.js';
 
+
+const url = 'https://course.dhis2.org/dhis/api';
+const authKey = 'Basic ' + btoa('BjarneB:District1-');
 /*
  * This is the start of the District Health Officer wild ride.
  * The entire DHO adventure is like a recurisve waterfall. One component
@@ -39,6 +43,14 @@ export default class HealthOfficerHome extends Component {
           sortSymbol: "sort list"
       }
   }
+  config = {
+    baseUrl: url
+  };
+
+  setConfig = config => {
+    this.config = config;
+  };
+
 
   /* When the component mounts, every teiSearchOrganisationUnit ID from /api/me
    * will be fetched. Then, the name will be fetched from /api/organisationUnits/[ID].
@@ -49,7 +61,7 @@ export default class HealthOfficerHome extends Component {
    * is still loading.
    */
   componentDidMount(){
-    this.fetchReports().then( (ou) => {
+    Api.fetchReports().then( (ou) => {
       this.setState({ids: ou});
       ou.forEach( (el) => {
         this.fetchOuName(el.id);
@@ -57,34 +69,12 @@ export default class HealthOfficerHome extends Component {
     });
   }
 
-  fetchReports(){
-    const url = 'https://course.dhis2.org/dhis/api/me';
-		return fetch(url, {
-			method: 'GET',
-			headers: {
-				'Authorization': 'Basic YWRtaW46ZGlzdHJpY3Q='
-			}
-		})
-			.then((response) => response.json())
-	    .then((responseJson) => {
-        var ou = [];
-	      responseJson.teiSearchOrganisationUnits.forEach((el) => {
-          ou.push(el);
-				})
-        return ou;
-	    })
-	    .catch((error) => {
-	      console.error(error);
-	    }
-		);
-  }
-
   fetchOuName(id){
-    const url = 'https://course.dhis2.org/dhis/api/organisationUnits/' + id;
-    return fetch(url, {
+    const url2 = '/organisationUnits/' + id;
+    return fetch(this.config.baseUrl + url2, {
 			method: 'GET',
 			headers: {
-				'Authorization': 'Basic YWRtaW46ZGlzdHJpY3Q='
+				'Authorization': authKey
 			}
 		})
 			.then((response) => response.json())

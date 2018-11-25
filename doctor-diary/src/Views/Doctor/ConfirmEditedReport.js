@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../Components/Header/Header.js';
 import NavBar from '../../Components/NavBar/NavBar.js';
+import Api from '../../Api.js';
 
 import DataElementForm from '../../Components/DataElementForm.js';
 
@@ -18,6 +19,7 @@ export default class ConfirmEditedReport extends Component {
       rows: [],
       tmpDataFromChild: "",
       tmpId: "",
+      sent: false
     }
     this.updateData = this.updateData.bind(this)
     this.myCallback = this.myCallback.bind(this)
@@ -41,13 +43,12 @@ export default class ConfirmEditedReport extends Component {
     }
     this.state.tmpDataFromChild = null
     this.state.tmpId = null
-}
+  }
 
-
-sendToAPI() {
-  var report = this.state.report
-}
-
+  sendToAPI(report) {
+    this.setState({sent: true});
+    Api.UpdateDataToApi(report);
+  }
 
   componentWillMount(){
     var rep = localStorage.getItem("ready")
@@ -87,7 +88,14 @@ sendToAPI() {
   render(){
     this.updateData();
     console.log(this.state.report.dueDate);
-    return(
+    return (this.state.sent) ? (
+      <div>
+        <Header title={this.state.title} />
+        <main>
+          <h2>Report successfully edited</h2>
+          <a href='/' className='ReportPageButton'>Home</a>
+        </main>
+      </div>) :(
         <div>
 
             <main>
@@ -97,7 +105,7 @@ sendToAPI() {
                     {this.state.rows}
                 </tbody>
             </table>
-
+            <button onClick={() => this.sendToAPI(this.state.report)}>Send</button>
             </main>
             <NavBar addFill={this.state.active}/>
         </div>
