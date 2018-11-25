@@ -19,7 +19,7 @@ export default class ConfirmEditedReport extends Component {
       rows: [],
       tmpDataFromChild: "",
       tmpId: "",
-      sent: false
+      sent: false,
     }
     this.updateData = this.updateData.bind(this)
     this.myCallback = this.myCallback.bind(this)
@@ -87,7 +87,6 @@ export default class ConfirmEditedReport extends Component {
 
   render(){
     this.updateData();
-    console.log(this.state.report.dueDate);
     return (this.state.sent) ? (
       <div>
         <Header title={this.state.title} />
@@ -99,7 +98,7 @@ export default class ConfirmEditedReport extends Component {
         <div>
 
             <main>
-            <h1>Report</h1>
+            <h1>New report for date {this.state.report.dueDate.substring(0, 10)}</h1>
             <table>
                 <tbody>
                     {this.state.rows}
