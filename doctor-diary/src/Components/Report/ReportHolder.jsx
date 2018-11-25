@@ -28,7 +28,7 @@ export default class ReportHolder extends Component{
 				});
 			})
 		})
-	} 
+	}
 
 	fetchElementName(id){
 		//Fetch the attributes

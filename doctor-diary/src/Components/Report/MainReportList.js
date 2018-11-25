@@ -38,7 +38,7 @@ export default class HealthOfficerHome extends Component {
   }
 
   updateSize(){
-    this.setState({ web: window.innerWidth > 1450 });
+    this.setState({ web: window.innerWidth > 650 });
   }
 
   fetchReports(){
